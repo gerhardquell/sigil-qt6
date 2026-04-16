@@ -1,0 +1,635 @@
+########################################################
+#  
+#  This is a CMake configuration file.
+#  To use it you need CMake which can be 
+#  downloaded from here: 
+#    http://www.cmake.org/cmake/resources/software.html
+#
+#########################################################
+
+cmake_minimum_required( VERSION 2.8.9 )
+
+#############################################################################
+
+# Print a message and fail for people who don't
+# read the build instructions and then complain
+# when the build process fails for them.
+if ( ${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_SOURCE_DIR} )
+    message( FATAL_ERROR "You are trying to run CMake from the <top_folder>/src/Sigil directory, "
+                         "instead of just from the <top_folder> directory.\nDO NOT DO THIS.\n"
+                         "The correct way looks like this:\n"
+                         "  cmake -G '<generator_name>' /path/to/topmost/folder/in/source/package\n"
+                         "You will probably now need to first clean your build directory." )
+endif()
+
+#############################################################################
+
+# We use the lower case name
+# on UNIX systems other than Mac OS X
+if ( WIN32 OR APPLE )
+    project( Sigil )
+else()
+    project( sigil )
+endif()
+
+#############################################################################
+
+# Qt6 packages
+find_package(Qt6 COMPONENTS Core Network Svg Widgets Xml Concurrent PrintSupport LinguistTools REQUIRED)
+find_package(Qt6WebEngineCore REQUIRED)
+find_package(Qt6WebEngineWidgets REQUIRED)
+set(CMAKE_AUTOMOC ON)
+
+set( MAIN_FILES
+    sigil_constants.h
+    sigil_exception.h
+    main.cpp
+    )
+    
+set( BOOK_MANIPULATION_FILES 
+    BookManipulation/Book.cpp
+    BookManipulation/Book.h
+    BookManipulation/BookReports.cpp
+    BookManipulation/BookReports.h
+    BookManipulation/Index.cpp
+    BookManipulation/Index.h
+    BookManipulation/CleanSource.cpp
+    BookManipulation/CleanSource.h
+    BookManipulation/FolderKeeper.cpp
+    BookManipulation/FolderKeeper.h
+    BookManipulation/Headings.cpp
+    BookManipulation/Headings.h
+    BookManipulation/Metadata.cpp
+    BookManipulation/Metadata.h
+    BookManipulation/XhtmlDoc.cpp
+    BookManipulation/XhtmlDoc.h
+    BookManipulation/GuideSemantics.cpp
+    BookManipulation/GuideSemantics.h
+    BookManipulation/XercesCppUse.h
+    BookManipulation/XercesHUse.h
+    )
+
+set( RESOURCE_OBJECT_FILES
+    ResourceObjects/Resource.cpp
+    ResourceObjects/Resource.h
+    ResourceObjects/TextResource.cpp
+    ResourceObjects/TextResource.h
+    ResourceObjects/HTMLResource.cpp
+    ResourceObjects/HTMLResource.h
+    ResourceObjects/CSSResource.cpp
+    ResourceObjects/CSSResource.h
+    ResourceObjects/ImageResource.cpp
+    ResourceObjects/ImageResource.h
+    ResourceObjects/AudioResource.cpp
+    ResourceObjects/AudioResource.h
+    ResourceObjects/VideoResource.cpp
+    ResourceObjects/VideoResource.h
+    ResourceObjects/MiscTextResource.cpp
+    ResourceObjects/MiscTextResource.h
+    ResourceObjects/SVGResource.cpp
+    ResourceObjects/SVGResource.h
+    ResourceObjects/FontResource.cpp
+    ResourceObjects/FontResource.h
+    ResourceObjects/OPFResource.cpp
+    ResourceObjects/OPFResource.h
+    ResourceObjects/NCXResource.cpp
+    ResourceObjects/NCXResource.h
+    ResourceObjects/XMLResource.cpp
+    ResourceObjects/XMLResource.h
+    )
+        
+set( DIALOG_FILES
+    Dialogs/About.cpp
+    Dialogs/About.h
+    Dialogs/AddMetadata.cpp
+    Dialogs/AddMetadata.h
+    Dialogs/ClipboardHistorySelector.h
+    Dialogs/ClipboardHistorySelector.cpp
+    Dialogs/DeleteFiles.cpp
+    Dialogs/DeleteFiles.h
+    Dialogs/DeleteStyles.cpp
+    Dialogs/DeleteStyles.h
+    Dialogs/EditTOC.cpp
+    Dialogs/EditTOC.h
+    Dialogs/OpenWithName.cpp
+    Dialogs/OpenWithName.h
+    Dialogs/SelectCharacter.cpp
+    Dialogs/SelectCharacter.h
+    Dialogs/SelectHyperlink.cpp
+    Dialogs/SelectHyperlink.h
+    Dialogs/SelectId.cpp
+    Dialogs/SelectId.h
+    Dialogs/SelectIndexTitle.cpp
+    Dialogs/SelectIndexTitle.h
+    Dialogs/SelectFiles.cpp
+    Dialogs/SelectFiles.h
+    Dialogs/MetaEditor.cpp
+    Dialogs/MetaEditor.h
+    Dialogs/MetaEditorItemDelegate.cpp
+    Dialogs/MetaEditorItemDelegate.h
+    Dialogs/HeadingSelector.cpp
+    Dialogs/HeadingSelector.h
+    Dialogs/Preferences.cpp
+    Dialogs/Preferences.h
+    Dialogs/PreferenceWidgets/AppearanceWidget.cpp
+    Dialogs/PreferenceWidgets/AppearanceWidget.h
+    Dialogs/PreferenceWidgets/CleanSourceWidget.cpp
+    Dialogs/PreferenceWidgets/CleanSourceWidget.h
+    Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.cpp
+    Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.h
+    Dialogs/PreferenceWidgets/LanguageWidget.cpp
+    Dialogs/PreferenceWidgets/LanguageWidget.h
+    Dialogs/PreferenceWidgets/PreferencesWidget.h
+    Dialogs/PreferenceWidgets/SpellCheckWidget.cpp
+    Dialogs/PreferenceWidgets/SpellCheckWidget.h
+    Dialogs/RenameTemplate.cpp
+    Dialogs/RenameTemplate.h
+    Dialogs/Reports.cpp
+    Dialogs/Reports.h
+    Dialogs/ReportsWidgets/AllFilesWidget.cpp
+    Dialogs/ReportsWidgets/AllFilesWidget.h
+    Dialogs/ReportsWidgets/HTMLFilesWidget.cpp
+    Dialogs/ReportsWidgets/HTMLFilesWidget.h
+    Dialogs/ReportsWidgets/LinksWidget.cpp
+    Dialogs/ReportsWidgets/LinksWidget.h
+    Dialogs/ReportsWidgets/ImageFilesWidget.cpp
+    Dialogs/ReportsWidgets/ImageFilesWidget.h
+    Dialogs/ReportsWidgets/CSSFilesWidget.cpp
+    Dialogs/ReportsWidgets/CSSFilesWidget.h
+    Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp
+    Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.h
+    Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp
+    Dialogs/ReportsWidgets/StylesInCSSFilesWidget.h
+    Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp
+    Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.h
+    Dialogs/ReportsWidgets/ReportsWidget.h
+    Dialogs/LinkStylesheets.cpp
+    Dialogs/LinkStylesheets.h
+    Dialogs/SearchEditor.cpp
+    Dialogs/SearchEditor.h
+    Dialogs/ClipEditor.cpp
+    Dialogs/ClipEditor.h
+    Dialogs/IndexEditor.cpp
+    Dialogs/IndexEditor.h
+    Dialogs/SpellcheckEditor.cpp
+    Dialogs/SpellcheckEditor.h
+    Dialogs/ViewImage.cpp
+    Dialogs/ViewImage.h
+    )
+
+set( EXPORTER_FILES
+    Exporters/ExportEPUB.cpp
+    Exporters/ExportEPUB.h
+    Exporters/Exporter.h
+    Exporters/ExporterFactory.cpp
+    Exporters/ExporterFactory.h
+    Exporters/NCXWriter.cpp
+    Exporters/NCXWriter.h
+    Exporters/XMLWriter.cpp
+    Exporters/XMLWriter.h
+    Exporters/EncryptionXmlWriter.cpp
+    Exporters/EncryptionXmlWriter.h
+    )
+    
+set( IMPORTER_FILES
+    Importers/ImportEPUB.cpp
+    Importers/ImportEPUB.h
+    Importers/Importer.cpp
+    Importers/Importer.h
+    Importers/ImporterFactory.cpp
+    Importers/ImporterFactory.h
+    Importers/ImportHTML.cpp
+    Importers/ImportHTML.h
+    Importers/ImportTXT.cpp
+    Importers/ImportTXT.h
+    )
+    
+set( MISC_FILES    
+    Misc/AppEventFilter.cpp
+    Misc/AppEventFilter.h
+    Misc/UpdateChecker.cpp
+    Misc/UpdateChecker.h
+    Misc/Utility.cpp
+    Misc/Utility.h
+    Misc/SleepFunctions.h
+    Misc/FindReplaceQLineEdit.cpp
+    Misc/FindReplaceQLineEdit.h
+    Misc/FilenameDelegate.cpp
+    Misc/FilenameDelegate.h
+    Misc/XHTMLHighlighter.cpp
+    Misc/XHTMLHighlighter.h
+    Misc/CSSHighlighter.cpp
+    Misc/CSSHighlighter.h
+    Misc/CSSInfo.cpp
+    Misc/CSSInfo.h
+    Misc/HTMLEncodingResolver.cpp
+    Misc/HTMLEncodingResolver.h
+    Misc/HTMLSpellCheck.cpp
+    Misc/HTMLSpellCheck.h
+    Misc/HTMLPrettyPrint.cpp
+    Misc/HTMLPrettyPrint.h
+    Misc/PasteTargetComboBox.cpp
+    Misc/PasteTargetComboBox.h
+    Misc/PasteTarget.h
+    Misc/QCodePage437Codec.cpp
+    Misc/QCodePage437Codec.h
+    Misc/RasterizeImageResource.cpp
+    Misc/RasterizeImageResource.h
+    Misc/SearchOperations.cpp
+    Misc/SearchOperations.h
+    Misc/Language.cpp
+    Misc/UILanguage.cpp
+    Misc/SettingsStore.cpp
+    Misc/SettingsStore.h
+    Misc/SpellCheck.cpp
+    Misc/SpellCheck.h
+    Misc/KeyboardShortcut.cpp
+    Misc/KeyboardShortcut.h
+    Misc/KeyboardShortcut_p.h
+    Misc/KeyboardShortcutManager.cpp
+    Misc/KeyboardShortcutManager.h
+    Misc/XhtmlEntitiesDtd.cpp
+    Misc/FontObfuscation.cpp
+    Misc/FontObfuscation.h
+    Misc/TempFolder.cpp
+    Misc/TempFolder.h
+    Misc/OpenExternally.cpp
+    Misc/OpenExternally.h
+    Misc/TOCHTMLWriter.cpp
+    Misc/TOCHTMLWriter.h
+    Misc/NumericItem.h
+    Misc/CaseInsensitiveItem.h
+    Misc/WrapIndicator.h
+    Misc/XMLEntities.cpp
+    )
+
+set( MISC_EDITORS_FILES    
+    MiscEditors/ClipEditorModel.cpp
+    MiscEditors/ClipEditorModel.h
+    MiscEditors/ClipEditorTreeView.cpp
+    MiscEditors/ClipEditorTreeView.h
+    MiscEditors/IndexEditorModel.cpp
+    MiscEditors/IndexEditorModel.h
+    MiscEditors/IndexEditorTreeView.cpp
+    MiscEditors/IndexEditorTreeView.h
+    MiscEditors/IndexEntries.cpp
+    MiscEditors/IndexEntries.h
+    MiscEditors/IndexHTMLWriter.cpp
+    MiscEditors/IndexHTMLWriter.h
+    MiscEditors/SearchEditorTreeView.cpp
+    MiscEditors/SearchEditorTreeView.h
+    MiscEditors/SearchEditorModel.cpp
+    MiscEditors/SearchEditorModel.h
+    )
+
+set( SPCRE_FILES
+    PCRE/SPCRE.cpp
+    PCRE/SPCRE.h
+    PCRE/PCRECache.cpp
+    PCRE/PCRECache.h
+    PCRE/PCREReplaceTextBuilder.cpp
+    PCRE/PCREReplaceTextBuilder.h
+    )
+
+set( VIEW_EDITOR_FILES
+    ViewEditors/BookViewEditor.cpp
+    ViewEditors/BookViewEditor.h
+    ViewEditors/BookViewPreview.cpp
+    ViewEditors/BookViewPreview.h
+    ViewEditors/CodeViewEditor.cpp
+    ViewEditors/CodeViewEditor.h
+    ViewEditors/LineNumberArea.cpp
+    ViewEditors/LineNumberArea.h
+    ViewEditors/Searchable.cpp
+    ViewEditors/Searchable.h
+    ViewEditors/Zoomable.h 
+    ViewEditors/ViewEditor.h     
+    ViewEditors/ViewWebPage.cpp
+    ViewEditors/ViewWebPage.h 
+    )
+
+set( MAINUI_FILES 
+    MainUI/MainApplication.cpp
+    MainUI/MainApplication.h
+    MainUI/MainWindow.cpp
+    MainUI/MainWindow.h
+    MainUI/FindReplace.cpp
+    MainUI/FindReplace.h
+    MainUI/BookBrowser.cpp
+    MainUI/BookBrowser.h
+    MainUI/ClipsWindow.cpp
+    MainUI/ClipsWindow.h
+    MainUI/PreviewWindow.cpp
+    MainUI/PreviewWindow.h
+    MainUI/TableOfContents.cpp
+    MainUI/TableOfContents.h
+    MainUI/OPFModel.cpp
+    MainUI/OPFModel.h
+    MainUI/OPFModelItem.cpp
+    MainUI/OPFModelItem.h
+    MainUI/NCXModel.cpp
+    MainUI/NCXModel.h
+    MainUI/ValidationResultsView.cpp
+    MainUI/ValidationResultsView.h
+    )
+
+set( TAB_FILES
+    Tabs/TabBar.cpp
+    Tabs/TabBar.h
+    Tabs/TabManager.cpp
+    Tabs/TabManager.h
+    Tabs/FlowTab.cpp
+    Tabs/FlowTab.h 
+    Tabs/ContentTab.cpp
+    Tabs/ContentTab.h 
+    Tabs/TextTab.cpp
+    Tabs/TextTab.h
+    Tabs/CSSTab.cpp
+    Tabs/CSSTab.h
+    Tabs/AVTab.cpp
+    Tabs/AVTab.h
+    Tabs/ImageTab.cpp
+    Tabs/ImageTab.h
+    Tabs/MiscTextTab.cpp
+    Tabs/MiscTextTab.h
+    Tabs/SVGTab.cpp
+    Tabs/SVGTab.h
+    Tabs/OPFTab.cpp
+    Tabs/OPFTab.h
+    Tabs/NCXTab.cpp
+    Tabs/NCXTab.h
+    Tabs/WellFormedCheckComponent.cpp
+    Tabs/WellFormedCheckComponent.h
+    Tabs/XMLTab.cpp
+    Tabs/XMLTab.h
+    Tabs/WellFormedContent.h
+    )
+            
+set( UI_FILES   
+    Form_Files/main.ui 
+    Form_Files/ClipboardHistorySelector.ui
+    Form_Files/DeleteFiles.ui
+    Form_Files/DeleteStyles.ui
+    Form_Files/OpenWithName.ui
+    Form_Files/SelectCharacter.ui
+    Form_Files/SelectHyperlink.ui
+    Form_Files/SelectId.ui
+    Form_Files/SelectIndexTitle.ui
+    Form_Files/SelectFiles.ui
+    Form_Files/MetaEditor.ui 
+    Form_Files/AddMetadata.ui 
+    Form_Files/About.ui 
+    Form_Files/EditTOC.ui 
+    Form_Files/HeadingSelector.ui 
+    Form_Files/FindReplace.ui
+    Form_Files/PAppearanceWidget.ui
+    Form_Files/Preferences.ui
+    Form_Files/PKeyboardShortcutsWidget.ui
+    Form_Files/PCleanSourceWidget.ui
+    Form_Files/PLanguageWidget.ui
+    Form_Files/PSpellCheckWidget.ui
+    Form_Files/RenameTemplate.ui 
+    Form_Files/Reports.ui
+    Form_Files/ReportsAllFilesWidget.ui
+    Form_Files/ReportsHTMLFilesWidget.ui
+    Form_Files/ReportsLinksWidget.ui
+    Form_Files/ReportsImageFilesWidget.ui
+    Form_Files/ReportsCSSFilesWidget.ui
+    Form_Files/ReportsClassesInHTMLFilesWidget.ui
+    Form_Files/ReportsStylesInCSSFilesWidget.ui
+    Form_Files/ReportsCharactersInHTMLFilesWidget.ui
+    Form_Files/LinkStylesheets.ui 
+    Form_Files/SearchEditor.ui
+    Form_Files/ClipEditor.ui
+    Form_Files/IndexEditor.ui 
+    Form_Files/SpellcheckEditor.ui 
+    Form_Files/ViewImage.ui
+    )
+    
+set( SOURCEUPDATE_FILES   
+    SourceUpdates/PerformXMLUpdates.cpp
+    SourceUpdates/PerformXMLUpdates.h
+    SourceUpdates/PerformHTMLUpdates.cpp 
+    SourceUpdates/PerformHTMLUpdates.h
+    SourceUpdates/PerformOPFUpdates.cpp
+    SourceUpdates/PerformOPFUpdates.h
+    SourceUpdates/PerformNCXUpdates.cpp
+    SourceUpdates/PerformNCXUpdates.h
+    SourceUpdates/PerformCSSUpdates.cpp
+    SourceUpdates/PerformCSSUpdates.h
+    SourceUpdates/AnchorUpdates.cpp
+    SourceUpdates/AnchorUpdates.h
+    SourceUpdates/LinkUpdates.cpp
+    SourceUpdates/LinkUpdates.h
+    SourceUpdates/WordUpdates.cpp
+    SourceUpdates/WordUpdates.h
+    SourceUpdates/UniversalUpdates.cpp
+    SourceUpdates/UniversalUpdates.h
+    )
+            
+set( QRC_FILES  
+    Resource_Files/main/main.qrc
+    Resource_Files/About/About.qrc
+    Resource_Files/javascript/javascript.qrc
+    Resource_Files/icon/icon.qrc  
+    )
+
+file( GLOB TS_FILES Resource_Files/ts/sigil_*.ts )
+
+file( GLOB DIC_FILES Resource_Files/dictionaries/* )
+
+file( GLOB EXAMPLE_FILES Resource_Files/examples/* )
+
+set( LINUX_DESKTOP_FILE
+    Resource_Files/freedesktop/sigil.desktop
+    )
+
+set( LINUX_DESKTOP_ICON_FILE
+    Resource_Files/icon/app_icon_48.png
+    )
+    
+set( RAW_SOURCES ${MAIN_FILES} ${TAB_FILES} ${SOURCEUPDATE_FILES} ${BOOK_MANIPULATION_FILES} ${RESOURCE_OBJECT_FILES} ${DIALOG_FILES} ${EXPORTER_FILES} ${IMPORTER_FILES} ${MISC_FILES} ${MISC_EDITORS_FILES} ${SPCRE_FILES} ${VIEW_EDITOR_FILES} ${MAINUI_FILES} )
+
+#############################################################################
+
+# Runs UIC on specified files
+qt6_wrap_ui( UI_FILES_H ${UI_FILES} )
+# Runs RCC on specified files
+qt6_add_resources( QRC_FILES_CPP ${QRC_FILES} )
+# Runs lrelease on the specified files
+qt6_add_translation( QM_FILES ${TS_FILES} )
+
+# Define the Sigil version string for use in source files
+set_source_files_properties( Dialogs/About.cpp PROPERTIES COMPILE_DEFINITIONS SIGIL_FULL_VERSION="${SIGIL_FULL_VERSION}" )
+set_source_files_properties( Misc/Utility.cpp PROPERTIES COMPILE_DEFINITIONS SIGIL_FULL_VERSION="${SIGIL_FULL_VERSION}" )
+
+#############################################################################
+
+# Adds folders for Visual Studio solution explorer (and for Xcode explorer)
+source_group( "Forms"             FILES ${UI_FILES} )
+source_group( "Resource Files"    FILES ${QRC_FILES} )
+source_group( "Book Manipulation" FILES ${BOOK_MANIPULATION_FILES} )
+source_group( "Resource Objects"  FILES ${RESOURCE_OBJECT_FILES} )
+source_group( "Dialogs"           FILES ${DIALOG_FILES} )
+source_group( "Exporters"         FILES ${EXPORTER_FILES} )
+source_group( "Importers"         FILES ${IMPORTER_FILES} )
+source_group( "Misc"              FILES ${MISC_FILES} )
+source_group( "MiscEditors"       FILES ${MISC_EDITORS_FILES} )
+source_group( "SPCRE"             FILES ${SPCRE_FILES} )
+source_group( "View Editors"      FILES ${VIEW_EDITOR_FILES} )
+source_group( "Tabs"              FILES ${TAB_FILES} )
+source_group( "MainUI"            FILES ${MAINUI_FILES} )
+source_group( "Main Files"        FILES ${MAIN_FILES} )
+source_group( "Source Updates"    FILES ${SOURCEUPDATE_FILES} )
+
+
+#############################################################################
+
+set( ALL_SOURCES ${RAW_SOURCES} ${UI_FILES_H} ${QRC_FILES_CPP} ${QM_FILES} )
+
+# Adding resource (RC) files for Windows
+if ( WIN32 )
+    configure_file( Resource_files/windows/version.rc.in ${PROJECT_BINARY_DIR}/version.rc )
+    set( WINDOWS_RC_FILES
+         Resource_Files/icon/icon.rc
+         ${PROJECT_BINARY_DIR}/version.rc
+         )
+    list( APPEND ALL_SOURCES ${WINDOWS_RC_FILES} )
+    source_group( "Resources" FILES {$WINDOWS_RC_FILES} )
+endif()
+
+#############################################################################
+
+# Apple bundle configuration
+if( APPLE )
+    # TODO: put these in some sort of add_custom_command( TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ...)
+    # also delete the Sigil.app folder as PRE_BUILD of Sigil executable
+    
+    if( CMAKE_GENERATOR STREQUAL Xcode )
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
+        # Create translation directory.
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/translations")
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/hunspell_dictionaries")
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/examples")
+    else()
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+        # Create translation directory.
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/translations")
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/hunspell_dictionaries")
+        exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/examples")
+    endif()
+
+    # Copy the PLIST file...
+    exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/mac/MacOSXBundleInfo.plist ${PROJECT_BINARY_DIR}")
+    
+    # ...and set the Sigil version string
+    exec_program("sed -i -e 's/SGVERSION/${SIGIL_FULL_VERSION}/g' ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist")
+endif()
+
+#############################################################################
+
+# We need to pick up the ui*.h files,
+# and the headers for the linked-to libraries.
+# The directories are in reverse order because we're using before to
+# put our include dirs before any system ones.
+include_directories( BEFORE
+                     ${FLIGHTCREW_INCLUDE_DIRS}
+                     ${HUNSPELL_INCLUDE_DIRS}
+                     ${PCRE_INCLUDE_DIRS}
+                     ${tidyLib_SOURCE_DIR}
+                     ${MINIZIP_INCLUDE_DIRS}
+                     ${ZLIB_INCLUDE_DIRS}
+                     ${XERCESEXTENSIONS_INCLUDE_DIRS}
+                     ${XERCES_INCLUDE_DIRS}
+                     ${BOOST_INCLUDE_DIRS}
+                     ${CMAKE_CURRENT_SOURCE_DIR}
+                     ${CMAKE_CURRENT_BINARY_DIR} )
+
+#############################################################################
+
+# We make bundles for Mac OS X
+if ( APPLE )
+    add_executable( ${PROJECT_NAME} MACOSX_BUNDLE ${ALL_SOURCES} )
+    set_target_properties( ${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist )
+# ...and a normal executable for everything else.
+else()
+    add_executable( ${PROJECT_NAME} WIN32 ${ALL_SOURCES} )
+endif()
+
+target_link_libraries( ${PROJECT_NAME}
+    Qt6::Core
+    Qt6::Network
+    Qt6::Svg
+    Qt6::Widgets
+    Qt6::Xml
+    Qt6::Concurrent
+    Qt6::PrintSupport
+    Qt6::WebEngineCore
+    Qt6::WebEngineWidgets
+    ${HUNSPELL_LIBRARIES}
+    ${PCRE_LIBRARIES}
+    tidyLib
+    ${MINIZIP_LIBRARIES}
+    ${BOOST_LIBS}
+    ${XERCES_LIBRARIES}
+    ${XERCESEXTENSIONS_LIBRARIES}
+    ${FLIGHTCREW_LIBRARIES}
+)
+
+#############################################################################
+
+# needed for correct static header inclusion
+if( FORCE_BUNDLED_COPIES OR NOT XERCES_FOUND )
+    add_definitions( -DXERCES_STATIC_LIBRARY )
+endif()
+if( FORCE_BUNDLED_COPIES OR NOT PCRE_FOUND )
+    add_definitions( -DPCRE_STATIC )
+endif()
+if( FORCE_BUNDLED_COPIES OR NOT HUNSPELL_FOUND )
+    add_definitions( -DHUNSPELL_STATIC )
+endif()
+
+# Speed up stirng building
+add_definitions( -DQT_USE_FAST_CONCATENATION )
+add_definitions( -DQT_USE_FAST_OPERATOR_PLUS )
+
+#############################################################################
+
+# "Link time code generation" flags for MSVC
+if( MSVC )
+    add_definitions( /DUNICODE /D_UNICODE )
+    # The /Zc:wchar_t- flag can't go into add_definitions
+    # because the RC compiler picks it up too and it provokes a name clash
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:wchar_t- /MP")
+    set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
+    set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
+
+# "Print all warnings" flag for GCC
+elseif( CMAKE_COMPILER_IS_GNUCXX )
+    add_definitions( -Wall )
+endif()
+
+
+#############################################################################
+# You can change the install location by 
+# running cmake like this:
+#
+#   cmake -DCMAKE_INSTALL_PREFIX=/new/install/prefix
+#
+# By default, the prefix is "/usr/local"
+# 
+if( UNIX AND NOT APPLE )
+    install( TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
+    install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications )
+    install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
+    install( FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/translations )
+    install( FILES ${DIC_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/hunspell_dictionaries )
+    install( FILES ${EXAMPLE_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/examples )
+endif()
+
