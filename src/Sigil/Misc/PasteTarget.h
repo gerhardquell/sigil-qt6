@@ -25,7 +25,7 @@
 #ifndef PASTETARGET_H
 #define PASTETARGET_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "MiscEditors/ClipEditorModel.h"
 

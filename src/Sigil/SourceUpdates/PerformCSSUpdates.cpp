@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QString>
+#include <QFileInfo>
+#include <QString>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 

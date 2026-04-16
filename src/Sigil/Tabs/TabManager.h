@@ -23,9 +23,9 @@
 #ifndef TABMANAGER_H
 #define TABMANAGER_H
 
-#include <QtCore/QUrl>
-#include <QtCore/QPointer>
-#include <QtWidgets/QTabWidget>
+#include <QUrl>
+#include <QPointer>
+#include <QTabWidget>
 
 #include "MainUI/MainWindow.h"
 #include "Tabs/ContentTab.h"

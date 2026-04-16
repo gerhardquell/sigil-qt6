@@ -19,9 +19,9 @@
 **
 *************************************************************************/
 
-#include <QtCore/QProcess>
-#include <QtCore/QStandardPaths>
-#include <QtWidgets/QFileDialog>
+#include <QProcess>
+#include <QStandardPaths>
+#include <QFileDialog>
 
 #include "Dialogs/OpenWithName.h"
 #include "Misc/OpenExternally.h"

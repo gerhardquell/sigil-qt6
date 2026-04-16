@@ -23,9 +23,9 @@
 #include <boost/tuple/tuple.hpp>
 #include <signal.h>
 
-#include <QtCore/QtCore>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QProgressDialog>
+#include <QtCore>
+#include <QApplication>
+#include <QProgressDialog>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/XercesCppUse.h"
@@ -39,6 +39,7 @@
 #include "ResourceObjects/TextResource.h"
 #include "ViewEditors/Searchable.h"
 #include "sigil_constants.h"
+
 
 using boost::make_tuple;
 using boost::tie;

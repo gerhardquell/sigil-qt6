@@ -23,9 +23,9 @@
 #include <pcre.h>
 
 #include <QtGui/QKeyEvent>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QCompleter>
+#include <QLineEdit>
+#include <QMessageBox>
+#include <QCompleter>
 #include <QRegularExpression>
 
 #include "MainUI/FindReplace.h"
@@ -604,7 +604,7 @@ void FindReplace::SetCodeViewIfNeeded(bool force)
         (!m_LookWhereCurrentFile &&
          (GetLookWhere() == FindReplace::LookWhere_AllHTMLFiles ||
           GetLookWhere() == FindReplace::LookWhere_SelectedHTMLFiles) &&
-         (m_MainWindow.GetViewState() == MainWindow::ViewState_BookView))) {
+         (m_MainWindow.GetViewState() == MainWindow::ViewState_CodeView))) {
         // Force change to Code View
         m_MainWindow.AnyCodeView();
 

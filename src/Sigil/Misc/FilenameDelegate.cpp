@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QEvent>
-#include <QtWidgets/QLineEdit>
+#include <QEvent>
+#include <QLineEdit>
 
 #include "Misc/FilenameDelegate.h"
 

@@ -23,11 +23,11 @@
 #ifndef FOLDERKEEPER_H
 #define FOLDERKEEPER_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtCore/QList>
-#include <QtCore/QMutex>
+#include <QObject>
+#include <QString>
+#include <QHash>
+#include <QList>
+#include <QMutex>
 #include <QFileSystemWatcher>
 
 // These have to be included directly because
@@ -390,7 +390,7 @@ template< typename T > inline
 QList< T * > FolderKeeper::ListResourceSort(const QList< T * > &resource_list)  const
 {
     QList< T * > sorted_list = resource_list;
-    qSort(sorted_list.begin(), sorted_list.end(), FolderKeeper::PointerLessThan< T >);
+    std::sort(sorted_list.begin(), sorted_list.end(), FolderKeeper::PointerLessThan< T >);
     return sorted_list;
 }
 

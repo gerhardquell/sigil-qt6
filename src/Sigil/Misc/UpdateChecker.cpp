@@ -19,14 +19,14 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDateTime>
-#include <QtCore/QDir>
-#include <QtCore/QTextStream>
+#include <QDateTime>
+#include <QDir>
+#include <QTextStream>
 #include <QtGui/QDesktopServices>
-#include <QtWidgets/QMessageBox>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QtCore/QXmlStreamReader>
+#include <QMessageBox>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QXmlStreamReader>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -123,7 +123,8 @@ QString UpdateChecker::TextInReply(QNetworkReply *reply)
 
     QTextStream in(reply);
     // Input should be UTF-8
-    in.setCodec("UTF-8");
+    // Qt 6: setCodec removed, UTF-8 is default
+    // in.setCodec("UTF-8");
     // This will automatically switch reading from
     // UTF-8 to UTF-16 if a BOM is detected
     in.setAutoDetectUnicode(true);

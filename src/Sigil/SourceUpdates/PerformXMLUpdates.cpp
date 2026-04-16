@@ -19,9 +19,9 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QStringList>
+#include <QDir>
+#include <QFileInfo>
+#include <QStringList>
 
 #include "BookManipulation/XercesCppUse.h"
 #include "BookManipulation/XhtmlDoc.h"

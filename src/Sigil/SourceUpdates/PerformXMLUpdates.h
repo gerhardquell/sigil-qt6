@@ -25,13 +25,12 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
+#include <QHash>
+#include <QStringList>
 
 #include "BookManipulation/XercesHUse.h"
 
 class QString;
-class QStringList;
 
 using boost::shared_ptr;
 

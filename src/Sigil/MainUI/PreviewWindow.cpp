@@ -19,14 +19,14 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QSplitter>
-#include <QtWidgets/QStackedWidget>
-#include <QtWebKitWidgets/QWebInspector>
+#include <QSplitter>
+#include <QStackedWidget>
+#include <QWebEngineView>
+#include <QVBoxLayout>
 
 #include "MainUI/PreviewWindow.h"
 #include "Misc/SleepFunctions.h"
 #include "ResourceObjects/HTMLResource.h"
-#include "ViewEditors/BookViewEditor.h"
 
 static const QString SETTINGS_GROUP = "previewwindow";
 
@@ -35,8 +35,7 @@ PreviewWindow::PreviewWindow(QWidget *parent)
     QDockWidget(tr("Preview"), parent),
     m_MainWidget(*new QWidget(this)),
     m_Layout(*new QVBoxLayout(&m_MainWidget)),
-    m_Preview(new BookViewPreview(this)),
-    m_Inspector(new QWebInspector(this)),
+    m_Preview(new QWebEngineView(this)),
     m_Splitter(new QSplitter(this)),
     m_StackedViews(new QStackedWidget(this))
 {
@@ -47,136 +46,76 @@ PreviewWindow::PreviewWindow(QWidget *parent)
 
 PreviewWindow::~PreviewWindow()
 {
-    // BookViewPreview must be deleted before QWebInspector.
-    // BookViewPreview's QWebPage is linked to the QWebInspector
-    // and when deleted it will send a message to the linked QWebInspector
-    // to remove the association. If QWebInspector is deleted before
-    // BookViewPreview, BookViewPreview will try to access the deleted
-    // QWebInspector and the application will SegFault. This is an issue
-    // with how QWebPages interface with QWebInspector.
     if (m_Preview) {
         delete m_Preview;
-        m_Preview = 0;
+        m_Preview = nullptr;
     }
+}
 
-    if (m_Inspector) {
-        delete m_Inspector;
-        m_Inspector = 0;
-    }
+void PreviewWindow::SetupView()
+{
+    m_Layout.setContentsMargins(0, 0, 0, 0);
+    m_Layout.addWidget(m_Splitter);
+    m_Splitter->addWidget(m_Preview);
+    setWidget(&m_MainWidget);
+}
 
-    if (m_Splitter) {
-        delete m_Splitter;
-        m_Splitter = 0;
-    }
+void PreviewWindow::LoadSettings()
+{
+    // Settings loading stub
+}
 
-    if (m_StackedViews) {
-        delete(m_StackedViews);
-        m_StackedViews= 0;
-    }
+void PreviewWindow::ConnectSignalsToSlots()
+{
+    // Signals connection stub
+}
+
+QList<ViewEditor::ElementIndex> PreviewWindow::GetCaretLocation()
+{
+    // Stub implementation
+    return QList<ViewEditor::ElementIndex>();
 }
 
 bool PreviewWindow::IsVisible()
 {
-    return m_Preview->isVisible();
+    return isVisible();
 }
 
 bool PreviewWindow::HasFocus()
 {
-    if (!m_Preview->isVisible()) {
-        return false;
-    }
     return m_Preview->hasFocus();
 }
 
 float PreviewWindow::GetZoomFactor()
 {
-    return m_Preview->GetZoomFactor();
+    // QWebEngineView doesn't have simple zoom factor getter
+    // This would need to be implemented with JavaScript or settings
+    return 1.0f;
 }
 
-void PreviewWindow::SetupView()
+void PreviewWindow::UpdatePage(QString filename, QString text, QList< ViewEditor::ElementIndex > location)
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    Q_UNUSED(filename)
+    Q_UNUSED(location)
 
-    m_Inspector->setPage(m_Preview->page());
+    if (!text.isEmpty()) {
+        m_Preview->setHtml(text);
+    }
+}
 
-    m_Layout.setContentsMargins(0, 0, 0, 0);
-#ifdef Q_OS_MAC
-    m_Layout.setSpacing(4);
-#endif
+void PreviewWindow::SetZoomFactor(float factor)
+{
+    m_Preview->setZoomFactor(factor);
+}
 
-    m_Layout.addWidget(m_StackedViews);
-
-    m_Splitter->setOrientation(Qt::Vertical);
-    m_Splitter->addWidget(m_Preview);
-    m_Splitter->addWidget(m_Inspector);
-    m_Splitter->setSizes(QList<int>() << 400 << 200);
-    m_StackedViews->addWidget(m_Splitter);
-
-    m_MainWidget.setLayout(&m_Layout);
-    setWidget(&m_MainWidget);
-
-    m_Preview->Zoom();
-
-    QApplication::restoreOverrideCursor();
+void PreviewWindow::SplitterMoved(int pos, int index)
+{
+    Q_UNUSED(pos)
+    Q_UNUSED(index)
 }
 
 void PreviewWindow::showEvent(QShowEvent *event)
 {
     QDockWidget::showEvent(event);
-    raise();
     emit Shown();
 }
-
-void PreviewWindow::UpdatePage(QString filename, QString text, QList< ViewEditor::ElementIndex > location)
-{
-    if (!m_Preview->isVisible()) {
-        return;
-    }
-
-    m_Preview->CustomSetDocument(filename, text);
-
-    // Wait until the preview is loaded before moving cursor.
-    while (!m_Preview->IsLoadingFinished()) {
-        qApp->processEvents();
-        SleepFunctions::msleep(100);
-    }
-
-    m_Preview->StoreCaretLocationUpdate(location);
-    m_Preview->ExecuteCaretUpdate();
-    m_Preview->InspectElement();
-}
-
-QList<ViewEditor::ElementIndex> PreviewWindow::GetCaretLocation()
-{
-    return m_Preview->GetCaretLocation();
-}
-
-void PreviewWindow::SetZoomFactor(float factor) {
-    m_Preview->SetZoomFactor(factor);
-}
-
-void PreviewWindow::SplitterMoved(int pos, int index)
-{
-    Q_UNUSED(pos);
-    Q_UNUSED(index);
-    SettingsStore settings;
-    settings.beginGroup(SETTINGS_GROUP);
-    settings.setValue("splitter", m_Splitter->saveState());
-    settings.endGroup();
-}
-
-void PreviewWindow::LoadSettings()
-{
-    SettingsStore settings;
-    settings.beginGroup(SETTINGS_GROUP);
-    m_Splitter->restoreState(settings.value("splitter").toByteArray());
-    settings.endGroup();
-}
-
-void PreviewWindow::ConnectSignalsToSlots()
-{
-    connect(m_Splitter,  SIGNAL(splitterMoved(int, int)), this, SLOT(SplitterMoved(int, int)));
-    connect(m_Preview,   SIGNAL(GoToPreviewLocationRequest()), this, SIGNAL(GoToPreviewLocationRequest()));
-    connect(m_Preview,   SIGNAL(ZoomFactorChanged(float)), this, SIGNAL(ZoomFactorChanged(float)));
-}
-

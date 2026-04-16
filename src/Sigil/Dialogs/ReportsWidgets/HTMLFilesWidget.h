@@ -24,12 +24,12 @@
 #ifndef HTMLFILESWIDGET_H
 #define HTMLFILESWIDGET_H
 
-#include <QtCore/QHash>
-#include <QtWidgets/QDialog>
+#include <QHash>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QSharedPointer>
+#include <QAction>
+#include <QMenu>
 
 #include "ResourceObjects/Resource.h"
 #include "BookManipulation/Book.h"
@@ -38,7 +38,6 @@
 #include "ui_ReportsHTMLFilesWidget.h"
 
 class QString;
-class QStringList;
 
 class HTMLFilesWidget : public ReportsWidget
 

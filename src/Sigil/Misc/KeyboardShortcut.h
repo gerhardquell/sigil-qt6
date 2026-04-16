@@ -23,7 +23,7 @@
 #ifndef KEYBOARDSHORTCUT_H
 #define KEYBOARDSHORTCUT_H
 
-#include <QtCore/QExplicitlySharedDataPointer>
+#include <QExplicitlySharedDataPointer>
 
 #include "Misc/KeyboardShortcut_p.h"
 

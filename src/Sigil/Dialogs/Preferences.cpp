@@ -19,12 +19,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDir>
-#include <QtCore/QUrl>
-#include <QtCore/QStandardPaths>
+#include <QDir>
+#include <QUrl>
+#include <QStandardPaths>
 #include <QtGui/QDesktopServices>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QScrollArea>
+#include <QMessageBox>
+#include <QScrollArea>
 
 #include "Dialogs/Preferences.h"
 #include "Misc/SettingsStore.h"
@@ -143,7 +143,7 @@ bool Preferences::isRestartRequired()
 
 void Preferences::openPreferencesLocation()
 {
-    QUrl location = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    QUrl location = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
     QDesktopServices::openUrl(location);
 }
 
@@ -151,7 +151,7 @@ void Preferences::extendUI()
 {
     QPushButton *open_button = ui.buttonBox->button(QDialogButtonBox::Reset);
     open_button->setText(tr("Open Preferences Location"));
-    open_button->setToolTip(QDir::toNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::DataLocation)));
+    open_button->setToolTip(QDir::toNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)));
 }
 
 void Preferences::connectSignalsSlots()

@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 #include "ViewEditors/CodeViewEditor.h"
 #include "ViewEditors/LineNumberArea.h"

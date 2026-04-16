@@ -23,7 +23,7 @@
 #ifndef WELLFORMEDCONTENT_H
 #define WELLFORMEDCONTENT_H
 
-#include <QtCore/QString>
+#include <QString>
 
 
 class WellFormedContent

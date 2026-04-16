@@ -27,7 +27,6 @@
 #include "PCRE/SPCRE.h"
 
 class QString;
-class QStringList;
 class QWidget;
 
 

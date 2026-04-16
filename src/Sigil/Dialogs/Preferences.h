@@ -23,7 +23,7 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 #include "ui_Preferences.h"
 #include "PreferenceWidgets/PreferencesWidget.h"

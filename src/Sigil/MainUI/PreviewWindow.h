@@ -23,17 +23,16 @@
 #ifndef PREVIEWWINDOW_H
 #define PREVIEWWINDOW_H
 
-#include <QtWidgets/QDockWidget>
-#include <QtCore/QTime>
+#include <QDockWidget>
+#include <QTime>
 
 
 #include "MainUI/MainWindow.h"
 
 class QWidget;
-class BookViewPreview;
+class QWebEngineView;
 class QSplitter;
 class QStackedWidget;
-class QWebInspector;
 class ViewEditor;
 
 class PreviewWindow : public QDockWidget
@@ -69,8 +68,7 @@ private:
     QWidget &m_MainWidget;
     QVBoxLayout &m_Layout;
 
-    BookViewPreview *m_Preview;
-    QWebInspector *m_Inspector;
+    QWebEngineView *m_Preview;
     QSplitter *m_Splitter;
     QStackedWidget *m_StackedViews;
 };

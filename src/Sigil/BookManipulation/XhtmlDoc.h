@@ -24,8 +24,7 @@
 #define XHTMLDOC_H
 
 #include <boost/shared_ptr.hpp>
-
-#include <QtWebKit/QWebElement>
+#include <QHash>
 
 #include "BookManipulation/XercesHUse.h"
 #include "BookManipulation/XercesCppUse.h"
@@ -33,7 +32,6 @@
 #include "ViewEditors/ViewEditor.h"
 
 class QString;
-class QStringList;
 class QXmlStreamReader;
 
 class XhtmlDoc
@@ -150,8 +148,6 @@ public:
     // returns
     //    Bonnie & Clyde
     static QString ResolveHTMLEntities(const QString &text);
-
-    static QList< QWebElement > QWebElementChildren(const QWebElement &element);
 
     /**
      * Splits the provided source on SGF section breaks.

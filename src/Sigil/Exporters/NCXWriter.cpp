@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QXmlStreamWriter>
+#include <QXmlStreamWriter>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/XercesCppUse.h"

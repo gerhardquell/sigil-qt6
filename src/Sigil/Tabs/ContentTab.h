@@ -25,7 +25,7 @@
 
 #include <QWidget>
 #include <QString>
-#include <QtCore/QUrl>
+#include <QUrl>
 
 #include "Misc/Utility.h"
 #include "ViewEditors/Zoomable.h"

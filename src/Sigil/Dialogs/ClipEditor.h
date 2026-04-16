@@ -25,9 +25,9 @@
 #ifndef CLIPEDITOR_H
 #define CLIPEDITOR_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 #include "Misc/SettingsStore.h"
 #include "MiscEditors/ClipEditorModel.h"

@@ -23,7 +23,7 @@
 #ifndef HTMLRESOURCE_H
 #define HTMLRESOURCE_H
 
-#include <QtCore/QHash>
+#include <QHash>
 
 #include "Misc/CSSInfo.h"
 #include "BookManipulation/GuideSemantics.h"

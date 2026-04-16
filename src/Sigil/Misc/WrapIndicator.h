@@ -32,9 +32,9 @@
 #ifndef WRAPINDICATOR_H
 #define WRAPINDICATOR_H
 
-#include <QtCore/QTimer>
-#include <QtCore/QPropertyAnimation>
-#include <QtWidgets/QWidget>
+#include <QTimer>
+#include <QPropertyAnimation>
+#include <QWidget>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPainter>
 

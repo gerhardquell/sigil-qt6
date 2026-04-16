@@ -20,7 +20,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
+#include <QFile>
 #include <QByteArray>
 #include <QDataStream>
 #include <QtCore/QTime>
@@ -56,7 +57,7 @@ IndexEditorModel::IndexEditorModel(QObject *parent)
       m_FSWatcher(new QFileSystemWatcher()),
       m_IsDataModified(false)
 {
-    m_SettingsPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + SETTINGS_FILE;
+    m_SettingsPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SETTINGS_FILE;
     QStringList header;
     header.append(tr("Text to Include"));
     header.append(tr("Index Entries"));

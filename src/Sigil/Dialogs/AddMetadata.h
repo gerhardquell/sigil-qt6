@@ -23,7 +23,7 @@
 #ifndef ADDMETADATA_H
 #define ADDMETADATA_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 #include "ui_AddMetadata.h"
 #include "BookManipulation/Metadata.h"

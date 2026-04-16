@@ -23,7 +23,6 @@
 #ifndef UILANGUAGE_H
 #define UILANGUAGE_H
 
-class QStringList;
 
 /**
  * UI Language routines

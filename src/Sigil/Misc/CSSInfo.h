@@ -25,10 +25,9 @@
 #ifndef CSSINFO_H
 #define CSSINFO_H
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QStringList>
 
-class QStringList;
 
 class CSSInfo : public QObject
 {

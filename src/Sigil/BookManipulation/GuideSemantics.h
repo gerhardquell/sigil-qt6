@@ -25,8 +25,8 @@
 
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QMutex>
-#include <QtCore/QHash>
+#include <QMutex>
+#include <QHash>
 
 using boost::tuple;
 

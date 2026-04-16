@@ -25,11 +25,12 @@
 #ifndef FINDREPLACEQLINEEDIT_H
 #define FINDREPLACEQLINEEDIT_H
 
-#include <QtWidgets/QLineEdit>
+#include <QLineEdit>
 #include <QtGui/QStandardItem>
 
 class QContextMenuEvent;
 class QSignalMapper;
+class FindReplace;
 
 class FindReplaceQLineEdit : public QLineEdit
 {
@@ -49,7 +50,7 @@ protected:
 private:
     bool CreateMenuEntries(QMenu *parent_menu, QAction *topAction, QStandardItem *entry);
 
-    QWidget *m_FindReplace;
+    FindReplace *m_FindReplace;
     QSignalMapper *m_searchMapper;
     bool m_tokeniseEnabled;
 };

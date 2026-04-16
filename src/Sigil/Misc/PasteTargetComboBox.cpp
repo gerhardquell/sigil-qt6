@@ -21,9 +21,9 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QApplication>
+#include <QApplication>
 #include <QtGui/QClipboard>
-#include <QtWidgets/QLineEdit>
+#include <QLineEdit>
 
 #include "Misc/PasteTargetComboBox.h"
 

@@ -23,9 +23,9 @@
 #ifndef NCXMODEL_H
 #define NCXMODEL_H
 
-#include <QtCore/QFutureWatcher>
-#include <QtCore/QMutex>
-#include <QtCore/QSharedPointer>
+#include <QFutureWatcher>
+#include <QMutex>
+#include <QSharedPointer>
 #include <QtGui/QStandardItemModel>
 
 #include "BookManipulation/Book.h"

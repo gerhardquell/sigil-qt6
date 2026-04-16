@@ -23,8 +23,8 @@
 #ifndef VIEWEDITOR_H
 #define VIEWEDITOR_H
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QList>
+#include <QString>
 
 #include "ViewEditors/Searchable.h"
 #include "ViewEditors/Zoomable.h"

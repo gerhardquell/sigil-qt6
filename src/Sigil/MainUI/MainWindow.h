@@ -25,8 +25,8 @@
 #ifndef SIGIL_H
 #define SIGIL_H
 
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QMainWindow>
+#include <QSharedPointer>
+#include <QMainWindow>
 
 #include "ui_main.h"
 #include "BookManipulation/Book.h"
@@ -99,7 +99,7 @@ public:
      * @param parent The window's parent object.
      * @param flags The flags used to modify window behavior.
      */
-    MainWindow(const QString &openfilepath = QString(), QWidget *parent = 0, Qt::WindowFlags flags = 0);
+    MainWindow(const QString &openfilepath = QString(), QWidget *parent = 0, Qt::WindowFlags flags = Qt::WindowFlags());
     ~MainWindow();
 
     /**
@@ -351,6 +351,7 @@ private slots:
      * Implements the set CodeView functionality.
      */
     void CodeView();
+    void BookView();
 
     /**
      * Implements Meta Editor action functionality.

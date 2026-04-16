@@ -21,12 +21,12 @@
 *************************************************************************/
 
 
-#include <QtCore/QFile>
-#include <QtCore/QHashIterator>
+#include <QFile>
+#include <QHashIterator>
 #include <QtGui/QFont>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QProgressDialog>
+#include <QMessageBox>
+#include <QApplication>
+#include <QProgressDialog>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/BookReports.h"

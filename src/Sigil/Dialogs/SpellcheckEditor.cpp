@@ -20,11 +20,11 @@
 **
 *************************************************************************/
 
-#include <QtCore/QHashIterator>
-#include <QtCore/QSignalMapper>
+#include <QHashIterator>
+#include <QSignalMapper>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "Dialogs/SpellcheckEditor.h"
 #include "Misc/CaseInsensitiveItem.h"
@@ -584,7 +584,7 @@ void SpellcheckEditor::ConnectSignalsSlots()
             this,               SLOT(ChangeState(int)));
     connect(ui.CaseInsensitiveSort,  SIGNAL(stateChanged(int)),
             this,               SLOT(ChangeState(int)));
-    connect(ui.Dictionaries, SIGNAL(activated(const QString &)),
-            this,            SLOT(DictionaryChanged(const QString &)));
+    connect(ui.Dictionaries, &QComboBox::currentTextChanged,
+            this,            &SpellcheckEditor::DictionaryChanged);
 
 }

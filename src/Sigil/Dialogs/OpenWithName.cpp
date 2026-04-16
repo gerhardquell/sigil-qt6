@@ -20,7 +20,7 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QLineEdit>
+#include <QLineEdit>
 
 #include "Dialogs/OpenWithName.h"
 

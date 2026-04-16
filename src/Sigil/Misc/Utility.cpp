@@ -23,18 +23,18 @@
 #include <time.h>
 
 #include <QApplication>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QProcess>
-#include <QtCore/QStringList>
-#include <QtCore/QStringRef>
-#include <QtCore/QTextStream>
-#include <QtCore/QtGlobal>
-#include <QtCore/QUrl>
-#include <QtCore/QUuid>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMessageBox>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QProcess>
+#include <QStringList>
+#include <QStringView>
+#include <QTextStream>
+#include <QtGlobal>
+#include <QUrl>
+#include <QUuid>
+#include <QMainWindow>
+#include <QMessageBox>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -140,9 +140,9 @@ QString Utility::Substring(int start_index, int end_index, const QString &string
 // Returns a substring of a specified string;
 // the characters included are in the interval:
 // [ start_index, end_index >
-QStringRef Utility::SubstringRef(int start_index, int end_index, const QString &string)
+QStringView Utility::SubstringRef(int start_index, int end_index, const QString &string)
 {
-    return string.midRef(start_index, end_index - start_index);
+    return string.mid(start_index, end_index - start_index);
 }
 // Replace the first occurrence of string "before"
 // with string "after" in string "string"
@@ -323,7 +323,8 @@ QString Utility::ReadUnicodeTextFile(const QString &fullfilepath)
 
     QTextStream in(&file);
     // Input should be UTF-8
-    in.setCodec("UTF-8");
+    // Qt 6: setCodec removed
+    // in.setCodec("UTF-8");
     // This will automatically switch reading from
     // UTF-8 to UTF-16 if a BOM is detected
     in.setAutoDetectUnicode(true);
@@ -350,7 +351,8 @@ void Utility::WriteUnicodeTextFile(const QString &text, const QString &fullfilep
 
     QTextStream out(&file);
     // We ALWAYS output in UTF-8
-    out.setCodec("UTF-8");
+    // Qt 6: setCodec removed
+    // out.setCodec("UTF-8");
     out << text;
 }
 

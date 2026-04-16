@@ -23,12 +23,12 @@
 #ifndef HEADINGSELECTOR_H
 #define HEADINGSELECTOR_H
 
-#include <QtCore/QList>
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QDialog>
+#include <QList>
+#include <QSharedPointer>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QAction>
+#include <QMenu>
 
 #include "ui_HeadingSelector.h"
 #include "BookManipulation/Headings.h"

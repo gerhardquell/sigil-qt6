@@ -20,9 +20,9 @@
 **
 *************************************************************************/
 
-#include <QtCore/QLocale>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QStandardPaths>
+#include <QLocale>
+#include <QCoreApplication>
+#include <QStandardPaths>
 
 #include "Misc/SettingsStore.h"
 #include "sigil_constants.h"
@@ -82,7 +82,7 @@ static const QString KEY_PREVIEW_SYNC_CURSOR = "Preview/syncCursor";
 
 
 SettingsStore::SettingsStore()
-    : QSettings(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/sigil.ini", QSettings::IniFormat)
+    : QSettings(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/sigil.ini", QSettings::IniFormat)
 {
 }
 
@@ -406,7 +406,7 @@ void SettingsStore::clearSettingsGroup()
     }
 }
 
-bool SettingsStore::previewEnabled() const
+bool SettingsStore::previewEnabled()
 {
     clearSettingsGroup();
     return value(KEY_PREVIEW_ENABLED, true).toBool();
@@ -418,7 +418,7 @@ void SettingsStore::setPreviewEnabled(bool enabled)
     setValue(KEY_PREVIEW_ENABLED, enabled);
 }
 
-int SettingsStore::previewOrientation() const
+int SettingsStore::previewOrientation()
 {
     clearSettingsGroup();
     return value(KEY_PREVIEW_ORIENTATION, Qt::Horizontal).toInt();
@@ -430,7 +430,7 @@ void SettingsStore::setPreviewOrientation(int orientation)
     setValue(KEY_PREVIEW_ORIENTATION, orientation);
 }
 
-int SettingsStore::previewDebounceMs() const
+int SettingsStore::previewDebounceMs()
 {
     clearSettingsGroup();
     return value(KEY_PREVIEW_DEBOUNCE, 400).toInt();
@@ -442,7 +442,7 @@ void SettingsStore::setPreviewDebounceMs(int ms)
     setValue(KEY_PREVIEW_DEBOUNCE, qBound(100, ms, 2000));
 }
 
-bool SettingsStore::previewSyncCursor() const
+bool SettingsStore::previewSyncCursor()
 {
     clearSettingsGroup();
     return value(KEY_PREVIEW_SYNC_CURSOR, true).toBool();

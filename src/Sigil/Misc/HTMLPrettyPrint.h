@@ -26,7 +26,6 @@
 
 class QChar;
 class QString;
-class QStringList;
 
 class HTMLPrettyPrint
 {

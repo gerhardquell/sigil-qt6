@@ -25,7 +25,7 @@
 #ifndef FINDREPLACE_H
 #define FINDREPLACE_H
 
-#include <QtCore/QTimer>
+#include <QTimer>
 
 #include "ui_FindReplace.h"
 #include "BookManipulation/FolderKeeper.h"

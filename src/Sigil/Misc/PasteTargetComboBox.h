@@ -25,8 +25,8 @@
 #ifndef PASTETARGETCOMBOBOX_H
 #define PASTETARGETCOMBOBOX_H
 
-#include <QtCore/QObject>
-#include <QtWidgets/QComboBox>
+#include <QObject>
+#include <QComboBox>
 
 #include "Misc/PasteTarget.h"
 #include "MiscEditors/ClipEditorModel.h"

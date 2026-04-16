@@ -19,14 +19,14 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QTreeView>
-#include <QtWidgets/QProgressDialog>
-#include <QtWidgets/QScrollBar>
+#include <QFileInfo>
+#include <QSignalMapper>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
+#include <QTreeView>
+#include <QProgressDialog>
+#include <QScrollBar>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/FolderKeeper.h"
@@ -47,6 +47,7 @@
 #include "ResourceObjects/OPFResource.h"
 #include "sigil_constants.h"
 #include "sigil_exception.h"
+
 
 static const QString SETTINGS_GROUP = "bookbrowser";
 static const QString OPF_NCX_EDIT_WARNING_KEY = SETTINGS_GROUP + "-opfncx-warning";
@@ -374,7 +375,7 @@ int BookBrowser::ValidSelectedItemCount()
         const QString &identifier = item->data().toString();
 
         // If folder item included, multiple selection is invalid
-        if (identifier == NULL) {
+        if (identifier.isNull()) {
             return -1;
         }
 
@@ -1289,7 +1290,7 @@ void BookBrowser::SetupTreeView()
 {
     m_TreeView.setEditTriggers(QAbstractItemView::EditKeyPressed);
     m_TreeView.setSortingEnabled(false);
-    m_TreeView.sortByColumn(-1);
+    m_TreeView.setSortingEnabled(false);
     m_TreeView.setUniformRowHeights(true);
     m_TreeView.setDragEnabled(true);
     m_TreeView.setAcceptDrops(false);
@@ -1337,13 +1338,13 @@ void BookBrowser::CreateContextMenuActions()
     m_NoObfuscationMethod    ->setCheckable(true);
     m_AdobesObfuscationMethod->setCheckable(true);
     m_IdpfsObfuscationMethod ->setCheckable(true);
-    m_CopyHTML->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Y));
+    m_CopyHTML->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT + Qt::Key_Y));
     sm->registerAction(m_CopyHTML, "MainWindow.BookBrowser.CopyHTML");
     m_Delete->setShortcut(QKeySequence::Delete);
     m_Merge->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_M));
     m_Merge->setToolTip("Merge with previous file, or merge multiple files into one.");
     sm->registerAction(m_Merge, "MainWindow.BookBrowser.Merge");
-    m_Rename->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_R));
+    m_Rename->setShortcut(QKeySequence(Qt::CTRL | Qt::ALT + Qt::Key_R));
     m_Rename->setToolTip("Rename selected file(s)");
     sm->registerAction(m_Rename, "MainWindow.BookBrowser.Rename");
     m_LinkStylesheets->setToolTip("Link Stylesheets to selected file(s).");
@@ -1695,7 +1696,7 @@ void BookBrowser::ConnectSignalsToSlots()
     foreach(QAction * action, m_GuideSemanticActions) {
         connect(action, SIGNAL(triggered()), &m_GuideSemanticMapper, SLOT(map()));
     }
-    connect(&m_GuideSemanticMapper, SIGNAL(mapped(int)), this, SLOT(AddGuideSemanticType(int)));
+    connect(&m_GuideSemanticMapper, SIGNAL(mappedInt(int)), this, SLOT(AddGuideSemanticType(int)));
 }
 
 

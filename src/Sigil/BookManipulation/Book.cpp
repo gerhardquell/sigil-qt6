@@ -43,6 +43,8 @@
 #include "SourceUpdates/PerformHTMLUpdates.h"
 #include "SourceUpdates/UniversalUpdates.h"
 
+const int PROGRESS_BAR_MINIMUM_DURATION = 2000;
+
 using boost::shared_ptr;
 using boost::make_tuple;
 using boost::tuple;
@@ -51,91 +53,91 @@ using boost::tie;
 static const QString FIRST_CSS_NAME   = "Style0001.css";
 static const QString FIRST_SVG_NAME   = "Image0001.svg";
 static const QString PLACEHOLDER_TEXT = "PLACEHOLDER";
-static const QString EMPTY_HTML_FILE  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-                                        "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\n"
-                                        "    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n\n"
-                                        "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-                                        "<head>\n"
-                                        "<title></title>\n"
-                                        "</head>\n"
-                                        "<body>\n"
+static const QString EMPTY_HTML_FILE  = "<?xml version=\"1.0\" encoding=\"utf-8\"?> "
+                                        "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" "
+                                        "    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">  "
+                                        "<html xmlns=\"http://www.w3.org/1999/xhtml\"> "
+                                        "<head> "
+                                        "<title></title> "
+                                        "</head> "
+                                        "<body> "
 
                                         // The "nbsp" is here so that the user starts writing
                                         // inside the <p> element; if it's not here, webkit
                                         // inserts text _outside_ the <p> element
-                                        "<p>&#160;</p>\n"
-                                        "</body>\n"
+                                        "<p>&#160;</p> "
+                                        "</body> "
                                         "</html>";
 
 static const QString SGC_TOC_CSS_FILE = 
-										"div.sgc-toc-title {\n"
-										"    font-size: 2em;\n"
-										"    font-weight: bold;\n"
-										"    margin-bottom: 1em;\n"
-										"    text-align: center;\n"
-										"}\n\n"
-										"div.sgc-toc-level-1 {\n"
-										"    margin-left: 0em;\n"
-										"}\n\n"
-										"div.sgc-toc-level-2 {\n"
-										"    margin-left: 2em;\n"
-										"}\n\n"
-										"div.sgc-toc-level-3 {\n"
-										"    margin-left: 2em;\n"
-										"}\n\n"
-										"div.sgc-toc-level-4 {\n"
-										"    margin-left: 2em;\n"
-										"}\n\n"
-										"div.sgc-toc-level-5 {\n"
-										"    margin-left: 2em;\n"
-										"}\n\n"
-										"div.sgc-toc-level-6 {\n"
-										"    margin-left: 2em;\n"
-										"}\n";
+										"div.sgc-toc-title { "
+										"    font-size: 2em; "
+										"    font-weight: bold; "
+										"    margin-bottom: 1em; "
+										"    text-align: center; "
+										"}  "
+										"div.sgc-toc-level-1 { "
+										"    margin-left: 0em; "
+										"}  "
+										"div.sgc-toc-level-2 { "
+										"    margin-left: 2em; "
+										"}  "
+										"div.sgc-toc-level-3 { "
+										"    margin-left: 2em; "
+										"}  "
+										"div.sgc-toc-level-4 { "
+										"    margin-left: 2em; "
+										"}  "
+										"div.sgc-toc-level-5 { "
+										"    margin-left: 2em; "
+										"}  "
+										"div.sgc-toc-level-6 { "
+										"    margin-left: 2em; "
+										"} ";
 
 static const QString SGC_INDEX_CSS_FILE = 
-										"div.sgc-index-title {\n"
-										"    font-size: 2em;\n"
-										"    font-weight: bold;\n"
-										"    margin-bottom: 1em;\n"
-										"    text-align: center;\n"
-										"}\n\n"
-										"div.sgc-index-body {\n"
-										"    margin-left: -2em;\n"
-										"}\n\n"
-										"div.sgc-index-entry {\n"
-										"    margin-top: 0em;\n"
-										"    margin-bottom: 0.5em;\n"
-										"    margin-left: 3.5em;\n"
-										"    text-indent: -1.5em;\n"
-										"}\n\n"
-										"div.sgc-index-new-letter {\n"
-                                        "    margin-top: 1.5em;\n"
-                                        "    margin-left: 1.3em;\n"
-                                        "    margin-bottom: 0.5em;\n"
-                                        "    font-size: 1.5em;\n"
-                                        "    font-weight: bold;\n"
-                                        "    border-bottom: solid black 4px;\n"
-                                        "    width: 50%;\n"
-                                        "}\n";
+										"div.sgc-index-title { "
+										"    font-size: 2em; "
+										"    font-weight: bold; "
+										"    margin-bottom: 1em; "
+										"    text-align: center; "
+										"}  "
+										"div.sgc-index-body { "
+										"    margin-left: -2em; "
+										"}  "
+										"div.sgc-index-entry { "
+										"    margin-top: 0em; "
+										"    margin-bottom: 0.5em; "
+										"    margin-left: 3.5em; "
+										"    text-indent: -1.5em; "
+										"}  "
+										"div.sgc-index-new-letter { "
+                                        "    margin-top: 1.5em; "
+                                        "    margin-left: 1.3em; "
+                                        "    margin-bottom: 0.5em; "
+                                        "    font-size: 1.5em; "
+                                        "    font-weight: bold; "
+                                        "    border-bottom: solid black 4px; "
+                                        "    width: 50%; "
+                                        "} ";
 
 const QString HTML_COVER_SOURCE = 
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n"
-"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\"\n"
-"\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">\n"
-"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-"<head>\n"
-"  <title>Cover</title>\n"
-"</head>\n"
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?> "
+"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" "
+"\"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\"> "
+"<html xmlns=\"http://www.w3.org/1999/xhtml\"> "
+"<head> "
+"  <title>Cover</title> "
+"</head> "
 ""
-"<body>\n"
-"  <div style=\"text-align: center; padding: 0pt; margin: 0pt;\">\n"
-"    <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.1\" viewBox=\"0 0 SGC_IMAGE_WIDTH SGC_IMAGE_HEIGHT\" width=\"100%\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n"
-"      <image width=\"SGC_IMAGE_WIDTH\" height=\"SGC_IMAGE_HEIGHT\" xlink:href=\"SGC_IMAGE_FILENAME\"/>\n"
-"    </svg>\n"
-"  </div>\n"
-"</body>\n"
-"</html>\n";
+"<body> "
+"  <div style=\"text-align: center; padding: 0pt; margin: 0pt;\"> "
+"    <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.1\" viewBox=\"0 0 SGC_IMAGE_WIDTH SGC_IMAGE_HEIGHT\" width=\"100%\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> "
+"      <image width=\"SGC_IMAGE_WIDTH\" height=\"SGC_IMAGE_HEIGHT\" xlink:href=\"SGC_IMAGE_FILENAME\"/> "
+"    </svg> "
+"  </div> "
+"</body> "
+"</html> ";
 
 Book::Book()
     :
@@ -429,10 +431,9 @@ void Book::CreateNewSections(const QStringList &new_sections, HTMLResource &orig
         sectionInfo.file_suffix = i;
         sectionInfo.file_extension = file_extension;
         sync.addFuture(
-            QtConcurrent::run(
-                this,
-                &Book::CreateOneNewSection,
-                sectionInfo));
+            QtConcurrent::run([this, sectionInfo]() {
+                return CreateOneNewSection(sectionInfo);
+            }));
     }
 
     sync.waitForFinished();
@@ -804,7 +805,7 @@ QSet<QString> Book::GetWordsInHTMLFiles()
         all_words.append(result);
     }
 
-    return all_words.toSet();
+    QSet<QString> result(all_words.begin(), all_words.end());     return result;
 }
 
 QStringList Book::GetWordsInHTMLFileMapped(HTMLResource *html_resource)

@@ -21,9 +21,9 @@
 
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QBuffer>
-#include <QtCore/QFileInfo>
-#include <QtCore/QObject>
+#include <QBuffer>
+#include <QFileInfo>
+#include <QObject>
 
 #include "BookManipulation/CleanSource.h"
 #include "Exporters/NCXWriter.h"

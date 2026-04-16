@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QByteArray>
-#include <QtCore/QCryptographicHash>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
+#include <QByteArray>
+#include <QCryptographicHash>
+#include <QFile>
+#include <QFileInfo>
 
 #include "Misc/FontObfuscation.h"
 #include "sigil_constants.h"

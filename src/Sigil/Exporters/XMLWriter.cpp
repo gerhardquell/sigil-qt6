@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QIODevice>
-#include <QtCore/QXmlStreamWriter>
+#include <QIODevice>
+#include <QXmlStreamWriter>
 
 #include "BookManipulation/Book.h"
 #include "Exporters/XMLWriter.h"

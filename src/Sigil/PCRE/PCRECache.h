@@ -24,8 +24,8 @@
 #ifndef PCRECACHE_H
 #define PCRECACHE_H
 
-#include <QtCore/QCache>
-#include <QtCore/QString>
+#include <QCache>
+#include <QString>
 
 #include "PCRE/SPCRE.h"
 

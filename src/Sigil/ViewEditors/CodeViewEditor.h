@@ -25,11 +25,11 @@
 
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QList>
-#include <QtCore/QStack>
-#include <QtWidgets/QPlainTextEdit>
+#include <QList>
+#include <QStack>
+#include <QPlainTextEdit>
 #include <QtGui/QStandardItem>
-#include <QtCore/QUrl>
+#include <QUrl>
 
 #include "Misc/CSSInfo.h"
 #include "Misc/PasteTarget.h"
@@ -76,6 +76,7 @@ public:
      * @param parent The object's parent.
      */
     CodeViewEditor(HighlighterType highlighter_type, bool check_spelling = false, QWidget *parent = 0);
+    ~CodeViewEditor();
 
     QSize sizeHint() const;
 

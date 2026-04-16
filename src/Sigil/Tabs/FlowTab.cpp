@@ -24,14 +24,14 @@
 
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QLayout>
+#include <QApplication>
+#include <QAction>
+#include <QDialog>
+#include <QLayout>
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrintPreviewDialog>
-#include <QtWidgets/QSplitter>
+#include <QSplitter>
 
 #include "BookManipulation/CleanSource.h"
 #include "MiscEditors/ClipEditorModel.h"
@@ -48,6 +48,7 @@ static const QString SETTINGS_GROUP = "flowtab";
 
 FlowTab::FlowTab(HTMLResource &resource,
                  const QUrl &fragment,
+                 int view_state,
                  int line_to_scroll_to,
                  int position_to_scroll_to,
                  QString caret_location_to_scroll_to,
@@ -74,6 +75,10 @@ FlowTab::FlowTab(HTMLResource &resource,
     // Create the editors and set up the splitter
     CreateEditors();
 
+    // Make sure the resource is loaded as its file doesn't seem
+    // to exist when the resource tries to do an initial load.
+    m_HTMLResource.InitialLoad();
+
     m_Layout.addWidget(m_Splitter);
     LoadSettings();
 
@@ -88,6 +93,11 @@ FlowTab::FlowTab(HTMLResource &resource,
 
 FlowTab::~FlowTab()
 {
+    // Disconnect CodeViewEditor signals before destroying to prevent
+    // updatePreview being called during destruction
+    if (m_CodeViewEditor) {
+        disconnect(m_CodeViewEditor, nullptr, this, nullptr);
+    }
     // Explicitly disconnect signals to prevent callbacks after deletion
     disconnect();
     m_WellFormedCheckComponent.deleteLater();
@@ -240,12 +250,12 @@ void FlowTab::EmitContentChanged()
 
 void FlowTab::EmitUpdatePreview()
 {
-    updatePreview();
+    emit UpdatePreview();
 }
 
 void FlowTab::EmitUpdatePreviewImmediately()
 {
-    updatePreview();
+    emit UpdatePreviewImmediately();
 }
 
 void FlowTab::EmitUpdateCursorPosition()

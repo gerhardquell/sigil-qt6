@@ -23,10 +23,10 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QtCore>
-#include <QtCore/QString>
-#include <QtCore/QHash>
-#include <QtConcurrent/QtConcurrent>
+#include <QtCore>
+#include <QString>
+#include <QHash>
+#include <QtConcurrent>
 
 #include "BookManipulation/XercesCppUse.h"
 #include "BookManipulation/XhtmlDoc.h"
@@ -116,7 +116,7 @@ void AnchorUpdates::UpdateAnchorsInOneFile(HTMLResource *html_resource,
         if (element.hasAttribute(QtoX("href")) &&
             QUrl(XtoQ(element.getAttribute(QtoX("href")))).isRelative()) {
             QString href = XtoQ(element.getAttribute(QtoX("href")));
-            QStringList parts = href.split(QChar('#'), QString::KeepEmptyParts);
+            QStringList parts = href.split(QChar('#'), Qt::KeepEmptyParts);
 
             if (parts.length() > 1) {
                 QString fragment_id = href.right(href.size() - (parts.at(0).length() + 1));
@@ -163,7 +163,7 @@ void AnchorUpdates::UpdateExternalAnchorsInOneFile(HTMLResource *html_resource, 
         if (element.hasAttribute(QtoX("href")) &&
             QUrl(XtoQ(element.getAttribute(QtoX("href")))).isRelative()) {
             QString href = XtoQ(element.getAttribute(QtoX("href")));
-            QStringList parts = href.split(QChar('#'), QString::KeepEmptyParts);
+            QStringList parts = href.split(QChar('#'), Qt::KeepEmptyParts);
 
             // If the href pointed to the original file then update the file_id.
             if (parts.length() > 1 && parts.at(0) == original_filename_with_relative_path && !parts.at(1).isEmpty()) {
@@ -207,7 +207,7 @@ void AnchorUpdates::UpdateAllAnchorsInOneFile(HTMLResource *html_resource,
             QUrl(XtoQ(element.getAttribute(QtoX("href")))).isRelative()) {
             // Is this href in the form "originating_filename#fragment_id" or "originating_filename" or "#fragment_id"?
             QString href = XtoQ(element.getAttribute(QtoX("href")));
-            QStringList parts = href.split(QChar('#'), QString::KeepEmptyParts);
+            QStringList parts = href.split(QChar('#'), Qt::KeepEmptyParts);
 
             // If the href pointed to the original file then update the file_id.
             if (originating_filename_links.contains(parts.at(0))) {
@@ -256,7 +256,7 @@ void AnchorUpdates::UpdateTOCEntries(NCXResource *ncx_resource, const QString &o
         if (element.hasAttribute(QtoX("src")) &&
             QUrl(XtoQ(element.getAttribute(QtoX("src")))).isRelative()) {
             QString src = XtoQ(element.getAttribute(QtoX("src")));
-            QStringList parts = src.split(QChar('#'), QString::KeepEmptyParts);
+            QStringList parts = src.split(QChar('#'), Qt::KeepEmptyParts);
 
             // If the src pointed to the original file then update the file_id.
             if (parts.count() > 1 && parts.at(0) == original_filename_with_relative_path && !parts.at(1).isEmpty()) {

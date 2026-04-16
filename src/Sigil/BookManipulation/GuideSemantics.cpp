@@ -19,9 +19,9 @@
 **
 *************************************************************************/
 
-#include <QtCore/QObject>
-#include <QtCore/QMutexLocker>
-#include <QtCore/QString>
+#include <QObject>
+#include <QMutexLocker>
+#include <QString>
 
 #include "GuideSemantics.h"
 

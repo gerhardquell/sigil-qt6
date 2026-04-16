@@ -23,7 +23,7 @@
 #ifndef OPFMODEL_H
 #define OPFMODEL_H
 
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 #include <QtGui/QStandardItemModel>
 
 #include "BookManipulation/Book.h"

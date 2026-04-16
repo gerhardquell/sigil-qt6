@@ -26,7 +26,7 @@
 #ifndef FLOWTAB_H
 #define FLOWTAB_H
 
-#include <QtCore/QUrl>
+#include <QUrl>
 
 #include "MainUI/MainWindow.h"
 #include "Misc/Utility.h"
@@ -65,6 +65,7 @@ public:
      */
     FlowTab(HTMLResource &resource,
             const QUrl &fragment,
+            int view_state = 0,  // Deprecated: kept for compatibility, always CodeView now
             int line_to_scroll_to = -1,
             int position_to_scroll_to = -1,
             QString caret_location_to_scroll_to = QString(),
@@ -291,6 +292,12 @@ signals:
 
     void MarkSelectionRequest();
     void ClearMarkedTextRequest();
+
+    // Qt 6 migration: added missing signals
+    void CSSUpdated();
+    void UpdatePreview();
+    void UpdatePreviewImmediately();
+    void InspectElement();
 
 private slots:
 

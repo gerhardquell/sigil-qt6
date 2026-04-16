@@ -22,8 +22,8 @@
 #include <QtCore>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
-#include <QtWebKitWidgets/QWebPage>
-#include <QtWebKitWidgets/QWebFrame>
+// REMOVED: #include <QtWebKitWidgets/QWebPage>
+// REMOVED: #include <QtWebKitWidgets/QWebFrame>
 
 #include "Misc/RasterizeImageResource.h"
 #include "Misc/SleepFunctions.h"

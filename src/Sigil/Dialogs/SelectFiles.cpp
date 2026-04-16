@@ -20,10 +20,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtWidgets/QLayout>
-#include <QtWebKitWidgets/QWebFrame>
-#include <QtWebKitWidgets/QWebView>
+#include <QFileInfo>
+#include <QLayout>
+// REMOVED: #include <QtWebKitWidgets/QWebFrame>
+#include <QWebEngineView>
 
 #include "Dialogs/SelectFiles.h"
 #include "Misc/SettingsStore.h"
@@ -37,18 +37,6 @@ static const int THUMBNAIL_SIZE_INCREMENT = 50;
 
 static QString SETTINGS_GROUP = "select_images";
 
-const QString IMAGE_HTML_BASE_PREVIEW =
-    "<html>"
-    "<head>"
-    "<style type=\"text/css\">"
-    "body { -webkit-user-select: none; }"
-    "img { display: block; margin-left: auto; margin-right: auto; border-style: solid; border-width: 1px; max-width: 95%; max-height: 95%}"
-    "</style>"
-    "<body>"
-    "<div><img src=\"%2\" /></div>"
-    "</body>"
-    "</html>";
-
 SelectFiles::SelectFiles(QString title, QList<Resource *> media_resources, QString default_selected_image, QWidget *parent) :
     QDialog(parent),
     m_MediaResources(media_resources),
@@ -57,7 +45,7 @@ SelectFiles::SelectFiles(QString title, QList<Resource *> media_resources, QStri
     m_DefaultSelectedImage(default_selected_image),
     m_ThumbnailSize(THUMBNAIL_SIZE),
     m_IsInsertFromDisk(false),
-    m_WebView(new QWebView(this))
+    m_WebView(new QWebEngineView(this))
 {
     ui.setupUi(this);
     setWindowTitle(title);
@@ -65,8 +53,8 @@ SelectFiles::SelectFiles(QString title, QList<Resource *> media_resources, QStri
     m_WebView->setContextMenuPolicy(Qt::NoContextMenu);
     m_WebView->setFocusPolicy(Qt::NoFocus);
     m_WebView->setAcceptDrops(false);
-    m_WebView->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
-    m_WebView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+    // REMOVED: scrollbar policy for WebKit
+    // REMOVED: scrollbar policy for WebKit
     ui.avLayout->addWidget(m_WebView);
 
     ReadSettings();
@@ -286,7 +274,7 @@ void SelectFiles::SetPreviewImage()
         details = QString("%2x%3px | %4 KB | %5%6").arg(img.width()).arg(img.height())
                   .arg(fsize).arg(grayscale_color).arg(colorsInfo);
 
-        QWebSettings::clearMemoryCaches();
+        // REMOVED: QWebSettings::clearMemoryCaches();
         const QUrl resourceUrl = QUrl::fromLocalFile(path);
         QString html = IMAGE_HTML_BASE_PREVIEW.arg(resourceUrl.toString());
         m_WebView->setHtml(html, resourceUrl);
@@ -295,14 +283,14 @@ void SelectFiles::SetPreviewImage()
     if (resource_type == Resource::VideoResourceType) {
         QString html;
         const QUrl resourceUrl = QUrl::fromLocalFile(path);
-        QWebSettings::clearMemoryCaches();
+        // REMOVED: QWebSettings::clearMemoryCaches();
         html = VIDEO_HTML_BASE.arg(resourceUrl.toString());
         m_WebView->setHtml(html, resourceUrl);
         details = QString("%1 MB").arg(fmbsize);
     } else if (resource_type == Resource::AudioResourceType) {
         QString html;
         const QUrl resourceUrl = QUrl::fromLocalFile(path);
-        QWebSettings::clearMemoryCaches();
+        // REMOVED: QWebSettings::clearMemoryCaches();
         html = AUDIO_HTML_BASE.arg(resourceUrl.toString());
         m_WebView->setHtml(html, resourceUrl);
         details = QString("%1 MB").arg(fmbsize);

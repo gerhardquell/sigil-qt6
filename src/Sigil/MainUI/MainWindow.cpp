@@ -21,22 +21,23 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QSignalMapper>
-#include <QtCore/QThread>
-#include <QtCore/QTimer>
+#include <QFileInfo>
+#include <QSignalMapper>
+#include <QThread>
+#include <QTimer>
+#include <QStandardPaths>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QImage>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QInputDialog>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QProgressDialog>
-#include <QtWidgets/QToolBar>
-#include <QtWebKit/QWebSettings>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QProgressDialog>
+#include <QToolBar>
+// REMOVED: #include <QtWebKit/QWebSettings>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QWebView>
-#include <QWebPage>
+#include <QWebEngineView>
+// REMOVED: #include <QWebPage>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/Index.h"
@@ -88,10 +89,6 @@
 
 static const int TEXT_ELIDE_WIDTH           = 300;
 static const QString SETTINGS_GROUP         = "mainwindow";
-const float ZOOM_STEP                = 0.1f;
-const float ZOOM_MIN                 = 0.09f;
-const float ZOOM_MAX                 = 5.0f;
-const float ZOOM_NORMAL              = 1.0f;
 static const int ZOOM_SLIDER_MIN            = 0;
 static const int ZOOM_SLIDER_MAX            = 1000;
 static const int ZOOM_SLIDER_MIDDLE         = 500;
@@ -116,7 +113,6 @@ static const QString TAB_STYLE_SHEET              = "#managerframe {border-top: 
         "border-bottom: 1px solid grey;} ";
 static const QString HTML_TOC_FILE = "TOC.xhtml";
 static const QString HTML_INDEX_FILE = "Index.xhtml";
-const QString HTML_COVER_FILENAME = "cover.xhtml";
 
 static const QStringList SUPPORTED_SAVE_TYPE = QStringList() << "epub";
 
@@ -146,7 +142,7 @@ MainWindow::MainWindow(const QString &openfilepath, QWidget *parent, Qt::WindowF
     m_lbZoomLabel(NULL),
     c_SaveFilters(GetSaveFiltersMap()),
     c_LoadFilters(GetLoadFiltersMap()),
-    m_ViewState(MainWindow::ViewState_BookView),
+    m_ViewState(MainWindow::ViewState_CodeView),
     m_headingMapper(new QSignalMapper(this)),
     m_casingChangeMapper(new QSignalMapper(this)),
     m_SearchEditor(new SearchEditor(this)),
@@ -927,7 +923,7 @@ void MainWindow::AddCover()
     // Populate the HTML cover file with the necessary text.
     // If a template file exists, use its text for the cover source.
     QString text = HTML_COVER_SOURCE; 
-    QString cover_path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + HTML_COVER_FILENAME;
+    QString cover_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + HTML_COVER_FILENAME;
     if (QFile::exists(cover_path)) {
         text = Utility::ReadUnicodeTextFile(cover_path);
     }
@@ -973,7 +969,7 @@ void MainWindow::AddCover()
 
     m_BookBrowser->Refresh();
     m_Book->SetModified();
-    QWebSettings::clearMemoryCaches();
+    // REMOVED: QWebSettings::clearMemoryCaches();
     OpenResourceAndWaitUntilLoaded(*html_cover_resource);
     // Reload the tab to ensure it reflects updated image.
     FlowTab *flow_tab = GetCurrentFlowTab();
@@ -1002,7 +998,7 @@ void MainWindow::CreateIndex()
     // If Index CSS file does not exist look for a default file
     // in preferences directory and if none create one.
     if (!found_css) {
-        QString css_path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + SGC_INDEX_CSS_FILENAME;
+        QString css_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SGC_INDEX_CSS_FILENAME;
         if (QFile::exists(css_path)) {
             m_BookBrowser->AddFile(css_path);
         }
@@ -1372,7 +1368,7 @@ void MainWindow::InsertFilesFromDisk()
     QStringList filenames = m_BookBrowser->AddExisting(true);
     connect(m_BookBrowser, SIGNAL(ResourcesAdded()), this, SLOT(ResourcesAddedOrDeleted()));
     // Since we disconnected the signal we will have missed forced clearing of cache
-    QWebSettings::clearMemoryCaches();
+    // REMOVED: QWebSettings::clearMemoryCaches();
     QStringList internal_filenames;
     foreach(QString filename, filenames) {
         QString internal_filename = filename.right(filename.length() - filename.lastIndexOf("/") - 1);
@@ -1404,7 +1400,7 @@ void MainWindow::InsertId()
     QString id = flow_tab->GetAttributeId();
 
     // Prevent adding a hidden anchor id in Book View.
-    if (m_ViewState == MainWindow::ViewState_BookView && id.isEmpty() && flow_tab->GetSelectedText().isEmpty()) {
+    if (m_ViewState == MainWindow::ViewState_CodeView && id.isEmpty() && flow_tab->GetSelectedText().isEmpty()) {
         QMessageBox::warning(this, tr("Sigil"), tr("You must select text before inserting a new id."));
         return;
     }
@@ -1444,7 +1440,7 @@ void MainWindow::InsertHyperlink()
     QString href = flow_tab->GetAttributeHref();
 
     // Prevent adding a hidden anchor link in Book View.
-    if (m_ViewState == MainWindow::ViewState_BookView && href.isEmpty() && flow_tab->GetSelectedText().isEmpty()) {
+    if (m_ViewState == MainWindow::ViewState_CodeView && href.isEmpty() && flow_tab->GetSelectedText().isEmpty()) {
         QMessageBox::warning(this, tr("Sigil"), tr("You must select text before inserting a new link."));
         return;
     }
@@ -2031,7 +2027,7 @@ void MainWindow::CreateHTMLTOC()
     // If HTML TOC CSS file does not exist look for a default file
     // in preferences directory and if none create one.
     if (!found_css) {
-        QString css_path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + SGC_TOC_CSS_FILENAME;
+        QString css_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SGC_TOC_CSS_FILENAME;
         if (QFile::exists(css_path)) {
             m_BookBrowser->AddFile(css_path);
         }
@@ -2175,7 +2171,7 @@ void MainWindow::ToggleViewState()
 
     if (type == Resource::HTMLResourceType) {
         if (m_ViewState == MainWindow::ViewState_CodeView) {
-            SetViewState(MainWindow::ViewState_BookView);
+            SetViewState(MainWindow::ViewState_CodeView);
         } else {
             SetViewState(MainWindow::ViewState_CodeView);
         }
@@ -2184,10 +2180,10 @@ void MainWindow::ToggleViewState()
     UpdateBrowserSelectionToTab();
 }
 
+// Qt 6: BookView removed - CodeView only now
 void MainWindow::BookView()
 {
-    SetViewState(MainWindow::ViewState_BookView);
-    UpdateBrowserSelectionToTab();
+    CodeView();
 }
 
 void MainWindow::CodeView()
@@ -2382,16 +2378,9 @@ void MainWindow::UpdateViewState(bool set_tab_state)
             FlowTab *ftab = dynamic_cast<FlowTab *>(&tab);
 
             if (ftab) {
-                bool view_state_changed = ftab->SetViewState(m_ViewState);
                 // We cannot reliably use Qt focus events to determine whether or
                 // not to reload the contents of a tab.
                 ftab->ReloadTabIfPending();
-
-                if (!view_state_changed) {
-                    // Either we were already in this view, the data is not well formed or tab is still loading.
-                    // We must force the UI to be in the state that this tab is now in.
-                    m_ViewState = ftab->GetViewState();
-                }
             }
             ClearMarkedText();
         }
@@ -2399,8 +2388,8 @@ void MainWindow::UpdateViewState(bool set_tab_state)
         if (m_ViewState == MainWindow::ViewState_CodeView) {
             SetStateActionsCodeView();
         } else {
-            m_ViewState = MainWindow::ViewState_BookView;
-            SetStateActionsBookView();
+            m_ViewState = MainWindow::ViewState_CodeView;
+            SetStateActionsCodeView();
         }
     } else if (type == Resource::CSSResourceType) {
         SetStateActionsCSSView();
@@ -2478,77 +2467,6 @@ void MainWindow::UpdateUIOnTabCountChange()
 }
 
 
-void MainWindow::SetStateActionsBookView()
-{
-    ui.actionBookView->setChecked(true);
-    ui.actionCodeView->setChecked(false);
-    ui.actionBookView->setEnabled(true);
-    ui.actionCodeView->setEnabled(true);
-    ui.actionPrintPreview->setEnabled(true);
-    ui.actionPrint->setEnabled(true);
-    ui.actionSplitSection->setEnabled(true);
-    ui.actionInsertSGFSectionMarker->setEnabled(true);
-    ui.actionInsertFile->setEnabled(true);
-    ui.actionInsertSpecialCharacter->setEnabled(true);
-    ui.actionInsertId->setEnabled(true);
-    ui.actionInsertHyperlink->setEnabled(true);
-    ui.actionInsertClosingTag->setEnabled(false);
-    ui.actionUndo->setEnabled(true);
-    ui.actionRedo->setEnabled(true);
-    ui.actionPasteClipboardHistory->setEnabled(true);
-    ui.actionBold         ->setEnabled(true);
-    ui.actionItalic       ->setEnabled(true);
-    ui.actionUnderline    ->setEnabled(true);
-    ui.actionStrikethrough->setEnabled(true);
-    ui.actionSubscript    ->setEnabled(true);
-    ui.actionSuperscript  ->setEnabled(true);
-    ui.actionAlignLeft   ->setEnabled(true);
-    ui.actionAlignCenter ->setEnabled(true);
-    ui.actionAlignRight  ->setEnabled(true);
-    ui.actionAlignJustify->setEnabled(true);
-    ui.actionDecreaseIndent->setEnabled(true);
-    ui.actionIncreaseIndent->setEnabled(true);
-    ui.actionTextDirectionLTR    ->setEnabled(true);
-    ui.actionTextDirectionRTL    ->setEnabled(true);
-    ui.actionTextDirectionDefault->setEnabled(true);
-    ui.actionInsertBulletedList->setEnabled(true);
-    ui.actionInsertNumberedList->setEnabled(true);
-    ui.actionShowTag->setEnabled(true);
-    ui.actionRemoveFormatting->setEnabled(true);
-    ui.menuHeadings->setEnabled(true);
-    ui.actionHeading1->setEnabled(true);
-    ui.actionHeading2->setEnabled(true);
-    ui.actionHeading3->setEnabled(true);
-    ui.actionHeading4->setEnabled(true);
-    ui.actionHeading5->setEnabled(true);
-    ui.actionHeading6->setEnabled(true);
-    ui.actionHeadingNormal->setEnabled(true);
-    ui.actionCasingLowercase  ->setEnabled(true);
-    ui.actionCasingUppercase  ->setEnabled(true);
-    ui.actionCasingTitlecase ->setEnabled(true);
-    ui.actionCasingCapitalize ->setEnabled(true);
-    ui.actionFind->setEnabled(true);
-    ui.actionFindNext->setEnabled(true);
-    ui.actionFindPrevious->setEnabled(true);
-    ui.actionReplaceCurrent->setEnabled(true);
-    ui.actionReplaceNext->setEnabled(true);
-    ui.actionReplacePrevious->setEnabled(true);
-    ui.actionReplaceAll->setEnabled(true);
-    ui.actionCount->setEnabled(true);
-    ui.actionMarkSelection->setEnabled(false);
-    ui.menuSearchCurrentFile->setEnabled(true);
-    ui.actionFindNextInFile->setEnabled(true);
-    ui.actionReplaceNextInFile->setEnabled(true);
-    ui.actionReplaceAllInFile->setEnabled(true);
-    ui.actionCountInFile->setEnabled(true);
-    ui.actionGoToLine->setEnabled(false);
-    ui.actionGoToLinkOrStyle->setEnabled(false);
-    ui.actionAddMisspelledWord->setEnabled(false);
-    ui.actionIgnoreMisspelledWord->setEnabled(false);
-    ui.actionAutoSpellCheck->setEnabled(false);
-    UpdateUIOnTabChanges();
-    m_FindReplace->ShowHide();
-}
 
 void MainWindow::SetStateActionsCodeView()
 {
@@ -2991,7 +2909,7 @@ void MainWindow::SplitOnSGFSectionMarkers()
     // If have the current tab is open in BV, make sure it has its content saved so it won't later overwrite a split.
     FlowTab *flow_tab = GetCurrentFlowTab();
 
-    if (flow_tab && (flow_tab->GetViewState() == MainWindow::ViewState_BookView)) {
+    if (flow_tab && (MainWindow::ViewState_CodeView == MainWindow::ViewState_CodeView)) {
         flow_tab->SaveTabContent();
     }
 
@@ -3031,7 +2949,7 @@ void MainWindow::SplitOnSGFSectionMarkers()
         m_BookBrowser->Refresh();
         ShowMessageOnStatusBar(tr("Split completed. You may need to update the Table of Contents."));
 
-        if (flow_tab && (flow_tab->GetViewState() == MainWindow::ViewState_BookView)) {
+        if (flow_tab && (MainWindow::ViewState_CodeView == MainWindow::ViewState_CodeView)) {
             // Our focus will have been moved to the book browser. Set it there and back to do
             // an equivalent of "GrabFocus()" to workaround Qt setFocus() not always working.
             m_BookBrowser->setFocus();
@@ -3103,11 +3021,11 @@ void MainWindow::ReadSettings()
     settings.endGroup();
     // Our default fonts for book view/web preview
     SettingsStore::BookViewAppearance bookViewAppearance = settings.bookViewAppearance();
-    QWebSettings *web_settings = QWebSettings::globalSettings();
-    web_settings->setFontSize(QWebSettings::DefaultFontSize, bookViewAppearance.font_size);
-    web_settings->setFontFamily(QWebSettings::StandardFont, bookViewAppearance.font_family_standard);
-    web_settings->setFontFamily(QWebSettings::SerifFont, bookViewAppearance.font_family_serif);
-    web_settings->setFontFamily(QWebSettings::SansSerifFont, bookViewAppearance.font_family_sans_serif);
+    // REMOVED: QWebSettings code for BookView
+    // REMOVED: web_settings->setFontSize(QWebSettings::DefaultFontSize, bookViewAppearance.font_size);
+    // REMOVED: web_settings->setFontFamily(QWebSettings::StandardFont, bookViewAppearance.font_family_standard);
+    // REMOVED: web_settings->setFontFamily(QWebSettings::SerifFont, bookViewAppearance.font_family_serif);
+    // REMOVED: web_settings->setFontFamily(QWebSettings::SansSerifFont, bookViewAppearance.font_family_sans_serif);
 }
 
 
@@ -3188,7 +3106,7 @@ void MainWindow::SetNewBook(QSharedPointer< Book > new_book)
 
 void MainWindow::ResourcesAddedOrDeleted()
 {
-    QWebSettings::clearMemoryCaches();
+    // REMOVED: QWebSettings::clearMemoryCaches();
 
     // Make sure currently visible tab is updated immediately
     FlowTab *flow_tab = GetCurrentFlowTab();
@@ -4244,7 +4162,7 @@ void MainWindow::ConnectSignalsToSlots()
     m_casingChangeMapper->setMapping(ui.actionCasingUppercase,  Utility::Casing_Uppercase);
     m_casingChangeMapper->setMapping(ui.actionCasingTitlecase, Utility::Casing_Titlecase);
     m_casingChangeMapper->setMapping(ui.actionCasingCapitalize, Utility::Casing_Capitalize);
-    connect(m_casingChangeMapper, SIGNAL(mapped(int)), this, SLOT(ChangeCasing(int)));
+    connect(m_casingChangeMapper, &QSignalMapper::mappedInt, this, &MainWindow::ChangeCasing);
     // View
     connect(ui.actionZoomIn,        SIGNAL(triggered()), this, SLOT(ZoomIn()));
     connect(ui.actionZoomOut,       SIGNAL(triggered()), this, SLOT(ZoomOut()));
@@ -4253,7 +4171,7 @@ void MainWindow::ConnectSignalsToSlots()
     connect(ui.actionCodeView,      SIGNAL(triggered()),  this,   SLOT(CodeView()));
     connect(ui.actionToggleViewState, SIGNAL(triggered()),  this,   SLOT(ToggleViewState()));
     connect(ui.actionHeadingPreserveAttributes, SIGNAL(triggered(bool)), this, SLOT(SetPreserveHeadingAttributes(bool)));
-    connect(m_headingMapper,      SIGNAL(mapped(const QString &)),  this,   SLOT(ApplyHeadingStyleToTab(const QString &)));
+    connect(m_headingMapper, &QSignalMapper::mappedString, this, &MainWindow::ApplyHeadingStyleToTab);
     // Window
     connect(ui.actionNextTab,       SIGNAL(triggered()), &m_TabManager, SLOT(NextTab()));
     connect(ui.actionPreviousTab,   SIGNAL(triggered()), &m_TabManager, SLOT(PreviousTab()));

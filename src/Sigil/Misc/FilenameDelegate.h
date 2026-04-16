@@ -22,7 +22,7 @@
 #ifndef FILENAMEDELEGATE_H
 #define FILENAMEDELEGATE_H
 
-#include <QtWidgets/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 
 class FilenameDelegate : public QStyledItemDelegate
 {

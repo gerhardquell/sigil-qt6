@@ -24,9 +24,8 @@
 #define UTILITY_H
 
 #include <QCoreApplication>
-#include <QtCore/QString>
+#include <QString>
 
-class QStringList;
 class QStringRef;
 class QWidget;
 
@@ -63,7 +62,7 @@ public:
     // Returns a substring of a specified string;
     // the characters included are in the interval:
     // [ start_index, end_index >
-    static QStringRef SubstringRef(int start_index, int end_index, const QString &string);
+    static QStringView SubstringRef(int start_index, int end_index, const QString &string);
 
     // Replace the first occurrence of string "before"
     // with string "after" in string "string"

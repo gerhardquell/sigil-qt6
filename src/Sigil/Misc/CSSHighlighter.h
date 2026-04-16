@@ -32,6 +32,7 @@ class CSSHighlighter : public QSyntaxHighlighter
 public:
 
     explicit CSSHighlighter(QObject *parent);
+    ~CSSHighlighter();
 
 protected:
 

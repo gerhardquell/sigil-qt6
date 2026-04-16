@@ -20,11 +20,11 @@
 **
 *************************************************************************/
 
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QFileDialog>
+#include <QSignalMapper>
+#include <QFileDialog>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "Dialogs/IndexEditor.h"
 #include "MiscEditors/IndexEditorTreeView.h"

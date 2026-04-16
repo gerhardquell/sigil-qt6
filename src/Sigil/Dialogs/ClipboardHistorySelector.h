@@ -26,7 +26,7 @@
 #define CLIPBOARDHISTORYSELECTOR_H
 
 #include <QClipboard>
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 #include "Misc/SettingsStore.h"
 

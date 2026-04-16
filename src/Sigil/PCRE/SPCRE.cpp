@@ -24,7 +24,6 @@
 #include "sigil_constants.h"
 
 // The maximum number of catpures that we will allow.
-const int PCRE_MAX_CAPTURE_GROUPS = 30;
 
 SPCRE::SPCRE(const QString &patten)
 {

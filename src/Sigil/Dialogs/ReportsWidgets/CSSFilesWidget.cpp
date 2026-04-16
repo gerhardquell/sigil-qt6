@@ -20,12 +20,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtWidgets/QFileDialog>
+#include <QFile>
+#include <QFileInfo>
+#include <QFileDialog>
 #include <QtGui/QFont>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "sigil_exception.h"
 #include "BookManipulation/FolderKeeper.h"

@@ -595,6 +595,7 @@ QString XhtmlDoc::GetTextInHtml(const QString &source)
     }
 
     return text;
+}
 
 
 // Resolves HTML entities in the provided string.
@@ -607,28 +608,6 @@ QString XhtmlDoc::ResolveHTMLEntities(const QString &text)
     // Faking some HTML... this is the easiest way to do it
     QString newsource = "<div>" + text + "</div>";
     return GetTextInHtml(newsource);
-}
-
-
-// A tree node class without a children() function...
-// appallingly stupid, isn't it?
-QList< QWebElement > XhtmlDoc::QWebElementChildren(const QWebElement &element)
-{
-    QList< QWebElement > children;
-    const QWebElement &first_child = element.firstChild();
-
-    if (!first_child.isNull()) {
-        children.append(first_child);
-    }
-
-    QWebElement next_sibling = first_child.nextSibling();
-
-    while (!next_sibling.isNull()) {
-        children.append(next_sibling);
-        next_sibling = next_sibling.nextSibling();
-    }
-
-    return children;
 }
 
 
@@ -1072,9 +1051,14 @@ XhtmlDoc::XMLElement XhtmlDoc::CreateXMLElement(QXmlStreamReader &reader)
 QString XhtmlDoc::PrepareSourceForXerces(const QString &source)
 {
     QString prefix = source.left(XML_DECLARATION_SEARCH_PREFIX_SIZE);
-    QRegularExpression standalone(STANDALONE_ATTRIBUTE);
+    // Match the complete standalone attribute: standalone="yes/no" or standalone='yes/no'
+    QRegularExpression standalone(STANDALONE_ATTRIBUTE + "\\s*=\\s*\"[^\"]*\"");
     QRegularExpressionMatch match = standalone.match(prefix);
-    return QString(source).remove(match.capturedStart(), match.capturedLength());
+    QString result(source);
+    if (match.hasMatch()) {
+        result.remove(match.capturedStart(), match.capturedLength());
+    }
+    return result;
 }
 
 

@@ -21,10 +21,10 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QString>
-#include <QtWebKitWidgets/QWebFrame>
-#include <QtWebKitWidgets/QWebPage>
+#include <QFileInfo>
+#include <QString>
+// REMOVED: #include <QtWebKitWidgets/QWebFrame>
+// REMOVED: #include <QtWebKitWidgets/QWebPage>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/GuideSemantics.h"

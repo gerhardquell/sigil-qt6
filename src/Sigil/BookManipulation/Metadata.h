@@ -23,9 +23,9 @@
 #ifndef METADATA_H
 #define METADATA_Hc
 
-#include <QtCore/QHash>
-#include <QtCore/QVariant>
-#include <QtCore/QObject>
+#include <QHash>
+#include <QVariant>
+#include <QObject>
 
 #include "BookManipulation/XercesHUse.h"
 

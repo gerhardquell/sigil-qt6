@@ -23,12 +23,12 @@
 #ifndef EDITTOC_H
 #define EDITTOC_H
 
-#include <QtCore/QList>
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QDialog>
+#include <QList>
+#include <QSharedPointer>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QAction>
+#include <QMenu>
 
 #include "MainUI/NCXModel.h"
 #include "BookManipulation/Headings.h"

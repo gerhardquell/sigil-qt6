@@ -24,7 +24,7 @@
 #ifndef PCREREPLACETEXTBUILDER_H
 #define PCREREPLACETEXTBUILDER_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "PCRE/SPCRE.h"
 

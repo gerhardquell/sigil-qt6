@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDate>
-#include <QtCore/QModelIndex>
+#include <QDate>
+#include <QModelIndex>
 
 #include "BookManipulation/Metadata.h"
 #include "Dialogs/AddMetadata.h"

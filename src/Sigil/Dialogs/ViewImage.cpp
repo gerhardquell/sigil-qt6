@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtWidgets/QLayout>
-#include <QWebView>
-#include <QWebFrame>
+#include <QFileInfo>
+#include <QLayout>
+#include <QLabel>
+#include <QPixmap>
 
 #include "Dialogs/ViewImage.h"
 #include "ResourceObjects/ImageResource.h"
@@ -35,11 +35,8 @@ ViewImage::ViewImage(QWidget *parent)
     QDialog(parent)
 {
     ui.setupUi(this);
-    ui.webView->setContextMenuPolicy(Qt::NoContextMenu);
-    ui.webView->setFocusPolicy(Qt::NoFocus);
-    ui.webView->setAcceptDrops(false);
-    ui.webView->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
-    ui.webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+    ui.imageLabel->setContextMenuPolicy(Qt::NoContextMenu);
+    ui.imageLabel->setFocusPolicy(Qt::NoFocus);
 
     ReadSettings();
 }
@@ -51,10 +48,13 @@ ViewImage::~ViewImage()
 
 void ViewImage::ShowImage(QString path)
 {
-    QWebSettings::clearMemoryCaches();
-    const QUrl resourceUrl = QUrl::fromLocalFile(path);
-    QString html = IMAGE_HTML_BASE_PREVIEW.arg(resourceUrl.toString());
-    ui.webView->setHtml(html, resourceUrl);
+    QPixmap pixmap(path);
+    if (!pixmap.isNull()) {
+        // Scale to fit while maintaining aspect ratio
+        ui.imageLabel->setPixmap(pixmap.scaled(ui.imageLabel->size(),
+                                               Qt::KeepAspectRatio,
+                                               Qt::SmoothTransformation));
+    }
 }
 
 void ViewImage::ReadSettings()

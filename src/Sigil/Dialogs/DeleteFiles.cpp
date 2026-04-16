@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QPushButton>
+#include <QPushButton>
 #include "Misc/SettingsStore.h"
 #include "Dialogs/DeleteFiles.h"
 

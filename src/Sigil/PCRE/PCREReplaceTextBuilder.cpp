@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QChar>
+#include <QChar>
 
 #include "PCRE/PCREReplaceTextBuilder.h"
 #include "Misc/Utility.h"

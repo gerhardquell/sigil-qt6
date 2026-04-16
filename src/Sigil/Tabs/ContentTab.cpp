@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QVBoxLayout>
+#include <QLayout>
+#include <QVBoxLayout>
 
 #include "ResourceObjects/Resource.h"
 #include "Tabs/FlowTab.h"

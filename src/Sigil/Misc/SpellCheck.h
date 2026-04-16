@@ -23,12 +23,11 @@
 #ifndef SPELLCHECK_H
 #define SPELLCHECK_H
 
-#include <QtCore/QHash>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QHash>
+#include <QString>
+#include <QStringList>
 
 class Hunspell;
-class QStringList;
 class QTextCodec;
 
 /**

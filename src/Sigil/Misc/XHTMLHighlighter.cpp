@@ -20,6 +20,7 @@
 *************************************************************************/
 
 #include <QRegularExpressionMatch>
+#include <QTextDocument>
 
 #include "Misc/SpellCheck.h"
 #include "Misc/Utility.h"
@@ -55,7 +56,6 @@ static const QString ENTITY_END             = ";";
 XHTMLHighlighter::XHTMLHighlighter(bool checkSpelling, QObject *parent)
     : QSyntaxHighlighter(parent),
       m_checkSpelling(checkSpelling)
-
 {
     SettingsStore settings;
     m_codeViewAppearance = settings.codeViewAppearance();
@@ -115,6 +115,18 @@ XHTMLHighlighter::XHTMLHighlighter(bool checkSpelling, QObject *parent)
     rule.pattern = QRegularExpression(ENTITY_END);
     rule.format  = entity_format;
     m_Rules[ "ENTITY_END" ] = rule;
+}
+
+
+// Destructor
+XHTMLHighlighter::~XHTMLHighlighter()
+{
+    // Block signals from the document to prevent
+    // issues during destruction sequence
+    QTextDocument *doc = document();
+    if (doc) {
+        doc->blockSignals(true);
+    }
 }
 
 

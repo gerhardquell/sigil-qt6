@@ -26,13 +26,12 @@
 #include <boost/tuple/tuple.hpp>
 #include <tidy.h>
 
-#include <QtCore/QList>
+#include <QList>
 
 #include "ResourceObjects/HTMLResource.h"
 
 using boost::tuple;
 
-class QStringList;
 
 class CleanSource
 {

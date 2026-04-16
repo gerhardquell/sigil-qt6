@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDate>
-#include <QtCore/QMutex>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QDate>
+#include <QMutex>
+#include <QString>
+#include <QStringList>
 
 #include "BookManipulation/Metadata.h"
 #include "BookManipulation/XercesCppUse.h"
@@ -594,7 +594,7 @@ Metadata::MetaElement Metadata::DateMetadata(const Metadata::MetaElement &meta)
 {
     QString dc_event = meta.attributes.value("event");
     // Dates are in YYYY[-MM[-DD]] format
-    QStringList date_parts = meta.value.toString().split("-", QString::SkipEmptyParts);
+    QStringList date_parts = meta.value.toString().split("-", Qt::SkipEmptyParts);
 
     if (date_parts.count() < 1) {
         date_parts.append(QString::number(QDate::currentDate().year()));

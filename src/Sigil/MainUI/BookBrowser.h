@@ -23,8 +23,8 @@
 #ifndef BOOKBROWSER_H
 #define BOOKBROWSER_H
 
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QDockWidget>
+#include <QSharedPointer>
+#include <QDockWidget>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/GuideSemantics.h"

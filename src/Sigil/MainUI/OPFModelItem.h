@@ -25,8 +25,8 @@
 
 #include <limits>
 
-#include <QtCore/Qt>
-#include <QtCore/QString>
+#include <Qt>
+#include <QString>
 #include <QtGui/QStandardItem>
 
 static const int NO_READING_ORDER        = std::numeric_limits< int >::max();

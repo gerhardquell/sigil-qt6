@@ -19,8 +19,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QString>
-#include <QtCore/QTextCodec>
+#include <QString>
+#include <QStringEncoder>
 #include <QRegularExpression>
 
 #include "Misc/HTMLEncodingResolver.h"

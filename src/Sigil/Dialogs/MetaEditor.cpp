@@ -21,10 +21,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDate>
+#include <QDate>
 #include <QtGui/QShowEvent>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "Dialogs/MetaEditor.h"
 #include "Dialogs/AddMetadata.h"
@@ -388,7 +388,7 @@ bool MetaEditor::OkToSplitInput(const QString &metaname)
 QList< QVariant > MetaEditor::InputsInField(const QString &field_value)
 {
     QList< QVariant > inputs;
-    foreach(QString input, field_value.split(";", QString::SkipEmptyParts)) {
+    foreach(QString input, field_value.split(";", Qt::SkipEmptyParts)) {
         inputs.append(input.simplified());
     }
     return inputs;
@@ -500,7 +500,7 @@ void MetaEditor::MoveUp()
             rows.append(row);
         }
     }
-    qSort(rows);
+    std::sort(rows.begin(), rows.end());
     // Move the rows as a block starting from the top
     foreach(int row, rows) {
         QList< QStandardItem * > items =  m_MetaModel.invisibleRootItem()->takeRow(row - 1);
@@ -529,7 +529,7 @@ void MetaEditor::MoveDown()
             rows.append(row);
         }
     }
-    qSort(rows);
+    std::sort(rows.begin(), rows.end());
 
     // Move the rows as a block starting from the bottom
     for (int i = rows.count() - 1; i >= 0; i--) {

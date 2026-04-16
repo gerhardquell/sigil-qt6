@@ -19,9 +19,9 @@
 **
 *************************************************************************/
 
-#include <QtCore/QHashIterator>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QShortcut>
+#include <QHashIterator>
+#include <QAction>
+#include <QShortcut>
 #include <QRegularExpression>
 
 #include "Misc/KeyboardShortcutManager.h"

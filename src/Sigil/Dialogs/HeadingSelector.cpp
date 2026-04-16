@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QStringList>
+#include <QStringList>
 #include <QtGui/QStandardItem>
 #include <QKeyEvent>
 
@@ -36,7 +36,6 @@
 static const QString SETTINGS_GROUP   = "heading_selector";
 static const int FIRST_COLUMN_PADDING = 30;
 
-const QString SIGIL_TOC_ID_PREFIX = "sigil_toc_id_";
 const QString OLD_SIGIL_TOC_ID_PREFIX = "heading_id_";
 
 // Constructor;

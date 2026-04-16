@@ -20,8 +20,8 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QCompleter>
-#include <QtWidgets/QLineEdit>
+#include <QCompleter>
+#include <QLineEdit>
 
 #include "Dialogs/SelectId.h"
 #include "ResourceObjects/HTMLResource.h"

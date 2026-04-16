@@ -21,13 +21,13 @@
 **
 *************************************************************************/
 
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QAction>
+#include <QSignalMapper>
+#include <QAction>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QRegularExpression>
 
 #include "BookManipulation/FolderKeeper.h"
@@ -184,7 +184,7 @@ bool ClipEditor::ItemsAreUnique(QList<QStandardItem *> items)
 {
     // Although saving a group and a sub item works, it could be confusing to users to
     // have and entry appear twice so its more predictable just to prevent it and warn the user
-    if (items.toSet().count() != items.count()) {
+    if (items.count() != items.count()) {
         Utility::DisplayStdErrorDialog(tr("You cannot select an entry and a group containing the entry."));
         return false;
     }

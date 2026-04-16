@@ -21,7 +21,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFile>
+#include <QFile>
 
 #include "Dialogs/MetaEditorItemDelegate.h"
 #include "BookManipulation/Metadata.h"

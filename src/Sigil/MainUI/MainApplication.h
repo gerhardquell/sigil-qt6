@@ -26,7 +26,7 @@
 #define MAINAPPLICATION_H
 
 #include <QEvent>
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 class MainApplication : public QApplication
 {

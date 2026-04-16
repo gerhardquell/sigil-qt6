@@ -56,7 +56,7 @@ QStandardItem *IndexEntries::GetRootItem()
 void IndexEntries::AddOneEntry(QString text, QString filename, QString index_id_value)
 {
     QStandardItem *parent_item = m_BookIndexRootItem;
-    QStringList names = text.split("/", QString::SkipEmptyParts);
+    QStringList names = text.split("/", Qt::SkipEmptyParts);
     names.append(filename % "#" % index_id_value);
     // Add names in heirachary
     foreach(QString name, names) {

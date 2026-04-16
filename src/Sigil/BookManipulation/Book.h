@@ -25,10 +25,10 @@
 
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtCore/QUrl>
-#include <QtCore/QVariant>
+#include <QHash>
+#include <QObject>
+#include <QUrl>
+#include <QVariant>
 #include "BookManipulation/Metadata.h"
 #include "BookManipulation/XhtmlDoc.h"
 #include "ResourceObjects/Resource.h"

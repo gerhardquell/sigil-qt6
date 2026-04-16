@@ -36,6 +36,9 @@ public:
     // Constructor
     XHTMLHighlighter(bool checkSpelling, QObject *parent = 0);
 
+    // Destructor
+    ~XHTMLHighlighter();
+
 protected:
 
     // Overrides the function from QSyntaxHighlighter;

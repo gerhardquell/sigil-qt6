@@ -25,7 +25,7 @@
 #ifndef CLIPEDITORTREEVIEW_H
 #define CLIPEDITORTREEVIEW_H
 
-#include <QtWidgets/QTreeView>
+#include <QTreeView>
 
 class ClipEditorTreeView : public QTreeView
 {

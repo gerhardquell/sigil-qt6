@@ -9,6 +9,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 #include <cstddef>
+#include <cstdint>
 #include <boost/cstdint.hpp>
 
 #include <boost/memory_order.hpp>

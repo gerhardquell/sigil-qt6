@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QTimer>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QPushButton>
+#include <QTimer>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QPushButton>
 
 #include "Misc/SettingsStore.h"
 #include "Tabs/ContentTab.h"

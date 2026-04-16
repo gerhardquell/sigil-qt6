@@ -25,7 +25,7 @@
 #ifndef METADATAITEMDELEGATE_H
 #define METADATAITEMDELEGATE_H
 
-#include <QtWidgets/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 
 class MetaEditorItemDelegate : public QStyledItemDelegate
 {

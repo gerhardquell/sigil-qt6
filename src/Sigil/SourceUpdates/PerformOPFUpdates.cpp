@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 #include "SourceUpdates/PerformOPFUpdates.h"
 

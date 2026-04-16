@@ -25,7 +25,7 @@
 #ifndef SELECTFILES_H
 #define SELECTFILES_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
 
 #include "ResourceObjects/Resource.h"
@@ -33,8 +33,7 @@
 #include "ui_SelectFiles.h"
 
 class QString;
-class QStringList;
-class QWebView;
+class QWebEngineView;
 
 class SelectFiles : public QDialog
 {
@@ -111,7 +110,7 @@ private:
     QListWidgetItem *m_VideoItem;
     QListWidgetItem *m_AudioItem;
 
-    QWebView *m_WebView;
+    QWebEngineView *m_WebView;
 
     Ui::SelectFiles ui;
 };

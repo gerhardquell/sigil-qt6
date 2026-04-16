@@ -24,13 +24,13 @@
 #ifndef IMAGEFILESWIDGET_H
 #define IMAGEFILESWIDGET_H
 
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QSharedPointer>
+#include <QAction>
+#include <QMenu>
 
 #include "ResourceObjects/Resource.h"
-#include <QtCore/QHash>
-#include <QtWidgets/QDialog>
+#include <QHash>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
 #include "BookManipulation/Book.h"
 #include "Dialogs/ReportsWidgets/ReportsWidget.h"
@@ -38,7 +38,6 @@
 #include "ui_ReportsImageFilesWidget.h"
 
 class QString;
-class QStringList;
 
 class ImageFilesWidget : public ReportsWidget
 {

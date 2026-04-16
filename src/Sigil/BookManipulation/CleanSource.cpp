@@ -22,11 +22,11 @@
 #include <boost/tuple/tuple.hpp>
 #include <buffio.h>
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QWriteLocker>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QProgressDialog>
+#include <QString>
+#include <QStringList>
+#include <QWriteLocker>
+#include <QApplication>
+#include <QProgressDialog>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -37,6 +37,7 @@
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 #include "Misc/Utility.h"
+
 
 using boost::make_tuple;
 using boost::tie;

@@ -22,14 +22,14 @@
 #include <iostream>
 #include <XercesInit.h>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QLibraryInfo>
-#include <QtCore/QTextCodec>
-#include <QtCore/QThreadPool>
-#include <QtCore/QTranslator>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QMessageBox>
+#include <QCoreApplication>
+#include <QDir>
+#include <QLibraryInfo>
+#include <QStringEncoder>
+#include <QThreadPool>
+#include <QTranslator>
+#include <QApplication>
+#include <QMessageBox>
 
 #include "Misc/UILanguage.h"
 #include "MainUI/MainApplication.h"
@@ -40,6 +40,8 @@
 #include "Misc/Utility.h"
 #include "sigil_constants.h"
 #include "sigil_exception.h"
+
+
 
 
 // Creates a MainWindow instance depending
@@ -84,6 +86,9 @@ void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
             fprintf(stderr, "Debug: %s\n", message.toLatin1().constData());
             break;
             // TODO: should go to a log
+        case QtInfoMsg:
+            fprintf(stderr, "Info: %s\n", message.toLatin1().constData());
+            break;
         case QtWarningMsg:
             fprintf(stderr, "Warning: %s\n", message.toLatin1().constData());
             break;
@@ -140,7 +145,7 @@ int main(int argc, char *argv[])
         QCoreApplication::setApplicationName("sigil");
         QCoreApplication::setApplicationVersion(SIGIL_VERSION);
         // Setup the translator and load the translation for the selected language
-        QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf8"));
+        // Note: QTextCodec removed in Qt 6, UTF-8 is now the default encoding
         QTranslator translator;
         SettingsStore settings;
         const QString qm_name = QString("sigil_%1").arg(settings.uiLanguage());
@@ -182,3 +187,28 @@ int main(int argc, char *argv[])
         return 1;
     }
 }
+
+// Missing constants for Qt 6 migration
+const QString FIRST_SECTION_PREFIX = "Section0001";
+const QString FIRST_SECTION_NAME = FIRST_SECTION_PREFIX + ".xhtml";
+const QString HTML_COVER_FILENAME = "cover.xhtml";
+const QString BODY_START = "<\\s*body[^\u003e]*>";
+const QString BODY_END = "</\\s*body\\s*>";
+const QString OPF_FILE_NAME = "content.opf";
+const QString NCX_FILE_NAME = "toc.ncx";
+const QString STANDALONE_ATTRIBUTE = "standalone";
+const QString ENCODING_ATTRIBUTE = "encoding";
+const QString NCX_MIMETYPE = "application/x-dtbncx+xml";
+const QString DUBLIN_CORE_NS = "http://purl.org/dc/elements/1.1/";
+const QString IMAGE_HTML_BASE_PREVIEW = "<html><head><style>img { max-width: 100%; max-height: 100%; }</style></head><body><img src='%1' /></body></html>";
+const QString SIGIL_TOC_ID_PREFIX = "sigil_toc_id_";
+const QString ADOBE_FONT_ALGO_ID = "http://ns.adobe.com/pdf/enc#RC";
+const QString IDPF_FONT_ALGO_ID = "http://www.idpf.org/2008/embedding";
+const QString VERSION_ATTRIBUTE = "version";
+const float ZOOM_NORMAL = 1.0f;
+const QString SGC_TOC_CSS_FILENAME = "sgc-toc.css";
+const QString SGC_INDEX_CSS_FILENAME = "sgc-index.css";
+const int PCRE_MAX_CAPTURE_GROUPS = 30;
+const float ZOOM_STEP = 0.1f;
+const float ZOOM_MIN = 0.09f;
+const float ZOOM_MAX = 5.0f;

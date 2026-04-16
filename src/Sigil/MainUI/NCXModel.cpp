@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QtCore>
-#include <QtCore/QThread>
-#include <QtConcurrent/QtConcurrent>
-#include <QtWidgets/QApplication>
+#include <QtCore>
+#include <QThread>
+#include <QtConcurrent>
+#include <QApplication>
 
 #include "MainUI/NCXModel.h"
 #include "Misc/Utility.h"
@@ -75,7 +75,7 @@ void NCXModel::Refresh()
     }
 
     m_RefreshInProgress = true;
-    m_NcxRootWatcher.setFuture(QtConcurrent::run(this, &NCXModel::GetRootNCXEntry));
+    m_NcxRootWatcher.setFuture(QtConcurrent::run([this]() { return GetRootNCXEntry(); }));
 }
 
 

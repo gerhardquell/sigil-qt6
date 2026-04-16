@@ -23,7 +23,7 @@
 #ifndef DELETEFILES_H
 #define DELETEFILES_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
 
 #include "ui_DeleteFiles.h"

@@ -27,9 +27,9 @@
 #include <boost/tuple/tuple.hpp>
 
 #include <QCoreApplication>
-#include <QtCore/QHash>
-#include <QtCore/QSet>
-#include <QtCore/QStringList>
+#include <QHash>
+#include <QSet>
+#include <QStringList>
 
 #include "Importers/Importer.h"
 #include "Misc/TempFolder.h"

@@ -20,13 +20,13 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
-#include <QtCore/QUrl>
+#include <QDir>
+#include <QFile>
+#include <QTextStream>
+#include <QUrl>
 #include <QtGui/QDesktopServices>
-#include <QtWidgets/QInputDialog>
-#include <QtWidgets/QMessageBox>
+#include <QInputDialog>
+#include <QMessageBox>
 
 #include "SpellCheckWidget.h"
 #include "Misc/Language.h"
@@ -433,7 +433,8 @@ void SpellCheckWidget::loadUserDictionaryWordList(QString dict_name)
 
     if (userDictFile.open(QIODevice::ReadOnly)) {
         QTextStream userDictStream(&userDictFile);
-        userDictStream.setCodec("UTF-8");
+        // Qt 6: setCodec removed, UTF-8 is default
+        // userDictStream.setCodec("UTF-8");
         QString line;
 
         do {
@@ -477,14 +478,15 @@ void SpellCheckWidget::saveUserDictionaryWordList(QString dict_name)
         }
     }
 
-    QStringList words = unique_words.toList();
+    QStringList words = unique_words.values();
     words.sort();
     // Replace words in the user dictionary.
     QFile userDictFile(dict_path);
 
     if (userDictFile.open(QFile::WriteOnly | QFile::Truncate)) {
         QTextStream userDictStream(&userDictFile);
-        userDictStream.setCodec("UTF-8");
+        // Qt 6: setCodec removed, UTF-8 is default
+        // userDictStream.setCodec("UTF-8");
         foreach(QString word, words) {
             userDictStream << word << "\n";
         }

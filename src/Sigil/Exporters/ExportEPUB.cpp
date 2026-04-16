@@ -29,13 +29,13 @@
 #include <iowin32.h>
 #endif
 
-#include <QtCore/QDateTime>
-#include <QtCore/QDir>
-#include <QtCore/QDirIterator>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QTemporaryFile>
-#include <QtCore/QTextStream>
+#include <QDateTime>
+#include <QDir>
+#include <QDirIterator>
+#include <QFile>
+#include <QFileInfo>
+#include <QTemporaryFile>
+#include <QTextStream>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/FolderKeeper.h"
@@ -51,12 +51,7 @@
 
 #define BUFF_SIZE 8192
 
-const QString BODY_START = "<\\s*body[^>]*>";
-const QString BODY_END   = "</\\s*body\\s*>";
 
-const QString OPF_FILE_NAME            = "content.opf";
-const QString NCX_FILE_NAME            = "toc.ncx";
-const QString CONTAINER_XML_FILE_NAME  = "container.xml";
 const QString ENCRYPTION_XML_FILE_NAME = "encryption.xml";
 
 static const QString METAINF_FOLDER_SUFFIX = "/META-INF";

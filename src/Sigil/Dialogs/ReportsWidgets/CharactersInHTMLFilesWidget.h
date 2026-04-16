@@ -24,10 +24,10 @@
 #ifndef CHARACTERSINHTMLFILESWIDGET_H
 #define CHARACTERSINHTMLFILESWIDGET_H
 
-#include <QtCore/QHash>
-#include <QtWidgets/QDialog>
+#include <QHash>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
-#include <QtCore/QSharedPointer>
+#include <QSharedPointer>
 
 #include "ResourceObjects/Resource.h"
 #include "BookManipulation/Book.h"

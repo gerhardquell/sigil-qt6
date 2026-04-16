@@ -22,11 +22,11 @@
 #include <boost/bind/bind.hpp>
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QtCore>
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QFutureSynchronizer>
-#include <QtConcurrent/QtConcurrent>
+#include <QtCore>
+#include <QDir>
+#include <QFileInfo>
+#include <QFutureSynchronizer>
+#include <QtConcurrent>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/FolderKeeper.h"
@@ -158,11 +158,11 @@ void ImportHTML::UpdateFiles(HTMLResource &html_resource,
         }
     }
 
-    QFutureSynchronizer<void> sync;
-    sync.addFuture(QtConcurrent::map(css_resources,
-                                     boost::bind(UniversalUpdates::LoadAndUpdateOneCSSFile, _1, css_updates)));
+    // Qt 6: Changed from async to sync execution
+    foreach(CSSResource *css_resource, css_resources) {
+        UniversalUpdates::LoadAndUpdateOneCSSFile(css_resource, css_updates);
+    }
     html_resource.SetText(XhtmlDoc::GetDomDocumentAsString(*PerformHTMLUpdates(document, html_updates, css_updates)().get()));
-    sync.waitForFinished();
 }
 
 
@@ -170,18 +170,10 @@ void ImportHTML::UpdateFiles(HTMLResource &html_resource,
 // as the files get a new name, the references are updated
 QHash< QString, QString > ImportHTML::LoadFolderStructure(const xc::DOMDocument &document)
 {
-    QFutureSynchronizer< QHash< QString, QString > > sync;
-    sync.addFuture(QtConcurrent::run(this, &ImportHTML::LoadMediaFiles,     &document));
-    sync.addFuture(QtConcurrent::run(this, &ImportHTML::LoadStyleFiles, &document));
-    sync.waitForFinished();
-    QList< QFuture< QHash< QString, QString > > > futures = sync.futures();
-    int num_futures = futures.count();
+    // Qt 6: Changed from async to sync execution
     QHash< QString, QString > updates;
-
-    for (int i = 0; i < num_futures; ++i) {
-        updates.unite(futures.at(i).result());
-    }
-
+    updates.insert(LoadMediaFiles(&document));
+    updates.insert(LoadStyleFiles(&document));
     return updates;
 }
 

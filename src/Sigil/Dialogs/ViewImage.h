@@ -23,13 +23,13 @@
 #ifndef VIEWIMAGE_H
 #define VIEWIMAGE_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 #include "Misc/SettingsStore.h"
 #include "ResourceObjects/Resource.h"
 #include "ui_ViewImage.h"
 
-class QWebView;
+class QLabel;
 
 class ViewImage : public QDialog
 {

@@ -23,7 +23,7 @@
 #ifndef DELETESTYLES_H
 #define DELETESTYLES_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
 #include "Misc/CSSInfo.h"
 

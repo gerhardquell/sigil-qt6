@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDir>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QLibraryInfo>
-#include <QtCore/QString>
+#include <QDir>
+#include <QCoreApplication>
+#include <QLibraryInfo>
+#include <QString>
 #include "Misc/UILanguage.h"
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)

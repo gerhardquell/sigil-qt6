@@ -23,8 +23,8 @@
 #ifndef TABLEOFCONTENTS_H
 #define TABLEOFCONTENTS_H
 
-#include <QtCore/QSharedPointer>
-#include <QtWidgets/QDockWidget>
+#include <QSharedPointer>
+#include <QDockWidget>
 
 #include "BookManipulation/Book.h"
 #include "MainUI/MainWindow.h"

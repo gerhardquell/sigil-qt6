@@ -23,8 +23,8 @@
 #ifndef SG_CONSTANTS_H
 #define SG_CONSTANTS_H
 
-class QString;
-class QStringList;
+#include <QString>
+#include <QStringList>
 
 // These enable us to use constants defined
 // in one CPP file to be used in another

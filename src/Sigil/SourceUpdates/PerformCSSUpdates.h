@@ -23,7 +23,7 @@
 #ifndef PERFORMCSSUPDATES_H
 #define PERFORMCSSUPDATES_H
 
-#include <QtCore/QHash>
+#include <QHash>
 
 class QString;
 

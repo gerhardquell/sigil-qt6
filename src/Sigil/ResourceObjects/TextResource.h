@@ -23,7 +23,7 @@
 #ifndef TEXTRESOURCE_H
 #define TEXTRESOURCE_H
 
-#include <QtCore/QMutex>
+#include <QMutex>
 
 #include "ResourceObjects/Resource.h"
 

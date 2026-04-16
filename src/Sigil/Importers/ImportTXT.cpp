@@ -32,8 +32,6 @@
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 
-const QString FIRST_SECTION_PREFIX = "Section0001";
-const QString FIRST_SECTION_NAME   = FIRST_SECTION_PREFIX + ".xhtml";
 
 // Constructor;
 // The parameter is the file to be imported

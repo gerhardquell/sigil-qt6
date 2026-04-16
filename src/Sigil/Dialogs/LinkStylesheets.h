@@ -24,9 +24,9 @@
 #ifndef LINKSTYLESHEETS_H
 #define LINKSTYLESHEETS_H
 
-#include <QtCore/QList>
-#include <QtCore/QStringList>
-#include <QtWidgets/QDialog>
+#include <QList>
+#include <QStringList>
+#include <QDialog>
 #include <QtGui/QStandardItemModel>
 
 #include "ui_LinkStylesheets.h"

@@ -19,14 +19,14 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QTimer>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QTreeView>
-#include <QtWidgets/QVBoxLayout>
+#include <QFileInfo>
+#include <QTimer>
+#include <QPushButton>
+#include <QTreeView>
+#include <QVBoxLayout>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QAction>
+#include <QMenu>
 
 #include "BookManipulation/FolderKeeper.h"
 #include "MainUI/TableOfContents.h"
@@ -144,7 +144,7 @@ void TableOfContents::SetupTreeView()
 {
     m_TreeView.setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_TreeView.setSortingEnabled(false);
-    m_TreeView.sortByColumn(-1);
+    m_TreeView.sortByColumn(-1, Qt::AscendingOrder);
     m_TreeView.setUniformRowHeights(true);
     m_TreeView.setDragEnabled(false);
     m_TreeView.setAcceptDrops(false);

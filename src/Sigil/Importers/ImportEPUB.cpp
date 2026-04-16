@@ -30,15 +30,15 @@
 #endif
 
 #include <QApplication>
-#include <QtCore/QtCore>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QFutureSynchronizer>
-#include <QtConcurrent/QtConcurrent>
-#include <QtWidgets/QMessageBox>
+#include <QtCore>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QFutureSynchronizer>
+#include <QtConcurrent>
+#include <QMessageBox>
 #include <QtGui/QTextDocument>
-#include <QtCore/QXmlStreamReader>
+#include <QXmlStreamReader>
 #include <QDirIterator>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
@@ -71,13 +71,9 @@
 
 using boost::make_tuple;
 
-const QString DUBLIN_CORE_NS             = "http://purl.org/dc/elements/1.1/";
 static const QString OEBPS_MIMETYPE      = "application/oebps-package+xml";
 static const QString UPDATE_ERROR_STRING = "SG_ERROR";
-const QString NCX_MIMETYPE               = "application/x-dtbncx+xml";
 static const QString NCX_EXTENSION       = "ncx";
-const QString ADOBE_FONT_ALGO_ID         = "http://ns.adobe.com/pdf/enc#RC";
-const QString IDPF_FONT_ALGO_ID          = "http://www.idpf.org/2008/embedding";
 static const QString CONTAINER_XML       = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                            "<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n"
                                            "    <rootfiles>\n"
@@ -699,25 +695,13 @@ QHash<QString, QString> ImportEPUB::LoadFolderStructure()
 {
     QList<QString> keys = m_Files.keys();
     int num_files = keys.count();
-    QFutureSynchronizer<tuple<QString, QString> > sync;
+    // Qt 6: Changed from async to sync execution
+    QHash<QString, QString> updates;
 
     for (int i = 0; i < num_files; ++i) {
         QString id = keys.at(i);
-        sync.addFuture(QtConcurrent::run(
-                           this,
-                           &ImportEPUB::LoadOneFile,
-                           m_Files.value(id),
-                           m_FileMimetypes.value(id)));
-    }
-
-    sync.waitForFinished();
-    QList<QFuture<tuple<QString, QString> > > futures = sync.futures();
-    int num_futures = futures.count();
-    QHash<QString, QString> updates;
-
-    for (int i = 0; i < num_futures; ++i) {
-        tuple< QString, QString > result = futures.at(i).result();
-        updates[result.get<0>()] = result.get< 1 >();
+        tuple<QString, QString> result = LoadOneFile(m_Files.value(id), m_FileMimetypes.value(id));
+        updates[result.get<0>()] = result.get<1>();
     }
 
     updates.remove(UPDATE_ERROR_STRING);
@@ -743,12 +727,15 @@ QString ImportEPUB::PrepareOPFForReading(const QString &source)
 {
     QString source_copy(source);
     QString prefix = source_copy.left(XML_DECLARATION_SEARCH_PREFIX_SIZE);
-    QRegularExpression version(VERSION_ATTRIBUTE);
+    // Match the complete version attribute: version="1.x" or version='1.x'
+    QRegularExpression version(VERSION_ATTRIBUTE + "\\s*=\\s*\"[^\"]*\"");
     QRegularExpressionMatch mo = version.match(prefix);
     // MASSIVE hack for XML 1.1 "support";
     // this is only for people who specify
     // XML 1.1 when they actually only use XML 1.0
-    source_copy.replace(mo.capturedStart(), mo.capturedLength(), "version=\"1.0\"");
+    if (mo.hasMatch()) {
+        source_copy.replace(mo.capturedStart(), mo.capturedLength(), "version=\"1.0\"");
+    }
     return source_copy;
 }
 

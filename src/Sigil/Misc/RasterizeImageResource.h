@@ -23,7 +23,7 @@
 #ifndef RASTERIZEIMAGERESOURCE_H
 #define RASTERIZEIMAGERESOURCE_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QWebPage;
 class QPixmap;

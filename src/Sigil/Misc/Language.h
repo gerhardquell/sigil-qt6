@@ -23,11 +23,10 @@
 #ifndef LANGUAGE_H
 #define LANGUAGE_H
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QHash>
+#include <QCoreApplication>
+#include <QHash>
 
 class QString;
-class QStringList;
 
 /**
  * Singleton.

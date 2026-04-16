@@ -20,12 +20,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFile>
-#include <QtCore/QHashIterator>
-#include <QtWidgets/QFileDialog>
+#include <QFile>
+#include <QHashIterator>
+#include <QFileDialog>
 #include <QtGui/QFont>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QMessageBox>
+#include <QPushButton>
+#include <QMessageBox>
 
 #include "sigil_constants.h"
 #include "sigil_exception.h"

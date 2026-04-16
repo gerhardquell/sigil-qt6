@@ -38,10 +38,8 @@ public:
 private:
 
     // Accepts an HTML stream and tries to determine its encoding;
-    // if no encoding is detected, the default codec for this locale is returned.
-    // We use this function because Qt's QTextCodec::codecForHtml() function
-    // leaves a *lot* to be desired.
-    static const QTextCodec *GetCodecForHTML(const QByteArray &raw_text);
+    // Returns "UTF-8" always for now (Qt 6: QTextCodec removed).
+    static QString GetCodecForHTML(const QByteArray &raw_text);
 
     // This function goes through the entire byte array
     // and tries to see whether this is a valid UTF-8 sequence.

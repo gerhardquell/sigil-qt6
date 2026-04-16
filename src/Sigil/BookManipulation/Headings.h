@@ -25,8 +25,8 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <QtCore/QList>
-#include <QtCore/QMetaType>
+#include <QList>
+#include <QMetaType>
 
 #include "BookManipulation/XercesHUse.h"
 

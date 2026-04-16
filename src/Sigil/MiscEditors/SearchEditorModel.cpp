@@ -21,11 +21,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
+#include <QFile>
 #include <QByteArray>
 #include <QDataStream>
-#include <QtCore/QTime>
-#include <QtCore/QStandardPaths>
+#include <QTime>
+#include <QStandardPaths>
 #include <QRegularExpression>
 
 #include "MiscEditors/SearchEditorModel.h"
@@ -59,7 +60,7 @@ SearchEditorModel::SearchEditorModel(QObject *parent)
       m_FSWatcher(new QFileSystemWatcher()),
       m_IsDataModified(false)
 {
-    m_SettingsPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + SETTINGS_FILE;
+    m_SettingsPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SETTINGS_FILE;
     QStringList header;
     header.append(tr("Name"));
     header.append(tr("Find"));
@@ -221,6 +222,7 @@ void SearchEditorModel::SettingsFileChanged(const QString &path) const
 
     while (!QFile::exists(path) && QTime::currentTime() < wake_time) {
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+#include <QFile>
     }
 
     // The signal is also received after resource files are removed / renamed,
@@ -338,7 +340,7 @@ void SearchEditorModel::AddFullNameEntry(SearchEditorModel::searchEntry *entry, 
     QString entry_name = entry->name;
 
     if (entry->name.contains("/")) {
-        QStringList group_names = entry->name.split("/", QString::SkipEmptyParts);
+        QStringList group_names = entry->name.split("/", Qt::SkipEmptyParts);
         entry_name = group_names.last();
 
         if (!entry->is_group) {
@@ -448,10 +450,13 @@ void SearchEditorModel::AddExampleEntries()
     QString examples_dir;
 #ifdef Q_OS_MAC
     examples_dir = QCoreApplication::applicationDirPath() + "/../examples/";
+#include <QFile>
 #elif defined(Q_OS_WIN32)
     examples_dir = QCoreApplication::applicationDirPath() + "/examples/";
+#include <QFile>
 #else
     examples_dir = QCoreApplication::applicationDirPath() + "/../share/" + QCoreApplication::applicationName().toLower() + "/examples/";
+#include <QFile>
 #endif
     LoadData(examples_dir % SEARCH_EXAMPLES_FILE);
 }

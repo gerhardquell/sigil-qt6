@@ -23,11 +23,10 @@
 #ifndef XMLENTITIES_H
 #define XMLENTITIES_H
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QHash>
+#include <QCoreApplication>
+#include <QHash>
 
 class QString;
-class QStringList;
 
 /**
  * Singleton.

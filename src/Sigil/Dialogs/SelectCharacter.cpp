@@ -20,11 +20,11 @@
 **
 *************************************************************************/
 
-#include <QtWidgets/QCompleter>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QToolButton>
-#include <QtWidgets/QApplication>
-#include <QtCore/QSignalMapper>
+#include <QCompleter>
+#include <QLineEdit>
+#include <QToolButton>
+#include <QApplication>
+#include <QSignalMapper>
 
 #include "Dialogs/SelectCharacter.h"
 #include "ResourceObjects/HTMLResource.h"
@@ -296,5 +296,5 @@ void SelectCharacter::WriteSettings()
 
 void SelectCharacter::connectSignalsSlots()
 {
-    connect(m_buttonMapper, SIGNAL(mapped(const QString &)), this, SLOT(SetSelectedCharacter(const QString &)));
+    connect(m_buttonMapper, &QSignalMapper::mappedString, this, &SelectCharacter::SetSelectedCharacter);
 }

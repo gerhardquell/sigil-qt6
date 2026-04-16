@@ -24,7 +24,7 @@
 #ifndef TABBAR_H
 #define TABBAR_H
 
-#include <QtWidgets/QTabBar>
+#include <QTabBar>
 
 class QContextMenuEvent;
 

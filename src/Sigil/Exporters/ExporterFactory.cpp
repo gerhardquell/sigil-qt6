@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 
 #include "Exporters/ExportEPUB.h"
 #include "Exporters/ExporterFactory.h"

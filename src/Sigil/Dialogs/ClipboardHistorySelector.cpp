@@ -20,12 +20,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QApplication>
+#include <QSignalMapper>
+#include <QApplication>
 #include <QtGui/QClipboard>
 #include <QtGui/QKeyEvent>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableWidgetItem>
+#include <QPushButton>
+#include <QTableWidgetItem>
 
 #include "Dialogs/ClipboardHistorySelector.h"
 #include "MainUI/MainApplication.h"
@@ -126,7 +126,7 @@ void ClipboardHistorySelector::SetupClipboardHistoryTable()
         QChar *uc = display_text.data();
 
         for (int i = 0; i < (int)text.length(); ++i) {
-            if ((uc[i] < 0x20 && uc[i] != 0x09)
+            if ((uc[i].unicode() < 0x20 && uc[i].unicode() != 0x09)
                 || uc[i] == QChar::LineSeparator
                 || uc[i] == QChar::ParagraphSeparator
                 || uc[i] == QChar::ObjectReplacementCharacter) {

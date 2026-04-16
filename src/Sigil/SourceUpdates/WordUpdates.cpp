@@ -21,9 +21,9 @@
 
 #include <boost/bind/bind.hpp>
 
-#include <QtCore/QtCore>
-#include <QtCore/QString>
-#include <QtConcurrent/QtConcurrent>
+#include <QtCore>
+#include <QString>
+#include <QtConcurrent>
 
 #include "Misc/HTMLSpellCheck.h"
 #include "ResourceObjects/HTMLResource.h"

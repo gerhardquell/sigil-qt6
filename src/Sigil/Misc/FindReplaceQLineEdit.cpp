@@ -21,24 +21,25 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFile>
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QAbstractItemView>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QCompleter>
+#include <QFile>
+#include <QSignalMapper>
+#include <QAbstractItemView>
+#include <QAction>
+#include <QCompleter>
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QMenu>
+#include <QMenu>
+#include "MainUI/FindReplace.h"
 
 #include "Misc/FindReplaceQLineEdit.h"
 #include "MiscEditors/SearchEditorModel.h"
 
 FindReplaceQLineEdit::FindReplaceQLineEdit(QWidget *parent)
     : QLineEdit(parent),
-      m_FindReplace(parent),
+      m_FindReplace(static_cast<FindReplace*>(parent)),
       m_searchMapper(new QSignalMapper(this)),
       m_tokeniseEnabled(true)
 {
-    connect(m_searchMapper, SIGNAL(mapped(const QString &)), m_FindReplace, SLOT(LoadSearchByName(const QString &)));
+    connect(m_searchMapper, &QSignalMapper::mappedString, m_FindReplace, &FindReplace::LoadSearchByName);
 }
 
 FindReplaceQLineEdit::~FindReplaceQLineEdit()

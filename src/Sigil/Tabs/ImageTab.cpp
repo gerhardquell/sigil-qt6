@@ -20,19 +20,19 @@
 *************************************************************************/
 
 #include <QApplication>
-#include <QtCore/QDateTime>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QLocale>
-#include <QtCore/QString>
-#include <QtCore/QUrl>
+#include <QDateTime>
+#include <QFile>
+#include <QFileInfo>
+#include <QLocale>
+#include <QString>
+#include <QUrl>
 #include <QtGui/QClipboard>
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QMenu>
-#include <QtWebKitWidgets/QWebView>
-#include <QtPrintSupport/QPrinter>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrintPreviewDialog>
+#include <QLayout>
+#include <QMenu>
+#include <QWebEngineView>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 
 
 #include "Misc/OpenExternally.h"
@@ -59,7 +59,7 @@ const QString IMAGE_HTML_BASE =
 ImageTab::ImageTab(ImageResource &resource, QWidget *parent)
     :
     ContentTab(resource, parent),
-    m_WebView(*new QWebView(this)),
+    m_WebView(*new QWebEngineView(this)),
     m_ContextMenu(*new QMenu(this)),
     m_OpenWithContextMenu(*new QMenu(this))
 {
@@ -129,7 +129,7 @@ void ImageTab::UpdateDisplay()
 
 void ImageTab::RefreshContent()
 {
-    QWebSettings::clearMemoryCaches();
+    // REMOVED: QWebSettings::clearMemoryCaches();
     const QString path = m_Resource.GetFullPath();
     const QFileInfo fileInfo = QFileInfo(path);
     const double ffsize = fileInfo.size() / 1024.0;

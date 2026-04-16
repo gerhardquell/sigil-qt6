@@ -23,7 +23,7 @@
 #ifndef HTMLSPELLCHECK_H
 #define HTMLSPELLCHECK_H
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class HTMLSpellCheck
 {

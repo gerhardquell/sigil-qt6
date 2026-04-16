@@ -42,7 +42,7 @@ bool AlphanumericItem::operator<(const QStandardItem &item) const
     QString s1 = data(ALPHANUMERIC_ORDER_ROLE).toString();
     QString s2 = item.data(ALPHANUMERIC_ORDER_ROLE).toString();
 
-    if (s1 == NULL || s2 == NULL) {
+    if (s1.isNull() || s2.isNull()) {
         return false;
     }
 

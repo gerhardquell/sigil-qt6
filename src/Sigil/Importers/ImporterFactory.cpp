@@ -19,7 +19,7 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 
 #include "Importers/ImporterFactory.h"
 #include "Importers/ImportEPUB.h"

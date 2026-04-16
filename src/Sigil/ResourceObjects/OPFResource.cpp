@@ -24,10 +24,10 @@
 // XercesExtensions
 #include <XmlUtils.h>
 
-#include <QtCore/QBuffer>
-#include <QtCore/QDate>
-#include <QtCore/QFileInfo>
-#include <QtCore/QUuid>
+#include <QBuffer>
+#include <QDate>
+#include <QFileInfo>
+#include <QUuid>
 #include <QRegularExpression>
 
 #include "BookManipulation/CleanSource.h"
@@ -116,7 +116,7 @@ QHash <QString, QString>  OPFResource::GetGuideSemanticNameForPaths()
 
     foreach(xc::DOMElement *reference, references) {
         const QString &href = XtoQ(reference->getAttribute(QtoX("href")));
-        QStringList parts = href.split('#', QString::KeepEmptyParts);
+        QStringList parts = href.split('#', Qt::KeepEmptyParts);
 
         const QString &type_text = XtoQ(reference->getAttribute(QtoX("type")));
         GuideSemantics::GuideSemanticType type =
@@ -808,7 +808,7 @@ xc::DOMElement *OPFResource::GetGuideReferenceForResource(const Resource &resour
         XhtmlDoc::GetTagMatchingDescendants(document, "reference", OPF_XML_NAMESPACE);
     foreach(xc::DOMElement * reference, references) {
         const QString &href = XtoQ(reference->getAttribute(QtoX("href")));
-        QStringList parts = href.split('#', QString::KeepEmptyParts);
+        QStringList parts = href.split('#', Qt::KeepEmptyParts);
 
         if (parts.at(0) == resource_oebps_path) {
             return reference;

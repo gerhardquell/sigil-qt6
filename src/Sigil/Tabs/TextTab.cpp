@@ -19,11 +19,11 @@
 **
 *************************************************************************/
 
-#include <QtCore/QTimer>
-#include <QtWidgets/QLayout>
-#include <QtPrintSupport/QPrinter>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrintPreviewDialog>
+#include <QTimer>
+#include <QLayout>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 
 #include "ResourceObjects/TextResource.h"
 #include "Tabs/TextTab.h"

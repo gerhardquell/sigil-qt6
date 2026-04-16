@@ -24,7 +24,6 @@
 #include "MiscEditors/IndexEntries.h"
 #include "sigil_constants.h"
 
-const QString SGC_INDEX_CSS_FILENAME = "sgc-index.css";
 
 static const QString TEMPLATE_BEGIN_TEXT =
     "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n"

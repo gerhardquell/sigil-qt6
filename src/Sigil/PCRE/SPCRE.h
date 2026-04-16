@@ -27,8 +27,8 @@
 #include <pcre.h>
 #include <utility>
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QList>
+#include <QString>
 
 using std::pair;
 

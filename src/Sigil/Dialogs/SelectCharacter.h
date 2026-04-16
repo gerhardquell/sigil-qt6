@@ -24,7 +24,7 @@
 #ifndef SELECTCHARACTER_H
 #define SELECTCHARACTER_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 #include "BookManipulation/Book.h"
 #include "Misc/SettingsStore.h"

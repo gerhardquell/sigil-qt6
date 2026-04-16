@@ -19,6 +19,8 @@
 **
 *************************************************************************/
 
+#include <QTextDocument>
+
 #include "Misc/CSSHighlighter.h"
 #include "Misc/SettingsStore.h"
 
@@ -72,6 +74,16 @@ CSSHighlighter::CSSHighlighter(QObject *parent)
     m_codeViewAppearance = settings.codeViewAppearance();
 }
 
+CSSHighlighter::~CSSHighlighter()
+{
+    // Block signals from the document to prevent
+    // issues during destruction sequence
+    QTextDocument *doc = document();
+    if (doc) {
+        doc->blockSignals(true);
+    }
+}
+
 void CSSHighlighter::highlightBlock(const QString &text)
 {
     int lastIndex = 0;
@@ -92,7 +104,7 @@ void CSSHighlighter::highlightBlock(const QString &text)
         state = save_state = (text.indexOf(QLatin1Char(':')) > -1 &&
                               text.indexOf(QLatin1Char('{')) == -1) ? Property : Selector;
     } else {
-        save_state = state >> 16;
+        save_state = state > 16;
         state &= 0x00ff;
     }
 

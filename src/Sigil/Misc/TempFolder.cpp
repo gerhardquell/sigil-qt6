@@ -19,10 +19,10 @@
 **
 *************************************************************************/
 
-#include <QtCore/QtCore>
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtConcurrent/QtConcurrent>
+#include <QtCore>
+#include <QDir>
+#include <QFileInfo>
+#include <QtConcurrent>
 
 #include "Misc/TempFolder.h"
 #include "Misc/Utility.h"

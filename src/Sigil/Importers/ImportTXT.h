@@ -23,8 +23,8 @@
 #ifndef IMPORTTXT_H
 #define IMPORTTXT_H
 
-#include <QtCore/QSharedPointer>
-#include <QtCore/QUrl>
+#include <QSharedPointer>
+#include <QUrl>
 
 #include "Importers/Importer.h"
 

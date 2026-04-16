@@ -26,7 +26,7 @@
 #include "Tabs/ContentTab.h"
 #include "ResourceObjects/Resource.h"
 
-class QWebView;
+class QWebEngineView;
 
 class AVTab : public ContentTab
 {
@@ -41,7 +41,7 @@ public slots:
 private:
     void ConnectSignalsToSlots();
 
-    QWebView *m_WebView;
+    QWebEngineView *m_WebView;
 };
 
 #endif // IMAGETAB_H

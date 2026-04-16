@@ -21,16 +21,16 @@
 
 #include <hunspell.hxx>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QIODevice>
-#include <QtCore/QTextCodec>
-#include <QtCore/QTextStream>
-#include <QtCore/QUrl>
-#include <QtWidgets/QApplication>
-#include <QtCore/QStandardPaths>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QIODevice>
+#include <QStringEncoder>
+#include <QTextStream>
+#include <QUrl>
+#include <QApplication>
+#include <QStandardPaths>
 
 #include "Misc/SpellCheck.h"
 #include "Misc/SettingsStore.h"
@@ -123,7 +123,7 @@ bool SpellCheck::spell(const QString &word)
         return true;
     }
 
-    return m_hunspell->spell(m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData()) != 0;
+    return m_hunspell->spell(Utility::getSpellingSafeText(word).toUtf8().constData()) != 0;
 }
 
 QStringList SpellCheck::suggest(const QString &word)
@@ -134,10 +134,10 @@ QStringList SpellCheck::suggest(const QString &word)
 
     QStringList suggestions;
     char **suggestedWords;
-    int count = m_hunspell->suggest(&suggestedWords, m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+    int count = m_hunspell->suggest(&suggestedWords, Utility::getSpellingSafeText(word).toUtf8().constData());
 
     for (int i = 0; i < count; ++i) {
-        suggestions << m_codec->toUnicode(suggestedWords[i]);
+        suggestions << QString::fromUtf8(suggestedWords[i]);
     }
 
     m_hunspell->free_list(&suggestedWords, count);
@@ -163,7 +163,7 @@ void SpellCheck::ignoreWordInDictionary(const QString &word)
         return;
     }
     
-    m_hunspell->add(m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+    m_hunspell->add(Utility::getSpellingSafeText(word).toUtf8().constData());
 }
 
 void SpellCheck::setDictionary(const QString &name, bool forceReplace)
@@ -200,10 +200,10 @@ void SpellCheck::setDictionary(const QString &name, bool forceReplace)
     }
 
     // Get the encoding for the text in the dictionary.
-    m_codec = QTextCodec::codecForName(m_hunspell->get_dic_encoding());
+    m_codec = nullptr; // Qt 6: QTextCodec removed, using UTF-8
 
     if (m_codec == 0) {
-        m_codec = QTextCodec::codecForName("UTF-8");
+        m_codec = nullptr; // Qt 6: QTextCodec removed, using UTF-8
     }
 
     // Load in the words from the user dictionaries.
@@ -251,7 +251,8 @@ void SpellCheck::addToUserDictionary(const QString &word, QString dict_name)
         // Try to open the file to add the word.
         if (userDictFile.open(QIODevice::Append)) {
             QTextStream userDictStream(&userDictFile);
-            userDictStream.setCodec("UTF-8");
+            // Qt 6: setCodec removed
+            // userDictStream.setCodec("UTF-8");
             userDictStream << word << "\n";
             userDictFile.close();
         }
@@ -277,7 +278,8 @@ QStringList SpellCheck::userDictionaryWords(QString dict_name)
 
     if (userDictFile.open(QIODevice::ReadOnly)) {
         QTextStream userDictStream(&userDictFile);
-        userDictStream.setCodec("UTF-8");
+        // Qt 6: setCodec removed
+            // userDictStream.setCodec("UTF-8");
         QString line;
 
         do {
@@ -358,12 +360,12 @@ void SpellCheck::loadDictionaryNames()
 
 QString SpellCheck::dictionaryDirectory()
 {
-    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/hunspell_dictionaries";
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/hunspell_dictionaries";
 }
 
 QString SpellCheck::userDictionaryDirectory()
 {
-    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/user_dictionaries";
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/user_dictionaries";
 }
 
 QString SpellCheck::currentUserDictionaryFile()

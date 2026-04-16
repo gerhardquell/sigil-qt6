@@ -25,8 +25,8 @@
 #define SETTINGSSTORE_H
 
 #include <QColor>
-#include <QtCore/QSettings>
-#include <QtCore/QString>
+#include <QSettings>
+#include <QString>
 
 #define CLEANON_OPEN         (1 << 0)
 #define CLEANON_SAVE         (1 << 1)
@@ -189,16 +189,16 @@ public:
     void clearAppearanceSettings();
 
     // Preview Settings
-    bool previewEnabled() const;
+    bool previewEnabled();
     void setPreviewEnabled(bool enabled);
 
-    int previewOrientation() const; // Qt::Horizontal or Qt::Vertical
+    int previewOrientation(); // Qt::Horizontal or Qt::Vertical
     void setPreviewOrientation(int orientation);
 
-    int previewDebounceMs() const;
+    int previewDebounceMs();
     void setPreviewDebounceMs(int ms);
 
-    bool previewSyncCursor() const;
+    bool previewSyncCursor();
     void setPreviewSyncCursor(bool sync);
 
 public slots:

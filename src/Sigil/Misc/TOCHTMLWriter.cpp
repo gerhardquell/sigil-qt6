@@ -20,12 +20,11 @@
 **
 *************************************************************************/
 
-#include <QtCore/QXmlStreamWriter>
+#include <QXmlStreamWriter>
 
 #include "TOCHTMLWriter.h"
 #include "sigil_constants.h"
 
-const QString SGC_TOC_CSS_FILENAME = "sgc-toc.css";
 
 TOCHTMLWriter::TOCHTMLWriter(NCXModel::NCXEntry ncx_root_entry)
     :

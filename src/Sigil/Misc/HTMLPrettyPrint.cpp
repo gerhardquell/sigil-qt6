@@ -186,14 +186,14 @@ void HTMLPrettyPrint::tokenize()
                 tag_len++;
             }
 
-            if (m_source.midRef(tag_start, tag_len) == "!--") {
+            if (m_source.mid(tag_start, tag_len) == "!--") {
                 collect_tag = false;
                 in_comment = true;
             }
         }
 
         if (c == '<' || c == '>') {
-            if (in_comment && ((c == '<') || (c == '>' && i >= 2 && m_source.midRef(i - 2, 2) != "--"))) {
+            if (in_comment && ((c == '<') || (c == '>' && i >= 2 && m_source.mid(i - 2, 2) != "--"))) {
                 continue;
             }
 

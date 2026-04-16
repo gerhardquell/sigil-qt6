@@ -1,36 +1,30 @@
 /****************************************************************************
-**
-** Copyright (C) 2000-2007 TROLLTECH ASA. All rights reserved.
-**
-** This file is part of the Opensource Edition of the Qtopia Toolkit.
-**
-** This software is licensed under the terms of the GNU General Public
-** License (GPL) version 2.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
+** Qt 6 STUB: QTextCodec removed
+** This file is a stub for CodePage 437 codec support
+** TODO: Reimplement using QStringConverter if needed
 ****************************************************************************/
 
-#include <QTextCodec>
+#pragma once
+#ifndef QCODEPAGE437CODEC_H
+#define QCODEPAGE437CODEC_H
 
-class QCodePage437Codec : public QTextCodec
+#include <QString>
+
+// Qt 6: QTextCodec removed, this is a stub
+class QCodePage437Codec
 {
 public:
-    QCodePage437Codec();
-    ~QCodePage437Codec();
+    QCodePage437Codec() {}
+    ~QCodePage437Codec() {}
 
-    QByteArray name() const;
-    QList<QByteArray> aliases() const;
-    int mibEnum() const;
+    // Stub: just return the input without conversion
+    QString toUnicode(const QByteArray &input) const {
+        return QString::fromLatin1(input);
+    }
 
-protected:
-    QString convertToUnicode(const char *in, int length, ConverterState *state) const;
-    QByteArray convertFromUnicode(const QChar *in, int length, ConverterState *state) const;
+    QByteArray fromUnicode(const QString &input) const {
+        return input.toLatin1();
+    }
 };
 
+#endif // QCODEPAGE437CODEC_H

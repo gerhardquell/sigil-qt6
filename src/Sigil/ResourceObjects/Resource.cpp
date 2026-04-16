@@ -19,12 +19,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QDir>
-#include <QtCore/QDateTime>
-#include <QtCore/QFileInfo>
-#include <QtCore/QString>
-#include <QtCore/QTimer>
-#include <QtWidgets/QFileIconProvider>
+#include <QDir>
+#include <QDateTime>
+#include <QFileInfo>
+#include <QString>
+#include <QTimer>
+#include <QFileIconProvider>
 
 #include "Misc/Utility.h"
 #include "ResourceObjects/Resource.h"

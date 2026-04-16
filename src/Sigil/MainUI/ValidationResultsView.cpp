@@ -21,11 +21,11 @@
 
 #include <flightcrew.h>
 
-#include <QtCore/QFileInfo>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QDockWidget>
-#include <QtWidgets/QHeaderView>
-#include <QtWidgets/QTableWidget>
+#include <QFileInfo>
+#include <QApplication>
+#include <QDockWidget>
+#include <QHeaderView>
+#include <QTableWidget>
 #include <QRegularExpression>
 
 #include "BookManipulation/FolderKeeper.h"

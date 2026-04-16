@@ -20,8 +20,8 @@
 **
 *************************************************************************/
 
-#include <QtCore/QEvent>
-#include <QtCore/QStringList>
+#include <QEvent>
+#include <QStringList>
 #include <QtGui/QKeyEvent>
 
 #include "KeyboardShortcutsWidget.h"

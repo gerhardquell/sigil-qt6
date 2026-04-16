@@ -23,9 +23,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/tuple/tuple.hpp>
 
-#include <QtCore/QtCore>
-#include <QtCore/QFutureSynchronizer>
-#include <QtConcurrent/QtConcurrent>
+#include <QtCore>
+#include <QFutureSynchronizer>
+#include <QtConcurrent>
 #include <QRegularExpression>
 
 #include "BookManipulation/CleanSource.h"
@@ -82,7 +82,7 @@ QStringList UniversalUpdates::PerformUniversalUpdates(bool resources_already_loa
         }
     }
 
-    QFutureSynchronizer<void> sync;
+    // Qt 6: QFutureSynchronizer changed, using manual wait
     QFuture< QString > html_future;
     QFuture< void > css_future;
 
@@ -94,15 +94,15 @@ QStringList UniversalUpdates::PerformUniversalUpdates(bool resources_already_loa
         css_future = QtConcurrent::map(css_resources,  boost::bind(LoadAndUpdateOneCSSFile,  _1, css_updates));
     }
 
-    sync.addFuture(html_future);
-    sync.addFuture(css_future);
+    // Qt 6: sync.addFuture removed
+    // Qt 6: sync.addFuture removed
     // We can't schedule these with QtConcurrent because they
     // will (indirectly) call QTextDocument::setPlainText, and if
     // a tab is open for the ncx/opf, then an event needs to be sent
     // to the tab widget. Events can't cross threads, and we crash.
     const QString ncx_result = UpdateNCXFile(ncx_resource, xml_updates);
     const QString opf_result = UpdateOPFFile(opf_resource, xml_updates);
-    sync.waitForFinished();
+    html_future.waitForFinished(); css_future.waitForFinished();
     // Now assemble our list of errors if any.
     QStringList load_update_errors;
 

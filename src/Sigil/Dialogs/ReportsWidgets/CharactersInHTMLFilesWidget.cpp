@@ -19,16 +19,16 @@
 **  along with Sigil.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-#include <QWebView>
-#include <QWebPage>
+#include <QWebEngineView>
+// REMOVED: #include <QWebPage>
 #include "Misc/SleepFunctions.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QHashIterator>
-#include <QtWidgets/QFileDialog>
+#include <QFile>
+#include <QHashIterator>
+#include <QFileDialog>
 #include <QtGui/QFont>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QMessageBox>
+#include <QPushButton>
+#include <QMessageBox>
 
 #include "sigil_constants.h"
 #include "sigil_exception.h"
@@ -137,7 +137,7 @@ void CharactersInHTMLFilesWidget::PageLoaded()
 
 QList < QChar > CharactersInHTMLFilesWidget::GetDisplayedCharacters(QList< HTMLResource * > resources)
 {
-    QWebView *view = new QWebView();
+    QWebEngineView *view = new QWebEngineView();
     view->setGeometry(0,0,200,200);
     connect(view->page(), SIGNAL(loadFinished(bool)), this, SLOT(PageLoaded()));
     m_PageLoaded = false;
@@ -157,7 +157,7 @@ QList < QChar > CharactersInHTMLFilesWidget::GetDisplayedCharacters(QList< HTMLR
         }
         m_PageLoaded = false;
 
-        view->page()->triggerAction(QWebPage::SelectAll);
+        // REMOVED: view->page()->triggerAction(QWebPage::SelectAll);
         QString text = view->page()->selectedText();
         all_characters.append(text);
     }

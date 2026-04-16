@@ -21,8 +21,8 @@
 *************************************************************************/
 
 #include <QtGui/QContextMenuEvent>
-#include <QtWidgets/QAction>
-#include <QtWidgets/QMenu>
+#include <QAction>
+#include <QMenu>
 
 #include "Tabs/TabBar.h"
 

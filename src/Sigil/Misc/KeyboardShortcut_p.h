@@ -23,7 +23,7 @@
 #ifndef KEYBOARDSHORTCUTPRIVATE_H
 #define KEYBOARDSHORTCUTPRIVATE_H
 
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 class QAction;
 class QKeySequence;

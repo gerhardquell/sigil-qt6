@@ -23,9 +23,9 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
-#include <QtCore/QObject>
-#include <QtCore/QReadWriteLock>
-#include <QtCore/QUrl>
+#include <QObject>
+#include <QReadWriteLock>
+#include <QUrl>
 #include <QtGui/QIcon>
 
 /**

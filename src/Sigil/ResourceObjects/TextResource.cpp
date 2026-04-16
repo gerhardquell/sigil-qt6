@@ -19,12 +19,12 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFile>
-#include <QtCore/QString>
-#include <QtCore/QThread>
-#include <QtCore/QTimer>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QPlainTextDocumentLayout>
+#include <QFile>
+#include <QString>
+#include <QThread>
+#include <QTimer>
+#include <QApplication>
+#include <QPlainTextDocumentLayout>
 #include <QtGui/QTextDocument>
 
 #include "Misc/Utility.h"
@@ -57,6 +57,13 @@ QString TextResource::GetText() const
 
 void TextResource::SetText(const QString &text)
 {
+    // Don't overwrite existing content with the empty HTML template
+    // This prevents race conditions where CreateEmptyHTMLFile() overwrites
+    // content that was already loaded from disk
+    if (!m_TextDocument->toPlainText().isEmpty() && text.length() < 300) {
+        return;
+    }
+
     //   We need to delay updating the QTextDocument if SetText has
     // been called from something other than the main GUI thread. Why?
     // Because a CodeView is probably connected to the text document,
