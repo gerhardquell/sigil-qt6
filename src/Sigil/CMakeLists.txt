@@ -292,20 +292,14 @@ set( SPCRE_FILES
     )
 
 set( VIEW_EDITOR_FILES
-    ViewEditors/BookViewEditor.cpp
-    ViewEditors/BookViewEditor.h
-    ViewEditors/BookViewPreview.cpp
-    ViewEditors/BookViewPreview.h
     ViewEditors/CodeViewEditor.cpp
     ViewEditors/CodeViewEditor.h
     ViewEditors/LineNumberArea.cpp
     ViewEditors/LineNumberArea.h
     ViewEditors/Searchable.cpp
     ViewEditors/Searchable.h
-    ViewEditors/Zoomable.h 
-    ViewEditors/ViewEditor.h     
-    ViewEditors/ViewWebPage.cpp
-    ViewEditors/ViewWebPage.h 
+    ViewEditors/Zoomable.h
+    ViewEditors/ViewEditor.h
     )
 
 set( MAINUI_FILES 

@@ -1,0 +1,70 @@
+Determining if the include file windows.h exists failed with the following output:
+Change Dir: /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-F2WQ0a
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f35e3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f35e3.dir/build.make CMakeFiles/cmTC_f35e3.dir/build
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-F2WQ0a“ wird betreten
+Building C object CMakeFiles/cmTC_f35e3.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f35e3.dir/CheckIncludeFile.c.o -c /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-F2WQ0a/CheckIncludeFile.c
+/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-F2WQ0a/CheckIncludeFile.c:1:10: schwerwiegender Fehler: windows.h: Datei oder Verzeichnis nicht gefunden
+    1 | #include <windows.h>
+      |          ^~~~~~~~~~~
+Kompilierung beendet.
+gmake[1]: *** [CMakeFiles/cmTC_f35e3.dir/build.make:78: CMakeFiles/cmTC_f35e3.dir/CheckIncludeFile.c.o] Fehler 1
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-F2WQ0a“ wird verlassen
+gmake: *** [Makefile:127: cmTC_f35e3/fast] Fehler 2
+
+
+
+Determining if the include file type_traits.h exists failed with the following output:
+Change Dir: /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-CU2Rch
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a2bc8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a2bc8.dir/build.make CMakeFiles/cmTC_a2bc8.dir/build
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-CU2Rch“ wird betreten
+Building CXX object CMakeFiles/cmTC_a2bc8.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++    -o CMakeFiles/cmTC_a2bc8.dir/CheckIncludeFile.cxx.o -c /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-CU2Rch/CheckIncludeFile.cxx
+/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-CU2Rch/CheckIncludeFile.cxx:1:10: fatal error: type_traits.h: Datei oder Verzeichnis nicht gefunden
+    1 | #include <type_traits.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_a2bc8.dir/build.make:78: CMakeFiles/cmTC_a2bc8.dir/CheckIncludeFile.cxx.o] Fehler 1
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-CU2Rch“ wird verlassen
+gmake: *** [Makefile:127: cmTC_a2bc8/fast] Fehler 2
+
+
+
+Determining if the include file bits/type_traits.h exists failed with the following output:
+Change Dir: /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-0TJ7th
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_de226/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_de226.dir/build.make CMakeFiles/cmTC_de226.dir/build
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-0TJ7th“ wird betreten
+Building CXX object CMakeFiles/cmTC_de226.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++    -o CMakeFiles/cmTC_de226.dir/CheckIncludeFile.cxx.o -c /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-0TJ7th/CheckIncludeFile.cxx
+/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-0TJ7th/CheckIncludeFile.cxx:1:10: fatal error: bits/type_traits.h: Datei oder Verzeichnis nicht gefunden
+    1 | #include <bits/type_traits.h>
+      |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_de226.dir/build.make:78: CMakeFiles/cmTC_de226.dir/CheckIncludeFile.cxx.o] Fehler 1
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-0TJ7th“ wird verlassen
+gmake: *** [Makefile:127: cmTC_de226/fast] Fehler 2
+
+
+
+Determining if the function _strtoi64 exists failed with the following output:
+Change Dir: /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-QBrifo
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0c7ea/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0c7ea.dir/build.make CMakeFiles/cmTC_0c7ea.dir/build
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-QBrifo“ wird betreten
+Building C object CMakeFiles/cmTC_0c7ea.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_strtoi64 -o CMakeFiles/cmTC_0c7ea.dir/CheckFunctionExists.c.o -c /data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-QBrifo/CheckFunctionExists.c
+Linking C executable cmTC_0c7ea
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c7ea.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_strtoi64 -rdynamic CMakeFiles/cmTC_0c7ea.dir/CheckFunctionExists.c.o -o cmTC_0c7ea 
+/usr/bin/ld: CMakeFiles/cmTC_0c7ea.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_strtoi64'
+collect2: Fehler: ld gab 1 als Ende-Status zurück
+gmake[1]: *** [CMakeFiles/cmTC_0c7ea.dir/build.make:99: cmTC_0c7ea] Fehler 1
+gmake[1]: Verzeichnis „/data1/u2/sigil074/build_test/CMakeFiles/CMakeScratch/TryCompile-QBrifo“ wird verlassen
+gmake: *** [Makefile:127: cmTC_0c7ea/fast] Fehler 2
+
+
+

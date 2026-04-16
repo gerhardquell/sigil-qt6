@@ -1,0 +1,151 @@
+# Introduction
+
+Instructions for building Sigil from source, on all platforms.
+
+Experience with compiling on your chosen platform is assumed. This is not a step
+by step guide but general information to help fill in gaps.
+
+Current releases of Sigil (as of 0.5) bundle the majority of dependencies. Qt,
+CMake and general build tools are required to be installed separately. Sigil's
+build setup will try to use system installed versions of any bundled
+dependencies and fall back to the bundled copies. This is provided for
+connivence for Linux packagers but it is not supported.
+
+
+# General notes
+
+You will need CMake 2.8.9 or later on all platforms. You can download it
+[http://www.cmake.org/cmake/resources/software.html here].
+    
+CMake is a cross-platform system for build automation. It can generate Visual
+Studio project files on Windows, Xcode project files on Mac OS X and Makefiles
+on Unix systems. After installing CMake, you can see a list of generators
+provided on your system by typing `cmake` in your terminal and pressing enter.
+The supported generators should be listed near the bottom of the printout.
+
+Qt 5.1.0 is also required on all platforms. It can be downloaded
+[http://qt-project.org/downloads here].  
+
+
+## Compiling on Windows
+
+Only Microsoft's Visual C++ compiler is supported.
+
+The installer directory contains the files needed to produce a binary installer
+for Windows. You need to provide the vcredist for your compiler. You need to
+put it in the installer directory and name it vcredist_x86.exe or
+vcredist_x64.exe.
+
+
+On Windows a `makeinstaller` target is provided which will build a binary
+installer. For that to work, you need to have
+[http://www.jrsoftware.org/isinfo.php Inno Setup] on Windows. The installer
+builder needs to be installed and on the system PATH.
+
+### Method 1 (nmake)
+
+Not everyone has access to or is comfortable with Visual Studio but there is an
+alternative. Microsoft provides the Windows SDK which contains all of the tools
+necessary to build.
+
+First you need to install the
+[http://www.microsoft.com/download/en/details.aspx?id=17851 .Net Framework 4].
+You will also need the [http://msdn.microsoft.com/en-us/dd299405.aspx Windows
+SDK]. Finally, if you are on a x64 platform and plan to produce x64 builds you
+will need to install the hot fix refererend by
+[http://support.microsoft.com/kb/2280741 this] KB article.
+
+Once you have the necessary tools installed you can run cmake in a cmd (use the
+Windows SDK Command Prompt) to produce an nmake based project (this is default).
+Then you can run `nmake makeinstaller` to build and create an installer package.
+
+### Method 2 (Visual Studio)
+
+You can generate Visual Studio project files by creating a new folder *outside*
+of the source distribution.
+
+Now navigate to that folder with a terminal like cmd.exe or PowerShell.  Then
+type in and run the following:
+{{{
+cmake -G "Visual Studio 10" /path/to/extracted/folder
+}}}
+This should create SLN and vcproj files for Visual Studio in that directory.
+You can also generate project files for some other VS version. You can get a
+list of all supported generators by typing in and running `cmake`.
+
+The default build procedure will build "Sigil.exe"; if you want to package that
+with the required DLL's into an installer, build the `makeinstaller` project.
+
+There is also an [http://qt-project.org/downloads Add-in] for VS on Qt's
+website. It will make it easier to develop Qt applications like Sigil, but is
+not strictly necessary. 
+
+
+## Compiling on OS X
+
+On OS X a `makedmg` target is provided which will build a redistributable dmg.
+There is also an `addframeworks` target which will add all necessary
+dependencies to the .app for distribution. The `makedmg` will invoke
+`addframeworks`.
+
+### Method 1 (make)
+
+{{{
+$ mkdir build
+$ cd build
+$ cmake -DFORCE_BUNDLED_COPIES=1 -DCMAKE_BUILD_TYPE=Release ..
+$ make
+$ make makedmg
+}}}
+
+### Method 2 (XCode)
+
+You can generate Xcode project files by creating a new folder *outside* of the
+source distribution.
+
+Now navigate to that folder with the Terminal. Then type in and run the
+following:
+{{{
+cmake -G Xcode /path/to/extracted/folder
+}}}
+This should create Xcode project files in that directory. The default build
+procedure will build "Sigil.app"; if you want to package that into a DMG file,
+invoke the `makedmg` build target.
+
+
+## Compiling on Linux
+
+Here is an example of installing Sigil on in your Home directory.
+
+Create the build directories and get the Sigil source code.
+{{{
+mkdir -p ~/sigil-x.y.z/src ~/sigil-x.y.z/build ~/sigil-x.y.z/run
+cd ~/sigil-x.y.z/src
+wget https://sigil.googlecode.com/files/Sigil-x.y.z-Code.zip
+unzip Sigil-x.y.z-Code.zip
+}}}
+
+{{{
+cd ~/sigil-x.y.z/build
+cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/opt/Qt5.y.z/5.y.z/gcc/lib/cmake -DCMAKE_INSTALL_PREFIX=~/sigil-x.y.z/run -DCMAKE_BUILD_TYPE=Release -DFORCE_BUNDLED_COPIES=1 ~/sigil-x.y.z/src
+make install
+}}}
+
+Create a script to run Sigil:
+{{{
+echo "
+export LD_LIBRARY_PATH=/opt/Qt5.y.z/5.y.z/gcc/lib
+~/sigil-x.y.z/run/bin/sigil" > ~/sigil.sh
+chmod +x ~/sigil.sh
+}}}
+
+# Run Sigil:
+{{{
+~/sigil.sh
+}}}
+
+
+Building from source in the git repository is *NOT* recommended, since code in
+the git repository is not stable. Do not open a bug report against a non release
+version.
+
