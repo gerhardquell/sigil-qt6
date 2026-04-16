@@ -1028,6 +1028,12 @@
 			null
 		],
 		[
+			"/data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.h",
+			"Mu",
+			"2XJTBWJE36/moc_PreviewWidget.cpp",
+			null
+		],
+		[
 			"/data1/u2/sigil074/src/Sigil/ViewEditors/Searchable.h",
 			"Mu",
 			"2XJTBWJE36/moc_Searchable.cpp",
@@ -1633,6 +1639,11 @@
 		],
 		[
 			"/data1/u2/sigil074/src/Sigil/ViewEditors/LineNumberArea.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp",
 			"Mu",
 			null
 		],

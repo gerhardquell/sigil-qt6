@@ -3,6 +3,8 @@
 #define PREVIEW_WIDGET_H
 
 #include <QWidget>
+#include <QString>
+#include <QUrl>
 #include <QWebEngineView>
 
 class QTimer;

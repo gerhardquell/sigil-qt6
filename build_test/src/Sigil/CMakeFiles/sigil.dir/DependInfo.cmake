@@ -151,6 +151,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/data1/u2/sigil074/src/Sigil/Tabs/XMLTab.cpp" "src/Sigil/CMakeFiles/sigil.dir/Tabs/XMLTab.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/Tabs/XMLTab.cpp.o.d"
   "/data1/u2/sigil074/src/Sigil/ViewEditors/CodeViewEditor.cpp" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/CodeViewEditor.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/CodeViewEditor.cpp.o.d"
   "/data1/u2/sigil074/src/Sigil/ViewEditors/LineNumberArea.cpp" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o.d"
+  "/data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o.d"
   "/data1/u2/sigil074/src/Sigil/ViewEditors/Searchable.cpp" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o.d"
   "/data1/u2/sigil074/src/Sigil/main.cpp" "src/Sigil/CMakeFiles/sigil.dir/main.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/main.cpp.o.d"
   "/data1/u2/sigil074/build_test/src/Sigil/qrc_About.cpp" "src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o" "gcc" "src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o.d"

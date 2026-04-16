@@ -35,12 +35,11 @@
 #include "Tabs/ContentTab.h"
 #include "Tabs/WellFormedContent.h"
 
-class QStackedWidget;
+class QSplitter;
 class QUrl;
-class QWebInspector;
-class BookViewEditor;
 class CodeViewEditor;
 class HTMLResource;
+class PreviewWidget;
 class Resource;
 class ViewEditor;
 class WellFormedCheckComponent;
@@ -61,24 +60,20 @@ public:
      *
      * @param resource The resource this tab will be displaying.
      * @param fragment The URL fragment ID to which the tab should scroll.
-     * @param view_state In which View should the resource open or switch to.
      * @param line_to_scroll_to To which line should the resource scroll.
      * @param parent The parent of this QObject.
      */
     FlowTab(HTMLResource &resource,
             const QUrl &fragment,
-            MainWindow::ViewState view_state,
             int line_to_scroll_to = -1,
             int position_to_scroll_to = -1,
             QString caret_location_to_scroll_to = QString(),
             bool grab_focus = true,
-            QWidget *parent = 0);
+            QWidget *parent = nullptr);
 
     ~FlowTab();
 
     // Overrides inherited from ContentTabs
-
-    MainWindow::ViewState GetViewState();
 
     bool IsModified();
 
@@ -105,8 +100,6 @@ public:
 
     bool InsertFileEnabled();
 
-    bool ViewStatesEnabled();
-
     QList< ViewEditor::ElementIndex > GetCaretLocation();
     QString GetCaretLocationUpdate() const;
     void GoToCaretLocation(QList< ViewEditor::ElementIndex > location);
@@ -126,19 +119,17 @@ public:
 
     Searchable *GetSearchableContent();
 
-    bool SetViewState(MainWindow::ViewState new_view_state);
-
     bool IsLoadingFinished();
 
     /**
-     * Scrolls the tab to the specified fragment (if in Book View).
+     * Scrolls the tab to the specified fragment (in Preview).
      *
      * @param fragment The URL fragment ID to which the tab should scroll.
      */
     void ScrollToFragment(const QString &fragment);
 
     /**
-     * Scrolls the tab to the specified line (if in Code View).
+     * Scrolls the tab to the specified line (in Code View).
      *
      * @param line The line to scroll to.
      */
@@ -270,7 +261,7 @@ signals:
     void SelectionChanged();
 
     /**
-     * Emitted when a linked is clicked in the Book View.
+     * Emitted when a link is clicked in the Preview.
      *
      * @param url The URL of the clicked link.
      */
@@ -298,11 +289,6 @@ signals:
 
     void InsertFileRequest();
 
-    void UpdatePreview();
-    void UpdatePreviewImmediately();
-
-    void InspectElement();
-
     void MarkSelectionRequest();
     void ClearMarkedTextRequest();
 
@@ -329,6 +315,10 @@ private slots:
 
     void EmitUpdateCursorPosition();
 
+    void onCodeViewTextChanged();
+    void onCursorPositionChanged();
+    void updatePreview();
+
     /**
      * Receives the signal emitted when an editor loses focus. Ensures that
      * the editor's content is well-formed and then saves it.
@@ -342,29 +332,20 @@ private slots:
      */
     void LoadSettings();
 
-    // Called when the underlying resource is modified. It is only connected
-    // when the view state is BV and used to know if BV should be reloaded
-    // when the user enters the view. CV is linked to the resource in such a
-    // way that this is unnecessary. The CV linking is not possible in BV.
+    // Called when the underlying resource is modified.
     void ResourceModified();
-    void LinkedResourceModified();
 
     // Called when the underlying text inside the control is being replaced
     // Store our caret location as required.
     void ResourceTextChanging();
 
 private:
-    void CreateBookViewIfRequired(bool is_delayed_load = true);
-    void CreateCodeViewIfRequired(bool is_delayed_load = true);
-
-    void BookView();
-    void CodeView();
+    void CreateEditors();
 
     /**
      * Connects all the required signals to their respective slots.
      */
-    void ConnectBookViewSignalsToSlots();
-    void ConnectCodeViewSignalsToSlots();
+    void ConnectSignalsToSlots();
 
 
     ///////////////////////////////
@@ -393,33 +374,19 @@ private:
     /**
      * The splitter widget that separates the two Views.
      */
-    QStackedWidget *m_views;
-
-    /**
-     * The Book View Editor.
-     * Displays and edits the rendered state of the HTML.
-     */
-    BookViewEditor *m_wBookView;
+    QSplitter *m_Splitter;
 
     /**
      * The Code View Editor.
      * Displays and edits the raw code.
      */
-    CodeViewEditor *m_wCodeView;
-
-    QWebInspector *m_inspector;
+    CodeViewEditor *m_CodeViewEditor;
 
     /**
-     * This is used in a few different ways.
-     *
-     * 1) We store the requested view state for loading the document.
-     * 2) We store the current view state.
-     * 3) We compare the state of the view when entering to this in order
-     *    to determine if we have changed the view (BV, CV) in order to
-     *    load the latest content into the view.
+     * The Preview Widget.
+     * Displays the rendered preview of the HTML.
      */
-    MainWindow::ViewState m_ViewState;
-    MainWindow::ViewState m_previousViewState;
+    PreviewWidget *m_PreviewWidget;
 
     /**
      * The component used to display a dialog about
@@ -427,21 +394,9 @@ private:
      */
     WellFormedCheckComponent &m_WellFormedCheckComponent;
 
-    /**
-     * A flag to be used in conjunction with the check for well-formedness which
-     * indicates whether it's safe to reload the tab content.
-     */
-    bool m_safeToLoad;
-
     bool m_initialLoad;
 
-    bool m_bookViewNeedsReload;
-
     bool m_grabFocus;
-
-    bool m_suspendTabReloading;
-
-    bool m_defaultCaretLocationToTop;
 };
 
 #endif // FLOWTAB_H

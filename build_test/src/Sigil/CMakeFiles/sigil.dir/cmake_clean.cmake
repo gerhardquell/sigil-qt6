@@ -290,6 +290,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sigil.dir/ViewEditors/CodeViewEditor.cpp.o.d"
   "CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o"
   "CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o.d"
+  "CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o"
+  "CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o.d"
   "CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o"
   "CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o.d"
   "CMakeFiles/sigil.dir/main.cpp.o"

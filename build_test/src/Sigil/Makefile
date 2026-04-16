@@ -3621,6 +3621,30 @@ ViewEditors/LineNumberArea.cpp.s:
 	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.s
 .PHONY : ViewEditors/LineNumberArea.cpp.s
 
+ViewEditors/PreviewWidget.o: ViewEditors/PreviewWidget.cpp.o
+.PHONY : ViewEditors/PreviewWidget.o
+
+# target to build an object file
+ViewEditors/PreviewWidget.cpp.o:
+	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o
+.PHONY : ViewEditors/PreviewWidget.cpp.o
+
+ViewEditors/PreviewWidget.i: ViewEditors/PreviewWidget.cpp.i
+.PHONY : ViewEditors/PreviewWidget.i
+
+# target to preprocess a source file
+ViewEditors/PreviewWidget.cpp.i:
+	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.i
+.PHONY : ViewEditors/PreviewWidget.cpp.i
+
+ViewEditors/PreviewWidget.s: ViewEditors/PreviewWidget.cpp.s
+.PHONY : ViewEditors/PreviewWidget.s
+
+# target to generate assembly for a file
+ViewEditors/PreviewWidget.cpp.s:
+	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.s
+.PHONY : ViewEditors/PreviewWidget.cpp.s
+
 ViewEditors/Searchable.o: ViewEditors/Searchable.cpp.o
 .PHONY : ViewEditors/Searchable.o
 
@@ -4232,6 +4256,9 @@ help:
 	@echo "... ViewEditors/LineNumberArea.o"
 	@echo "... ViewEditors/LineNumberArea.i"
 	@echo "... ViewEditors/LineNumberArea.s"
+	@echo "... ViewEditors/PreviewWidget.o"
+	@echo "... ViewEditors/PreviewWidget.i"
+	@echo "... ViewEditors/PreviewWidget.s"
 	@echo "... ViewEditors/Searchable.o"
 	@echo "... ViewEditors/Searchable.i"
 	@echo "... ViewEditors/Searchable.s"

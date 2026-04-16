@@ -2450,10 +2450,24 @@ src/Sigil/CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.s"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data1/u2/sigil074/src/Sigil/ViewEditors/Searchable.cpp -o CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.s
 
+src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
+src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o: /data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp
+src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_212) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o"
+	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o -MF CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o.d -o CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o -c /data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp
+
+src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.i"
+	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp > CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.i
+
+src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.s"
+	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data1/u2/sigil074/src/Sigil/ViewEditors/PreviewWidget.cpp -o CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.s
+
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/MainApplication.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_212) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_213) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o -MF CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/MainApplication.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.i: cmake_force
@@ -2467,7 +2481,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/MainWindow.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_213) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_214) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o -MF CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/MainWindow.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.i: cmake_force
@@ -2481,7 +2495,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/FindReplace.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_214) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_215) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o -MF CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/FindReplace.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.i: cmake_force
@@ -2495,7 +2509,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/BookBrowser.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_215) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_216) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o -MF CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/BookBrowser.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.i: cmake_force
@@ -2509,7 +2523,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/BookBrowser.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/ClipsWindow.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_216) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_217) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o -MF CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/ClipsWindow.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.i: cmake_force
@@ -2523,7 +2537,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/ClipsWindow.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/PreviewWindow.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_217) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_218) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o -MF CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/PreviewWindow.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.i: cmake_force
@@ -2537,7 +2551,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/PreviewWindow.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/TableOfContents.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_218) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_219) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o -MF CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/TableOfContents.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.i: cmake_force
@@ -2551,7 +2565,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/TableOfContents.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/OPFModel.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_219) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_220) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o -MF CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/OPFModel.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.i: cmake_force
@@ -2565,7 +2579,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModel.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/OPFModelItem.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_220) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_221) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o -MF CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/OPFModelItem.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.i: cmake_force
@@ -2579,7 +2593,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/OPFModelItem.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/NCXModel.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_221) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_222) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o -MF CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/NCXModel.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.i: cmake_force
@@ -2593,7 +2607,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/NCXModel.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o: /data1/u2/sigil074/src/Sigil/MainUI/ValidationResultsView.cpp
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_222) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_223) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o -MF CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o.d -o CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.o -c /data1/u2/sigil074/src/Sigil/MainUI/ValidationResultsView.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.i: cmake_force
@@ -2607,7 +2621,7 @@ src/Sigil/CMakeFiles/sigil.dir/MainUI/ValidationResultsView.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o: src/Sigil/qrc_main.cpp
 src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_223) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_224) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.o -MF CMakeFiles/sigil.dir/qrc_main.cpp.o.d -o CMakeFiles/sigil.dir/qrc_main.cpp.o -c /data1/u2/sigil074/build_test/src/Sigil/qrc_main.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.i: cmake_force
@@ -2621,7 +2635,7 @@ src/Sigil/CMakeFiles/sigil.dir/qrc_main.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o: src/Sigil/qrc_About.cpp
 src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_224) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_225) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.o -MF CMakeFiles/sigil.dir/qrc_About.cpp.o.d -o CMakeFiles/sigil.dir/qrc_About.cpp.o -c /data1/u2/sigil074/build_test/src/Sigil/qrc_About.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.i: cmake_force
@@ -2635,7 +2649,7 @@ src/Sigil/CMakeFiles/sigil.dir/qrc_About.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o: src/Sigil/qrc_javascript.cpp
 src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_225) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_226) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.o -MF CMakeFiles/sigil.dir/qrc_javascript.cpp.o.d -o CMakeFiles/sigil.dir/qrc_javascript.cpp.o -c /data1/u2/sigil074/build_test/src/Sigil/qrc_javascript.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.i: cmake_force
@@ -2649,7 +2663,7 @@ src/Sigil/CMakeFiles/sigil.dir/qrc_javascript.cpp.s: cmake_force
 src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o: src/Sigil/CMakeFiles/sigil.dir/flags.make
 src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o: src/Sigil/qrc_icon.cpp
 src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o: src/Sigil/CMakeFiles/sigil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_226) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_227) "Building CXX object src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o"
 	cd /data1/u2/sigil074/build_test/src/Sigil && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.o -MF CMakeFiles/sigil.dir/qrc_icon.cpp.o.d -o CMakeFiles/sigil.dir/qrc_icon.cpp.o -c /data1/u2/sigil074/build_test/src/Sigil/qrc_icon.cpp
 
 src/Sigil/CMakeFiles/sigil.dir/qrc_icon.cpp.i: cmake_force
@@ -2797,6 +2811,7 @@ sigil_OBJECTS = \
 "CMakeFiles/sigil.dir/ViewEditors/CodeViewEditor.cpp.o" \
 "CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o" \
 "CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o" \
+"CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o" \
 "CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o" \
 "CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o" \
 "CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o" \
@@ -2951,6 +2966,7 @@ bin/sigil: src/Sigil/CMakeFiles/sigil.dir/PCRE/PCREReplaceTextBuilder.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/ViewEditors/CodeViewEditor.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/ViewEditors/LineNumberArea.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.o
+bin/sigil: src/Sigil/CMakeFiles/sigil.dir/ViewEditors/PreviewWidget.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/MainUI/MainApplication.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/MainUI/MainWindow.cpp.o
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/MainUI/FindReplace.cpp.o
@@ -2998,7 +3014,7 @@ bin/sigil: lib/libBoostParts.a
 bin/sigil: lib/libXercesExtensions.a
 bin/sigil: lib/libXerces.a
 bin/sigil: src/Sigil/CMakeFiles/sigil.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_227) "Linking CXX executable ../../bin/sigil"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data1/u2/sigil074/build_test/CMakeFiles --progress-num=$(CMAKE_PROGRESS_228) "Linking CXX executable ../../bin/sigil"
 	cd /data1/u2/sigil074/build_test/src/Sigil && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sigil.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
