@@ -37,11 +37,8 @@
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QString>
+#include <QtCore/QStringList>
 #include <QtCore/QXmlStreamReader>
-#include <QtWebKitWidgets/QWebFrame>
-#include <QtWebKitWidgets/QWebPage>
-#include <QtXml/QXmlInputSource>
-#include <QtXml/QXmlSimpleReader>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -586,10 +583,18 @@ xc::DOMElement *XhtmlDoc::RenameElementInDocument(xc::DOMDocument &document, xc:
 //   Hello Qt this is great
 QString XhtmlDoc::GetTextInHtml(const QString &source)
 {
-    QWebPage page;
-    page.mainFrame()->setHtml(source);
-    return page.mainFrame()->toPlainText();
-}
+    // Use QXmlStreamReader to extract text content
+    QXmlStreamReader reader(source);
+    QString text;
+
+    while (!reader.atEnd()) {
+        reader.readNext();
+        if (reader.isCharacters()) {
+            text += reader.text().toString();
+        }
+    }
+
+    return text;
 
 
 // Resolves HTML entities in the provided string.
