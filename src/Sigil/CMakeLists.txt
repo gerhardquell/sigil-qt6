@@ -300,6 +300,8 @@ set( VIEW_EDITOR_FILES
     ViewEditors/Searchable.h
     ViewEditors/Zoomable.h
     ViewEditors/ViewEditor.h
+    ViewEditors/PreviewWidget.cpp
+    ViewEditors/PreviewWidget.h
     )
 
 set( MAINUI_FILES 
