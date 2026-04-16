@@ -1016,18 +1016,6 @@
 			null
 		],
 		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/BookViewEditor.h",
-			"Mu",
-			"2XJTBWJE36/moc_BookViewEditor.cpp",
-			null
-		],
-		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/BookViewPreview.h",
-			"Mu",
-			"2XJTBWJE36/moc_BookViewPreview.cpp",
-			null
-		],
-		[
 			"/data1/u2/sigil074/src/Sigil/ViewEditors/CodeViewEditor.h",
 			"Mu",
 			"2XJTBWJE36/moc_CodeViewEditor.cpp",
@@ -1049,12 +1037,6 @@
 			"/data1/u2/sigil074/src/Sigil/ViewEditors/ViewEditor.h",
 			"Mu",
 			"2XJTBWJE36/moc_ViewEditor.cpp",
-			null
-		],
-		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/ViewWebPage.h",
-			"Mu",
-			"2XJTBWJE36/moc_ViewWebPage.cpp",
 			null
 		],
 		[
@@ -1645,16 +1627,6 @@
 		],
 		[ "/data1/u2/sigil074/src/Sigil/Tabs/XMLTab.cpp", "Mu", null ],
 		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/BookViewEditor.cpp",
-			"Mu",
-			null
-		],
-		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/BookViewPreview.cpp",
-			"Mu",
-			null
-		],
-		[
 			"/data1/u2/sigil074/src/Sigil/ViewEditors/CodeViewEditor.cpp",
 			"Mu",
 			null
@@ -1665,11 +1637,6 @@
 			null
 		],
 		[ "/data1/u2/sigil074/src/Sigil/ViewEditors/Searchable.cpp", "Mu", null ],
-		[
-			"/data1/u2/sigil074/src/Sigil/ViewEditors/ViewWebPage.cpp",
-			"Mu",
-			null
-		],
 		[ "/data1/u2/sigil074/src/Sigil/main.cpp", "Mu", null ]
 	],
 	"VERBOSITY" : 0

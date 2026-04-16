@@ -3573,54 +3573,6 @@ Tabs/XMLTab.cpp.s:
 	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/Tabs/XMLTab.cpp.s
 .PHONY : Tabs/XMLTab.cpp.s
 
-ViewEditors/BookViewEditor.o: ViewEditors/BookViewEditor.cpp.o
-.PHONY : ViewEditors/BookViewEditor.o
-
-# target to build an object file
-ViewEditors/BookViewEditor.cpp.o:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewEditor.cpp.o
-.PHONY : ViewEditors/BookViewEditor.cpp.o
-
-ViewEditors/BookViewEditor.i: ViewEditors/BookViewEditor.cpp.i
-.PHONY : ViewEditors/BookViewEditor.i
-
-# target to preprocess a source file
-ViewEditors/BookViewEditor.cpp.i:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewEditor.cpp.i
-.PHONY : ViewEditors/BookViewEditor.cpp.i
-
-ViewEditors/BookViewEditor.s: ViewEditors/BookViewEditor.cpp.s
-.PHONY : ViewEditors/BookViewEditor.s
-
-# target to generate assembly for a file
-ViewEditors/BookViewEditor.cpp.s:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewEditor.cpp.s
-.PHONY : ViewEditors/BookViewEditor.cpp.s
-
-ViewEditors/BookViewPreview.o: ViewEditors/BookViewPreview.cpp.o
-.PHONY : ViewEditors/BookViewPreview.o
-
-# target to build an object file
-ViewEditors/BookViewPreview.cpp.o:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewPreview.cpp.o
-.PHONY : ViewEditors/BookViewPreview.cpp.o
-
-ViewEditors/BookViewPreview.i: ViewEditors/BookViewPreview.cpp.i
-.PHONY : ViewEditors/BookViewPreview.i
-
-# target to preprocess a source file
-ViewEditors/BookViewPreview.cpp.i:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewPreview.cpp.i
-.PHONY : ViewEditors/BookViewPreview.cpp.i
-
-ViewEditors/BookViewPreview.s: ViewEditors/BookViewPreview.cpp.s
-.PHONY : ViewEditors/BookViewPreview.s
-
-# target to generate assembly for a file
-ViewEditors/BookViewPreview.cpp.s:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/BookViewPreview.cpp.s
-.PHONY : ViewEditors/BookViewPreview.cpp.s
-
 ViewEditors/CodeViewEditor.o: ViewEditors/CodeViewEditor.cpp.o
 .PHONY : ViewEditors/CodeViewEditor.o
 
@@ -3692,30 +3644,6 @@ ViewEditors/Searchable.s: ViewEditors/Searchable.cpp.s
 ViewEditors/Searchable.cpp.s:
 	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/Searchable.cpp.s
 .PHONY : ViewEditors/Searchable.cpp.s
-
-ViewEditors/ViewWebPage.o: ViewEditors/ViewWebPage.cpp.o
-.PHONY : ViewEditors/ViewWebPage.o
-
-# target to build an object file
-ViewEditors/ViewWebPage.cpp.o:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/ViewWebPage.cpp.o
-.PHONY : ViewEditors/ViewWebPage.cpp.o
-
-ViewEditors/ViewWebPage.i: ViewEditors/ViewWebPage.cpp.i
-.PHONY : ViewEditors/ViewWebPage.i
-
-# target to preprocess a source file
-ViewEditors/ViewWebPage.cpp.i:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/ViewWebPage.cpp.i
-.PHONY : ViewEditors/ViewWebPage.cpp.i
-
-ViewEditors/ViewWebPage.s: ViewEditors/ViewWebPage.cpp.s
-.PHONY : ViewEditors/ViewWebPage.s
-
-# target to generate assembly for a file
-ViewEditors/ViewWebPage.cpp.s:
-	cd /data1/u2/sigil074/build_test && $(MAKE) $(MAKESILENT) -f src/Sigil/CMakeFiles/sigil.dir/build.make src/Sigil/CMakeFiles/sigil.dir/ViewEditors/ViewWebPage.cpp.s
-.PHONY : ViewEditors/ViewWebPage.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -4298,12 +4226,6 @@ help:
 	@echo "... Tabs/XMLTab.o"
 	@echo "... Tabs/XMLTab.i"
 	@echo "... Tabs/XMLTab.s"
-	@echo "... ViewEditors/BookViewEditor.o"
-	@echo "... ViewEditors/BookViewEditor.i"
-	@echo "... ViewEditors/BookViewEditor.s"
-	@echo "... ViewEditors/BookViewPreview.o"
-	@echo "... ViewEditors/BookViewPreview.i"
-	@echo "... ViewEditors/BookViewPreview.s"
 	@echo "... ViewEditors/CodeViewEditor.o"
 	@echo "... ViewEditors/CodeViewEditor.i"
 	@echo "... ViewEditors/CodeViewEditor.s"
@@ -4313,9 +4235,6 @@ help:
 	@echo "... ViewEditors/Searchable.o"
 	@echo "... ViewEditors/Searchable.i"
 	@echo "... ViewEditors/Searchable.s"
-	@echo "... ViewEditors/ViewWebPage.o"
-	@echo "... ViewEditors/ViewWebPage.i"
-	@echo "... ViewEditors/ViewWebPage.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

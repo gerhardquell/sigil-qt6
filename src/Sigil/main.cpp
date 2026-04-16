@@ -41,18 +41,6 @@
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 
-#ifdef Q_OS_WIN32
-# include <QtWidgets/QPlainTextEdit>
-# include "ViewEditors/BookViewPreview.h"
-static const QString WIN_CLIPBOARD_ERROR = "QClipboard::setMimeData: Failed to set data on clipboard";
-static const int RETRY_DELAY_MS = 5;
-#endif
-
-#ifdef Q_OS_MAC
-# include <QFileDialog>
-# include <QKeySequence>
-# include <QAction>
-#endif
 
 // Creates a MainWindow instance depending
 // on command line arguments
@@ -69,39 +57,7 @@ static MainWindow *GetMainWindow(const QStringList &arguments)
     }
 }
 
-#ifdef Q_OS_MAC
-static void file_new()
-{
-    MainWindow *w = GetMainWindow(QStringList());
-    w->show();
-}
 
-static void file_open()
-{
-    const QMap<QString, QString> load_filters = MainWindow::GetLoadFiltersMap();
-    QStringList filters(load_filters.values());
-    filters.removeDuplicates();
-    QString filter_string = "";
-    foreach(QString filter, filters) {
-        filter_string += filter + ";;";
-    }
-    // "All Files (*.*)" is the default
-    QString default_filter = load_filters.value("epub");
-    QString filename = QFileDialog::getOpenFileName(0,
-            "Open File",
-            "~",
-            filter_string,
-            &default_filter
-            );
-
-    if (!filename.isEmpty()) {
-        MainWindow *w = GetMainWindow(QStringList() << "" << filename);
-        w->show();
-    }
-}
-#endif
-
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
 // Returns a QIcon with the Sigil "S" logo in various sizes
 static QIcon GetApplicationIcon()
 {
@@ -115,7 +71,6 @@ static QIcon GetApplicationIcon()
     app_icon.addFile(":/icon/app_icon_512.png", QSize(512, 512));
     return app_icon;
 }
-#endif
 
 
 // The message handler installed to handle Qt messages
@@ -134,49 +89,6 @@ void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
             break;
         case QtCriticalMsg:
             error_message = QString(message.toLatin1().constData());
-#ifdef Q_OS_WIN32
-            // On Windows there is a known issue with the clipboard that results in some copy
-            // operations in controls being intermittently blocked. Rather than presenting
-            // the user with an error dialog, we should simply retry the operation.
-            // Hopefully this will be fixed in a future Qt version (still broken as of 4.8.3).
-            if (error_message.startsWith(WIN_CLIPBOARD_ERROR)) {
-                QWidget *widget = QApplication::focusWidget();
-
-                if (widget) {
-                    QPlainTextEdit *textEdit = dynamic_cast<QPlainTextEdit *>(widget);
-
-                    if (textEdit) {
-                        QTimer::singleShot(RETRY_DELAY_MS, textEdit, SLOT(copy()));
-                        break;
-                    }
-
-                    // BV/PV copying is a little different, in that the focus widget is set to
-                    // the parent editor (unlike CodeView's QPlainTextEdit).
-                    BookViewPreview *bookViewPreview = dynamic_cast<BookViewPreview *>(widget);
-
-                    if (bookViewPreview) {
-                        QTimer::singleShot(RETRY_DELAY_MS, bookViewPreview, SLOT(copy()));
-                        break;
-                    }
-
-                    // Same issue can happen on a QLineEdit / QComboBox
-                    QLineEdit *lineEdit = dynamic_cast<QLineEdit *>(widget);
-
-                    if (lineEdit) {
-                        QTimer::singleShot(RETRY_DELAY_MS, lineEdit, SLOT(copy()));
-                        break;
-                    }
-
-                    QComboBox *comboBox = dynamic_cast<QComboBox *>(widget);
-
-                    if (comboBox) {
-                        QTimer::singleShot(RETRY_DELAY_MS, comboBox->lineEdit(), SLOT(copy()));
-                        break;
-                    }
-                }
-            }
-
-#endif
             Utility::DisplayExceptionErrorDialog(QString("Critical: %1").arg(error_message));
             break;
 
@@ -242,18 +154,10 @@ int main(int argc, char *argv[])
             }
         }
         app.installTranslator(&translator);
-        // We set the window icon explicitly on Linux.
-        // On Windows this is handled by the RC file,
-        // and on Mac by the ICNS file.
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
+        // Set the window icon
         app.setWindowIcon(GetApplicationIcon());
-#endif
-        // On Unix systems, we make sure that the temp folder we
-        // create is accessible by all users. On Windows, there's
-        // a temp folder per user.
-#ifndef Q_OS_WIN32
+        // Make sure that the temp folder we create is accessible by all users
         CreateTempFolderWithCorrectPermissions();
-#endif
         // Needs to be created on the heap so that
         // the reply has time to return.
         UpdateChecker *checker = new UpdateChecker(&app);
@@ -269,28 +173,6 @@ int main(int argc, char *argv[])
             return 1;
         } else {
             // Normal startup
-#ifdef Q_OS_MAC
-            app.setQuitOnLastWindowClosed(false);
-
-            QMenuBar *mac_menu = new QMenuBar();
-            QMenu *file_menu = new QMenu("File");
-            QAction *action;
-            // New
-            action = file_menu->addAction("New");
-            action->setShortcut(QKeySequence("Ctrl+N"));
-            QObject::connect(action, &QAction::triggered, file_new);
-            // Open
-            action = file_menu->addAction("Open");
-            action->setShortcut(QKeySequence("Ctrl+O"));
-            QObject::connect(action, &QAction::triggered, file_open);
-            // Quit
-            action = file_menu->addAction("Quit");
-            action->setShortcut(QKeySequence("Ctrl+Q"));
-            QObject::connect(action, &QAction::triggered, qApp->quit);
-
-            mac_menu->addMenu(file_menu);
-            mac_menu->show();
-#endif
             MainWindow *widget = GetMainWindow(arguments);
             widget->show();
             return app.exec();

@@ -145,7 +145,6 @@ public:
      */
     enum ViewState {
         ViewState_Unknown = 0,     /**< Default non view that we don't know or care what it is */
-        ViewState_BookView = 10,   /**< The WYSIWYG view. */
         ViewState_CodeView = 30    /**< The XHTML code editing view. */
     };
 
@@ -349,11 +348,6 @@ private slots:
     void PasteClip20IntoCurrentTarget();
 
     /**
-     * Implements the set BookView functionality.
-     */
-    void BookView();
-
-    /**
      * Implements the set CodeView functionality.
      */
     void CodeView();
@@ -449,11 +443,6 @@ private slots:
      * Performs needed changes when the user switches tabs.
      */
     void UpdateUIWhenTabsSwitch();
-
-    /**
-     * Set initial state for actions in Book View
-     */
-    void SetStateActionsBookView();
 
     /**
      * Set initial state for actions in Code View
