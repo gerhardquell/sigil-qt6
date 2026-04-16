@@ -188,6 +188,19 @@ public:
      */
     void clearAppearanceSettings();
 
+    // Preview Settings
+    bool previewEnabled() const;
+    void setPreviewEnabled(bool enabled);
+
+    int previewOrientation() const; // Qt::Horizontal or Qt::Vertical
+    void setPreviewOrientation(int orientation);
+
+    int previewDebounceMs() const;
+    void setPreviewDebounceMs(int ms);
+
+    bool previewSyncCursor() const;
+    void setPreviewSyncCursor(bool sync);
+
 public slots:
 
     /**

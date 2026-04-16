@@ -75,6 +75,11 @@ static QString KEY_CODE_VIEW_XHTML_HTML_COMMENT_COLOR = SETTINGS_GROUP + "/" + "
 static QString KEY_SPECIAL_CHARACTER_FONT_FAMILY = SETTINGS_GROUP + "/" + "special_character_font_family";
 static QString KEY_SPECIAL_CHARACTER_FONT_SIZE = SETTINGS_GROUP + "/" + "special_character_font_size";
 
+static const QString KEY_PREVIEW_ENABLED = "Preview/enabled";
+static const QString KEY_PREVIEW_ORIENTATION = "Preview/orientation";
+static const QString KEY_PREVIEW_DEBOUNCE = "Preview/debounceMs";
+static const QString KEY_PREVIEW_SYNC_CURSOR = "Preview/syncCursor";
+
 
 SettingsStore::SettingsStore()
     : QSettings(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/sigil.ini", QSettings::IniFormat)
@@ -399,4 +404,52 @@ void SettingsStore::clearSettingsGroup()
     while (!group().isEmpty()) {
         endGroup();
     }
+}
+
+bool SettingsStore::previewEnabled() const
+{
+    clearSettingsGroup();
+    return value(KEY_PREVIEW_ENABLED, true).toBool();
+}
+
+void SettingsStore::setPreviewEnabled(bool enabled)
+{
+    clearSettingsGroup();
+    setValue(KEY_PREVIEW_ENABLED, enabled);
+}
+
+int SettingsStore::previewOrientation() const
+{
+    clearSettingsGroup();
+    return value(KEY_PREVIEW_ORIENTATION, Qt::Horizontal).toInt();
+}
+
+void SettingsStore::setPreviewOrientation(int orientation)
+{
+    clearSettingsGroup();
+    setValue(KEY_PREVIEW_ORIENTATION, orientation);
+}
+
+int SettingsStore::previewDebounceMs() const
+{
+    clearSettingsGroup();
+    return value(KEY_PREVIEW_DEBOUNCE, 400).toInt();
+}
+
+void SettingsStore::setPreviewDebounceMs(int ms)
+{
+    clearSettingsGroup();
+    setValue(KEY_PREVIEW_DEBOUNCE, qBound(100, ms, 2000));
+}
+
+bool SettingsStore::previewSyncCursor() const
+{
+    clearSettingsGroup();
+    return value(KEY_PREVIEW_SYNC_CURSOR, true).toBool();
+}
+
+void SettingsStore::setPreviewSyncCursor(bool sync)
+{
+    clearSettingsGroup();
+    setValue(KEY_PREVIEW_SYNC_CURSOR, sync);
 }
