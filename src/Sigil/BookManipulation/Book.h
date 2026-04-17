@@ -165,6 +165,12 @@ public:
      */
     CSSResource &CreateEmptyCSSFile();
 
+    /**
+     * Creates an impressum HTML file from the user template in ~/.sigil/.
+     * Only creates the file if a user template exists.
+     */
+    HTMLResource &CreateImpressumFile();
+
     SVGResource &CreateEmptySVGFile();
 
     HTMLResource &CreateHTMLCoverFile(QString text);

@@ -35,6 +35,7 @@
 #include "Misc/TempFolder.h"
 #include "Misc/Utility.h"
 #include "Misc/HTMLSpellCheck.h"
+#include "Misc/UserTemplates.h"
 #include "ResourceObjects/HTMLResource.h"
 #include "ResourceObjects/NCXResource.h"
 #include "ResourceObjects/OPFResource.h"
@@ -254,7 +255,7 @@ HTMLResource &Book::CreateNewHTMLFile()
 HTMLResource &Book::CreateEmptyHTMLFile()
 {
     HTMLResource &html_resource = CreateNewHTMLFile();
-    html_resource.SetText(EMPTY_HTML_FILE);
+    html_resource.SetText(UserTemplates::instance().defaultHtml());
     SetModified(true);
     return html_resource;
 }
@@ -263,7 +264,17 @@ HTMLResource &Book::CreateEmptyHTMLFile()
 HTMLResource &Book::CreateEmptyHTMLFile(HTMLResource &resource)
 {
     HTMLResource &new_resource = CreateNewHTMLFile();
-    new_resource.SetText(EMPTY_HTML_FILE);
+
+    QString html = UserTemplates::instance().defaultHtml();
+
+    // Adjust CSS links to match the EPUB-internal stylesheet filename
+    QList< CSSResource* > css_resources = m_Mainfolder.GetResourceTypeList< CSSResource >(false);
+    if (!css_resources.isEmpty()) {
+        QString cssFilename = css_resources.first()->Filename();
+        html = UserTemplates::instance().adjustCssLinks(html, cssFilename);
+    }
+
+    new_resource.SetText(html);
 
     if (&resource != NULL) {
         QList< HTMLResource * > html_resources = m_Mainfolder.GetResourceTypeList< HTMLResource >(true);
@@ -277,6 +288,28 @@ HTMLResource &Book::CreateEmptyHTMLFile(HTMLResource &resource)
 
     SetModified(true);
     return new_resource;
+}
+
+HTMLResource &Book::CreateImpressumFile()
+{
+    TempFolder tempfolder;
+    QString fullfilepath = tempfolder.GetPath() + "/" + IMPRESSUM_FILE_NAME;
+    Utility::WriteUnicodeTextFile(PLACEHOLDER_TEXT, fullfilepath);
+    HTMLResource &html_resource = *qobject_cast< HTMLResource * >(
+                                      &m_Mainfolder.AddContentFileToFolder(fullfilepath));
+
+    QString html = UserTemplates::instance().impressumHtml();
+
+    // Adjust CSS links to match EPUB-internal stylesheet filename
+    QList< CSSResource* > css_resources = m_Mainfolder.GetResourceTypeList< CSSResource >(false);
+    if (!css_resources.isEmpty()) {
+        QString cssFilename = css_resources.first()->Filename();
+        html = UserTemplates::instance().adjustCssLinks(html, cssFilename);
+    }
+
+    html_resource.SetText(html);
+    SetModified(true);
+    return html_resource;
 }
 
 
@@ -339,7 +372,7 @@ CSSResource &Book::CreateEmptyCSSFile()
 {
     TempFolder tempfolder;
     QString fullfilepath = tempfolder.GetPath() + "/" + m_Mainfolder.GetUniqueFilenameVersion(FIRST_CSS_NAME);
-    Utility::WriteUnicodeTextFile("", fullfilepath);
+    Utility::WriteUnicodeTextFile(UserTemplates::instance().defaultCss(), fullfilepath);
     CSSResource &css_resource = *qobject_cast< CSSResource * >(
                                     &m_Mainfolder.AddContentFileToFolder(fullfilepath));
     SetModified(true);
