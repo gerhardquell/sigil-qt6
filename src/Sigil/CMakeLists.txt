@@ -238,6 +238,8 @@ set( MISC_FILES
     Misc/UILanguage.cpp
     Misc/SettingsStore.cpp
     Misc/SettingsStore.h
+    Misc/UserTemplates.cpp
+    Misc/UserTemplates.h
     Misc/SpellCheck.cpp
     Misc/SpellCheck.h
     Misc/KeyboardShortcut.cpp
