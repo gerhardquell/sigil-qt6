@@ -27,6 +27,9 @@
 #include <QTreeView>
 #include <QProgressDialog>
 #include <QScrollBar>
+#include <QApplication>
+#include <QClipboard>
+#include <QImage>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/FolderKeeper.h"
@@ -41,6 +44,7 @@
 #include "Misc/KeyboardShortcutManager.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
+#include "Misc/TempFolder.h"
 #include "Misc/OpenExternally.h"
 #include "ResourceObjects/HTMLResource.h"
 #include "ResourceObjects/NCXResource.h"
@@ -487,6 +491,28 @@ void BookBrowser::AddNewSVG()
     SVGResource &new_resource = m_Book->CreateEmptySVGFile();
     // Open the new file in a tab
     emit ResourceActivated(new_resource);
+    emit BookContentModified();
+    Refresh();
+}
+
+void BookBrowser::PasteImage()
+{
+    QImage clipboardImage = QApplication::clipboard()->image();
+    if (clipboardImage.isNull()) {
+        return;
+    }
+
+    TempFolder tempfolder;
+    QString filename = m_Book->GetFolderKeeper().GetUniqueFilenameVersion("Image0001.png");
+    QString fullfilepath = tempfolder.GetPath() + "/" + filename;
+
+    if (!clipboardImage.save(fullfilepath, "PNG")) {
+        return;
+    }
+
+    Resource &resource = m_Book->GetFolderKeeper().AddContentFileToFolder(fullfilepath);
+    m_Book->SetModified(true);
+    emit ResourceActivated(resource);
     emit BookContentModified();
     Refresh();
 }
@@ -1317,6 +1343,7 @@ void BookBrowser::CreateContextMenuActions()
     m_AddNewHTML              = new QAction(tr("Add Blank HTML File"),   this);
     m_AddNewCSS               = new QAction(tr("Add Blank Stylesheet"),  this);
     m_AddNewSVG               = new QAction(tr("Add Blank SVG Image"),   this);
+    m_PasteImage              = new QAction(tr("Paste Image"),           this);
     m_AddExisting             = new QAction(tr("Add Existing Files..."), this);
     m_CopyHTML                = new QAction(tr("Add Copy"),              this);
     m_CopyCSS                 = new QAction(tr("Add Copy"),              this);
@@ -1535,6 +1562,8 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
         m_CopyCSS->setEnabled(item_count == 1);
     } else if (m_LastContextMenuType == Resource::ImageResourceType || m_LastContextMenuType == Resource::SVGResourceType) {
         m_ContextMenu.addAction(m_AddNewSVG);
+        m_ContextMenu.addAction(m_PasteImage);
+        m_PasteImage->setEnabled(!QApplication::clipboard()->image().isNull());
     }
 
     m_ContextMenu.addAction(m_AddExisting);
@@ -1680,6 +1709,7 @@ void BookBrowser::ConnectSignalsToSlots()
     connect(m_SortHTML,                SIGNAL(triggered()), this, SLOT(SortHTML()));
     connect(m_AddNewCSS,               SIGNAL(triggered()), this, SLOT(AddNewCSS()));
     connect(m_AddNewSVG,               SIGNAL(triggered()), this, SLOT(AddNewSVG()));
+    connect(m_PasteImage,              SIGNAL(triggered()), this, SLOT(PasteImage()));
     connect(m_AddExisting,             SIGNAL(triggered()), this, SLOT(AddExisting()));
     connect(m_Rename,                  SIGNAL(triggered()), this, SLOT(Rename()));
     connect(m_Delete,                  SIGNAL(triggered()), this, SLOT(Delete()));

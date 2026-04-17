@@ -156,6 +156,7 @@ public slots:
     void AddNewHTML();
     void AddNewCSS();
     void AddNewSVG();
+    void PasteImage();
     void CreateHTMLTOCCSSFile();
     void CreateIndexCSSFile();
     /**
@@ -488,6 +489,7 @@ private:
     QAction *m_AddNewHTML;
     QAction *m_AddNewCSS;
     QAction *m_AddNewSVG;
+    QAction *m_PasteImage;
     QAction *m_AddExisting;
     QAction *m_Rename;
     QAction *m_Delete;
