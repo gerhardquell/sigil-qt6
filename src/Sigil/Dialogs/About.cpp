@@ -61,7 +61,8 @@ About::About(QWidget *parent)
         "<h4>" + tr("Translators") + "</h4>" +
         "<ul><li><a href=\"https://www.transifex.net/projects/p/sigil/\">https://www.transifex.net/projects/p/sigil/teams/</a></li></ul>" +
         "<h4>" + tr("Original Creator") + "</h4>" +
-        "<ul><li>Strahinja Marković  (" + tr("retired") + ")</li></ul>";
+        "<ul><li>Strahinja Marković  (" + tr("retired") + ")</li></ul>"+
+				"<ul><li>Gerhard Quell -> Updater to QT6 - 2026</li></ul>";
     ui.creditsDisplay->setText(credits);
 }
 

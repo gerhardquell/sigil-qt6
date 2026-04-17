@@ -32,9 +32,6 @@
 #include <QDir>
 #include <QSize>
 
-// Debug prefix for stderr logging - grep with: 2>&1 | grep SIGIL-PREVIEW
-#define DBG_PREFIX "[SIGIL-PREVIEW] "
-
 PreviewWidget::PreviewWidget(QWidget *parent)
     : QWidget(parent),
       m_webView(nullptr),
@@ -80,11 +77,6 @@ void PreviewWidget::setupUi()
     m_updateTimer = new QTimer(this);
     m_updateTimer->setSingleShot(true);
     m_updateTimer->setInterval(400);
-
-    fprintf(stderr, DBG_PREFIX "setupUi: webView sizeHint=%dx%d, minSize=%dx%d, policy=%d/%d\n",
-            m_webView->sizeHint().width(), m_webView->sizeHint().height(),
-            m_webView->minimumSize().width(), m_webView->minimumSize().height(),
-            m_webView->sizePolicy().horizontalPolicy(), m_webView->sizePolicy().verticalPolicy());
 }
 
 void PreviewWidget::connectSignals()
@@ -116,14 +108,8 @@ void PreviewWidget::scheduleUpdate(const QString &html, const QUrl &baseUrl)
 void PreviewWidget::updatePreview()
 {
     if (m_pendingHtml.isEmpty()) {
-        fprintf(stderr, DBG_PREFIX "updatePreview: skipped (empty HTML)\n");
         return;
     }
-
-    fprintf(stderr, DBG_PREFIX "updatePreview: HTML %d chars, basePath='%s', baseUrl='%s', widgetSize=%dx%d visible=%d\n",
-            m_pendingHtml.size(), m_basePath.toUtf8().constData(),
-            m_pendingBaseUrl.toString().toUtf8().constData(),
-            m_webView->width(), m_webView->height(), m_webView->isVisible());
 
     // Use file:// base URL from the HTML resource's filesystem path.
     // This lets the browser resolve relative URLs (../Styles/stylesheet.css)
@@ -135,9 +121,6 @@ void PreviewWidget::updatePreview()
         // Convert filesystem path to file:// URL
         baseUrl = QUrl::fromLocalFile(m_basePath + "/dummy.xhtml");
     }
-
-    fprintf(stderr, DBG_PREFIX "updatePreview: using baseUrl='%s'\n",
-            baseUrl.toString().toUtf8().constData());
 
     m_isLoading = true;
     m_webView->setHtml(m_pendingHtml, baseUrl);
@@ -167,16 +150,12 @@ QWebEngineView *PreviewWidget::webView() const
 void PreviewWidget::onLoadFinished(bool ok)
 {
     m_isLoading = false;
-    fprintf(stderr, DBG_PREFIX "onLoadFinished: ok=%d, webViewSize=%dx%d\n",
-            ok, m_webView->width(), m_webView->height());
     emit loadFinished(ok);
 }
 
 void PreviewWidget::setupUrlHandler(const QString &basePath)
 {
     m_basePath = basePath;
-
-    fprintf(stderr, DBG_PREFIX "setupUrlHandler: basePath='%s'\n", basePath.toUtf8().constData());
 }
 
 QString PreviewWidget::convertUrlsToScheme(const QString &html, const QString &basePath) const
@@ -268,9 +247,6 @@ QString PreviewWidget::convertUrlsToScheme(const QString &html, const QString &b
     total += applyReplacementsReverse(srcsetRegex, true);
     total += applyReplacementsReverse(posterRegex);
     total += applyReplacementsReverse(cssUrlRegex);
-
-    fprintf(stderr, DBG_PREFIX "convertUrlsToScheme: %d URLs converted, html %d→%d chars\n",
-            total, html.size(), result.size());
 
     return result;
 }

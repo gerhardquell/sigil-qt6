@@ -29,13 +29,9 @@
 #include <QWebEngineProfile>
 #include <QWebEngineUrlScheme>
 #include <QWebEngineUrlRequestJob>
-#include <cstdio>
 
 #include "ResourceObjects/Resource.h"
 #include "Misc/Utility.h"
-
-// Debug prefix for stderr logging - grep with: 2>&1 | grep SIGIL-PREVIEW
-#define DBG_PREFIX "[SIGIL-PREVIEW] "
 
 const QString SigilUrlSchemeHandler::SIGIL_SCHEME = "sigil";
 const QString SigilUrlSchemeHandler::SIGIL_HOST = "book";
@@ -134,7 +130,6 @@ void SigilUrlSchemeHandler::requestStarted(QWebEngineUrlRequestJob *job)
     // Extract path from URL
     QString path = url.path();
     if (path.isEmpty()) {
-        fprintf(stderr, DBG_PREFIX "schemeHandler: empty path for url='%s'\n", url.toString().toUtf8().constData());
         job->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
     }
@@ -147,7 +142,6 @@ void SigilUrlSchemeHandler::requestStarted(QWebEngineUrlRequestJob *job)
     // Resolve to absolute path
     QString absolutePath = resolvePath(path);
     if (absolutePath.isEmpty()) {
-        fprintf(stderr, DBG_PREFIX "schemeHandler: NOT FOUND path='%s'\n", path.toUtf8().constData());
         job->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
     }
@@ -155,7 +149,6 @@ void SigilUrlSchemeHandler::requestStarted(QWebEngineUrlRequestJob *job)
     // Read file content
     QFile file(absolutePath);
     if (!file.open(QIODevice::ReadOnly)) {
-        fprintf(stderr, DBG_PREFIX "schemeHandler: CANNOT READ '%s'\n", absolutePath.toUtf8().constData());
         job->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
     }
@@ -165,9 +158,6 @@ void SigilUrlSchemeHandler::requestStarted(QWebEngineUrlRequestJob *job)
 
     // Determine MIME type
     QString mimeType = getMimeType(absolutePath);
-
-    fprintf(stderr, DBG_PREFIX "schemeHandler: OK '%s' → %s (%d bytes)\n",
-            path.toUtf8().constData(), mimeType.toUtf8().constData(), data.size());
 
     // Create reply
     QBuffer *buffer = new QBuffer(job);

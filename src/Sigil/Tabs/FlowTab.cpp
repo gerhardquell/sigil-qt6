@@ -34,10 +34,6 @@
 #include <QSplitter>
 #include <QFileInfo>
 #include <QDir>
-#include <cstdio>
-
-// Debug prefix for stderr logging - grep with: 2>&1 | grep SIGIL-PREVIEW
-#define DBG_PREFIX "[SIGIL-PREVIEW] "
 
 #include "BookManipulation/CleanSource.h"
 #include "MiscEditors/ClipEditorModel.h"
@@ -135,13 +131,6 @@ void FlowTab::CreateEditors()
     sizes << 500 << 500;
     m_Splitter->setSizes(sizes);
 
-    fprintf(stderr, DBG_PREFIX "CreateEditors: splitter=%p visible=%d size=%dx%d\n",
-            m_Splitter, m_Splitter->isVisible(),
-            m_Splitter->width(), m_Splitter->height());
-    fprintf(stderr, DBG_PREFIX "CreateEditors: preview=%p visible=%d size=%dx%d\n",
-            m_PreviewWidget, m_PreviewWidget->isVisible(),
-            m_PreviewWidget->width(), m_PreviewWidget->height());
-
     QApplication::restoreOverrideCursor();
 }
 
@@ -161,12 +150,6 @@ void FlowTab::DelayedInitialization()
     m_CodeViewEditor->CustomSetDocument(m_HTMLResource.GetTextDocumentForWriting());
     // Zoom factor for CodeView can only be set when document has been loaded.
     m_CodeViewEditor->Zoom();
-
-    fprintf(stderr, DBG_PREFIX "DelayedInit: resource='%s' oebpsPath='%s'\n",
-            htmlFilePath.toUtf8().constData(), oebpsDir.absolutePath().toUtf8().constData());
-    fprintf(stderr, DBG_PREFIX "DelayedInit: splitter visible=%d size=%dx%d, preview visible=%d size=%dx%d\n",
-            m_Splitter->isVisible(), m_Splitter->width(), m_Splitter->height(),
-            m_PreviewWidget->isVisible(), m_PreviewWidget->width(), m_PreviewWidget->height());
 
     // Scroll to the requested position
     if (m_PositionToScrollTo > 0) {
