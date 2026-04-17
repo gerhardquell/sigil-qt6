@@ -74,8 +74,10 @@
 #include "Misc/SleepFunctions.h"
 #include "Misc/SpellCheck.h"
 #include "Misc/TOCHTMLWriter.h"
+#include "Misc/UserTemplates.h"
 #include "Misc/Utility.h"
 #include "MiscEditors/IndexHTMLWriter.h"
+#include "ResourceObjects/CSSResource.h"
 #include "ResourceObjects/HTMLResource.h"
 #include "ResourceObjects/NCXResource.h"
 #include "ResourceObjects/OPFResource.h"
@@ -3119,7 +3121,29 @@ void MainWindow::ResourcesAddedOrDeleted()
 void MainWindow::CreateNewBook()
 {
     QSharedPointer< Book > new_book = QSharedPointer< Book >(new Book());
+
+    // Create CSS first so HTML files can reference it
+    CSSResource &css = new_book->CreateEmptyCSSFile();
+
+    // Create impressum as first page if user has a template
+    if (UserTemplates::instance().hasImpressum()) {
+        new_book->CreateImpressumFile();
+    }
+
+    // Create first section with default HTML template
     new_book->CreateEmptyHTMLFile();
+
+    // Adjust CSS links in all HTML files to match actual CSS filename
+    QString cssFilename = css.Filename();
+    QList< HTMLResource* > html_resources = new_book->GetHTMLResources();
+    for (HTMLResource *resource : html_resources) {
+        QString html = resource->GetText();
+        QString adjusted = UserTemplates::instance().adjustCssLinks(html, cssFilename);
+        if (html != adjusted) {
+            resource->SetText(adjusted);
+        }
+    }
+
     SetNewBook(new_book);
     new_book->SetModified(false);
     m_SaveACopyFilename = "";
