@@ -3648,6 +3648,10 @@ void MainWindow::ExtendUI()
     // Basically, restoreGeometry() in ReadSettings() overrules this command.
     m_ValidationResultsView->hide();
 
+    // Qt 6: CodeView-only — hide BookView/CodeView toggle buttons
+    ui.actionBookView->setVisible(false);
+    ui.actionCodeView->setVisible(false);
+
     m_PreviewWindow = new PreviewWindow(this);
     m_PreviewWindow->setObjectName(PREVIEW_WINDOW_NAME);
     addDockWidget(Qt::RightDockWidgetArea, m_PreviewWindow);
