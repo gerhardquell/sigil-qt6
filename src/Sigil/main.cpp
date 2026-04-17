@@ -197,6 +197,7 @@ int main(int argc, char *argv[])
 // Missing constants for Qt 6 migration
 const QString FIRST_SECTION_PREFIX = "Section0001";
 const QString FIRST_SECTION_NAME = FIRST_SECTION_PREFIX + ".xhtml";
+const QString IMPRESSUM_FILE_NAME = "Impressum.xhtml";
 const QString HTML_COVER_FILENAME = "cover.xhtml";
 const QString BODY_START = "<\\s*body[^\u003e]*>";
 const QString BODY_END = "</\\s*body\\s*>";
