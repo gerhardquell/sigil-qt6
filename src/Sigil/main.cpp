@@ -167,6 +167,10 @@ int main(int argc, char *argv[])
         app.installTranslator(&translator);
         // Set the window icon
         app.setWindowIcon(GetApplicationIcon());
+        // Set application-wide font size
+        QFont appFont = app.font();
+        appFont.setPointSize(13);
+        app.setFont(appFont);
         // Make sure that the temp folder we create is accessible by all users
         CreateTempFolderWithCorrectPermissions();
         // Needs to be created on the heap so that
