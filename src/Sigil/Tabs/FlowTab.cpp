@@ -32,6 +32,12 @@
 #include <QtPrintSupport/QPrintDialog>
 #include <QtPrintSupport/QPrintPreviewDialog>
 #include <QSplitter>
+#include <QFileInfo>
+#include <QDir>
+#include <cstdio>
+
+// Debug prefix for stderr logging - grep with: 2>&1 | grep SIGIL-PREVIEW
+#define DBG_PREFIX "[SIGIL-PREVIEW] "
 
 #include "BookManipulation/CleanSource.h"
 #include "MiscEditors/ClipEditorModel.h"
@@ -129,18 +135,38 @@ void FlowTab::CreateEditors()
     sizes << 500 << 500;
     m_Splitter->setSizes(sizes);
 
+    fprintf(stderr, DBG_PREFIX "CreateEditors: splitter=%p visible=%d size=%dx%d\n",
+            m_Splitter, m_Splitter->isVisible(),
+            m_Splitter->width(), m_Splitter->height());
+    fprintf(stderr, DBG_PREFIX "CreateEditors: preview=%p visible=%d size=%dx%d\n",
+            m_PreviewWidget, m_PreviewWidget->isVisible(),
+            m_PreviewWidget->width(), m_PreviewWidget->height());
+
     QApplication::restoreOverrideCursor();
 }
 
 void FlowTab::DelayedInitialization()
 {
-    // Set up the CodeView with the document
+    // Setup URL handler FIRST, so that when the document is loaded
+    // and triggers updatePreview(), the basePath is already set.
+    QString htmlFilePath = m_HTMLResource.GetFullPath();
+    QString oebpsPath = QFileInfo(htmlFilePath).absolutePath();
+    QDir oebpsDir(oebpsPath);
+    if (oebpsDir.dirName().toLower() == "text" || oebpsDir.dirName().toLower() == "html" || oebpsDir.dirName().toLower() == "xhtml") {
+        oebpsDir.cdUp();
+    }
+    m_PreviewWidget->setupUrlHandler(oebpsDir.absolutePath());
+
+    // Set up the CodeView with the document (this fires DocumentSet → updatePreview)
     m_CodeViewEditor->CustomSetDocument(m_HTMLResource.GetTextDocumentForWriting());
     // Zoom factor for CodeView can only be set when document has been loaded.
     m_CodeViewEditor->Zoom();
 
-    // Initial preview update
-    updatePreview();
+    fprintf(stderr, DBG_PREFIX "DelayedInit: resource='%s' oebpsPath='%s'\n",
+            htmlFilePath.toUtf8().constData(), oebpsDir.absolutePath().toUtf8().constData());
+    fprintf(stderr, DBG_PREFIX "DelayedInit: splitter visible=%d size=%dx%d, preview visible=%d size=%dx%d\n",
+            m_Splitter->isVisible(), m_Splitter->width(), m_Splitter->height(),
+            m_PreviewWidget->isVisible(), m_PreviewWidget->width(), m_PreviewWidget->height());
 
     // Scroll to the requested position
     if (m_PositionToScrollTo > 0) {
@@ -268,7 +294,7 @@ void FlowTab::onCodeViewTextChanged()
     // Schedule a debounced preview update
     if (m_PreviewWidget && m_CodeViewEditor) {
         QString html = m_CodeViewEditor->toPlainText();
-        m_PreviewWidget->scheduleUpdate(html, m_HTMLResource.GetFullPath());
+        m_PreviewWidget->scheduleUpdate(html, QUrl::fromLocalFile(m_HTMLResource.GetFullPath()));
     }
 }
 
@@ -282,7 +308,7 @@ void FlowTab::updatePreview()
     // Update the preview immediately
     if (m_PreviewWidget && m_CodeViewEditor) {
         QString html = m_CodeViewEditor->toPlainText();
-        m_PreviewWidget->setHtml(html, m_HTMLResource.GetFullPath());
+        m_PreviewWidget->setHtml(html, QUrl::fromLocalFile(m_HTMLResource.GetFullPath()));
     }
 }
 
@@ -1059,11 +1085,12 @@ void FlowTab::ConnectSignalsToSlots()
     connect(m_CodeViewEditor, SIGNAL(BookmarkLinkOrStyleLocationRequest()), this, SIGNAL(BookmarkLinkOrStyleLocationRequest()));
     connect(m_CodeViewEditor, SIGNAL(SpellingHighlightRefreshRequest()), this, SIGNAL(SpellingHighlightRefreshRequest()));
     connect(m_CodeViewEditor, SIGNAL(ShowStatusMessageRequest(const QString &)), this, SIGNAL(ShowStatusMessageRequest(const QString &)));
+
+    // All content changes → debounced preview update (via scheduleUpdate)
     connect(m_CodeViewEditor, SIGNAL(FilteredTextChanged()), this, SLOT(onCodeViewTextChanged()));
-    connect(m_CodeViewEditor, SIGNAL(FilteredCursorMoved()), this, SLOT(onCodeViewTextChanged()));
-    connect(m_CodeViewEditor, SIGNAL(PageUpdated()), this, SLOT(updatePreview()));
-    connect(m_CodeViewEditor, SIGNAL(PageClicked()), this, SLOT(updatePreview()));
-    connect(m_CodeViewEditor, SIGNAL(DocumentSet()), this, SLOT(updatePreview()));
+    connect(m_CodeViewEditor, SIGNAL(PageUpdated()), this, SLOT(onCodeViewTextChanged()));
+    connect(m_CodeViewEditor, SIGNAL(DocumentSet()), this, SLOT(onCodeViewTextChanged()));
+
     connect(m_CodeViewEditor, SIGNAL(MarkSelectionRequest()), this, SIGNAL(MarkSelectionRequest()));
     connect(m_CodeViewEditor, SIGNAL(ClearMarkedTextRequest()), this, SIGNAL(ClearMarkedTextRequest()));
 

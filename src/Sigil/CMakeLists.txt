@@ -299,6 +299,8 @@ set( VIEW_EDITOR_FILES
     ViewEditors/ViewEditor.h
     ViewEditors/PreviewWidget.cpp
     ViewEditors/PreviewWidget.h
+    ViewEditors/SigilUrlSchemeHandler.cpp
+    ViewEditors/SigilUrlSchemeHandler.h
     )
 
 set( MAINUI_FILES 

@@ -937,7 +937,7 @@ void HeadingSelector::ConnectSignalsToSlots()
             this,               SLOT(UpdateHeadingElements())
            );
     connect(ui.cbTOCSetHeadingLevel,
-            SIGNAL(activated(const QString &)),
+            SIGNAL(textActivated(const QString &)),
             this,               SLOT(SelectHeadingLevelInclusion(const QString &))
            );
     connect(ui.left,             SIGNAL(clicked()), this, SLOT(DecreaseHeadingLevel()));

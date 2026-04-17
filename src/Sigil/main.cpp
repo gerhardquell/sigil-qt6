@@ -40,6 +40,7 @@
 #include "Misc/Utility.h"
 #include "sigil_constants.h"
 #include "sigil_exception.h"
+#include "ViewEditors/SigilUrlSchemeHandler.h"
 
 
 
@@ -125,6 +126,11 @@ int main(int argc, char *argv[])
 #ifndef QT_DEBUG
     qInstallMessageHandler(MessageHandler);
 #endif
+
+    // Register the sigil:// URL scheme handler for WebEngine preview
+    // Must be done before QApplication is created
+    SigilUrlSchemeHandler::registerScheme();
+
     MainApplication app(argc, argv);
     XercesExt::XercesInit init;
 
