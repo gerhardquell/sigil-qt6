@@ -497,6 +497,9 @@ void BookBrowser::AddNewSVG()
 
 void BookBrowser::PasteImage()
 {
+    if (!m_Book) {
+        return;
+    }
     QImage clipboardImage = QApplication::clipboard()->image();
     if (clipboardImage.isNull()) {
         return;

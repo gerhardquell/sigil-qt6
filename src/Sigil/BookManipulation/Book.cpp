@@ -54,21 +54,6 @@ using boost::tie;
 static const QString FIRST_CSS_NAME   = "Style0001.css";
 static const QString FIRST_SVG_NAME   = "Image0001.svg";
 static const QString PLACEHOLDER_TEXT = "PLACEHOLDER";
-static const QString EMPTY_HTML_FILE  = "<?xml version=\"1.0\" encoding=\"utf-8\"?> "
-                                        "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" "
-                                        "    \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">  "
-                                        "<html xmlns=\"http://www.w3.org/1999/xhtml\"> "
-                                        "<head> "
-                                        "<title></title> "
-                                        "</head> "
-                                        "<body> "
-
-                                        // The "nbsp" is here so that the user starts writing
-                                        // inside the <p> element; if it's not here, webkit
-                                        // inserts text _outside_ the <p> element
-                                        "<p>&#160;</p> "
-                                        "</body> "
-                                        "</html>";
 
 static const QString SGC_TOC_CSS_FILE = 
 										"div.sgc-toc-title { "
@@ -265,18 +250,9 @@ HTMLResource &Book::CreateEmptyHTMLFile(HTMLResource &resource)
 {
     HTMLResource &new_resource = CreateNewHTMLFile();
 
-    QString html = UserTemplates::instance().defaultHtml();
+    new_resource.SetText(UserTemplates::instance().defaultHtml());
 
-    // Adjust CSS links to match the EPUB-internal stylesheet filename
-    QList< CSSResource* > css_resources = m_Mainfolder.GetResourceTypeList< CSSResource >(false);
-    if (!css_resources.isEmpty()) {
-        QString cssFilename = css_resources.first()->Filename();
-        html = UserTemplates::instance().adjustCssLinks(html, cssFilename);
-    }
-
-    new_resource.SetText(html);
-
-    if (&resource != NULL) {
+    {
         QList< HTMLResource * > html_resources = m_Mainfolder.GetResourceTypeList< HTMLResource >(true);
         int reading_order = GetOPF().GetReadingOrder(resource) + 1;
 
@@ -298,16 +274,7 @@ HTMLResource &Book::CreateImpressumFile()
     HTMLResource &html_resource = *qobject_cast< HTMLResource * >(
                                       &m_Mainfolder.AddContentFileToFolder(fullfilepath));
 
-    QString html = UserTemplates::instance().impressumHtml();
-
-    // Adjust CSS links to match EPUB-internal stylesheet filename
-    QList< CSSResource* > css_resources = m_Mainfolder.GetResourceTypeList< CSSResource >(false);
-    if (!css_resources.isEmpty()) {
-        QString cssFilename = css_resources.first()->Filename();
-        html = UserTemplates::instance().adjustCssLinks(html, cssFilename);
-    }
-
-    html_resource.SetText(html);
+    html_resource.SetText(UserTemplates::instance().impressumHtml());
     SetModified(true);
     return html_resource;
 }
@@ -315,9 +282,6 @@ HTMLResource &Book::CreateImpressumFile()
 
 void Book::MoveResourceAfter(HTMLResource &from_resource, HTMLResource &to_resource)
 {
-    if (&from_resource == NULL || &to_resource == NULL) {
-        return;
-    }
 
     QList< HTMLResource * > html_resources = m_Mainfolder.GetResourceTypeList< HTMLResource >(true);
     int to_after_reading_order = GetOPF().GetReadingOrder(to_resource) + 1;

@@ -99,7 +99,6 @@ QString UserTemplates::adjustCssLinks(const QString &html, const QString &cssFil
         const QRegularExpressionMatch &match = matches[i];
         QString prefix = match.captured(1);   // href="
         QString path = match.captured(2);      // ../Styles/
-        QString oldName = match.captured(3);   // Style.css
         QString suffix = match.captured(4);    // "
 
         result.replace(match.capturedStart(), match.capturedLength(),
@@ -112,11 +111,8 @@ QString UserTemplates::adjustCssLinks(const QString &html, const QString &cssFil
 QString UserTemplates::readFile(const QString &filename) const
 {
     QString filepath = configDir() + "/" + filename;
-    QFile file(filepath);
-    if (!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (!QFile::exists(filepath)) {
         return QString();
     }
-    QString content = QString::fromUtf8(file.readAll());
-    file.close();
-    return content;
+    return Utility::ReadUnicodeTextFile(filepath);
 }

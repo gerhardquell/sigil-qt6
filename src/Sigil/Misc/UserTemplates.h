@@ -1,4 +1,3 @@
-#pragma once
 #ifndef USER_TEMPLATES_H
 #define USER_TEMPLATES_H
 
@@ -20,6 +19,9 @@ public:
 
 private:
     UserTemplates();
+    UserTemplates(const UserTemplates&) = delete;
+    UserTemplates& operator=(const UserTemplates&) = delete;
+
     QString readFile(const QString &filename) const;
 
     QString m_defaultHtml;
