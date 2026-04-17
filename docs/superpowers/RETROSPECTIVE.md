@@ -396,6 +396,34 @@ FlowTab
 
 ---
 
+## Phase 3: User-Templates und Impression (2026-04-17)
+
+### 13. User-Templates aus ~/.sigil/
+
+**Feature:**
+Benutzerdefinierte Templates in `~/.sigil/` für default.xhtml, style.css und impressum.xhtml.
+
+**Architektur:**
+Neue `UserTemplates`-Klasse (Singleton) in `Misc/`, liest Dateien einmalig beim Start. `Book` nutzt `UserTemplates` statt hardcoded Strings. `adjustCssLinks()` passt CSS-Referenzen an EPUB-interne Dateinamen an.
+
+**Entscheidungen:**
+- **Singleton** — Templates ändern sich nicht zur Laufzeit
+- **Vollständiges XHTML** — User legt komplette Dateien ab, kein Auto-Wrapping
+- **Fester Dateiname** — `Impressum.xhtml` (wie `cover.xhtml`)
+- **Impressum als erste Seite** — vor Section0001.xhtml im Spine
+- **Kein Auto-Create** — `~/.sigil/` wird nicht automatisch angelegt
+- **CSS-Link-Anpassung** — `adjustCssLinks()` ersetzt Dateinamen via Regex (reverse-order)
+- **Keine Guide-Semantik** — Impressum ist kein Standard-EPUB-Guide-Typ
+
+**Geänderte Dateien:**
+- Neu: `Misc/UserTemplates.h`, `Misc/UserTemplates.cpp`
+- Geändert: `Book.h/cpp` (CreateEmptyHTMLFile, CreateEmptyCSSFile, CreateImpressumFile)
+- Geändert: `MainWindow.cpp` (CreateNewBook — CSS zuerst, dann Impression, dann Section)
+- Geändert: `sigil_constants.h`, `main.cpp` (IMPRESSUM_FILE_NAME)
+- Geändert: `CMakeLists.txt` (UserTemplates-Dateien)
+
+---
+
 ## Empfehlungen für zukünftige Qt WebEngine Arbeit
 
 1. **file:// Base URL bevorzugen** — Chromium resolved relative URLs nativ, kein Custom Scheme nötig
@@ -410,6 +438,7 @@ FlowTab
 
 - **Phase 1 Geänderte Dateien:** 214 (+1039 / -1286)
 - **Phase 2 Geänderte Dateien:** 7 (+258 / -20)
+- **Phase 3 Geänderte Dateien:** 7 (+220 / -5)
 - **Build-Zeit:** ~2 Minuten (parallel mit 4 Cores)
 - **Debug-Logging-Dateien:** 9 (errors.txt bis errors9.txt)
 
@@ -430,8 +459,8 @@ FlowTab
 - acceptNavigationRequest() ist der einzige zuverlässige Weg für Link-Interception
 
 **Gesamtergebnis:**
-Migration erfolgreich abgeschlossen. Sigil läuft mit Qt 6.9.2 — Editor und Preview funktionieren korrekt.
+Migration erfolgreich abgeschlossen. Sigil läuft mit Qt 6.9.2 — Editor, Preview und User-Templates funktionieren korrekt.
 
 ---
 
-*Dokument erstellt am 2026-04-16, aktualisiert am 2026-04-17*
+*Dokument erstellt am 2026-04-16, aktualisiert am 2026-04-17 (Phase 3)*
